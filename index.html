@@ -49,17 +49,43 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-12-16T12:38:34.000Z"><a href="/2015/12/16/kongsicong/">2015-12-16</a></time>
+        <time datetime="2015-12-21T02:11:14.377Z"><a href="/2015/12/21/opencv2.x介绍/">2015-12-21</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/12/16/kongsicong/">kongsicong</a></h1>
+    <h1 class="title"><a href="/2015/12/21/opencv2.x介绍/"></a></h1>
   
 
     </header>
     <div class="entry">
       
-        
+        <h1 id="opencv2-x_u4ECB_u7ECD"><a href="#opencv2-x_u4ECB_u7ECD" class="headerlink" title="opencv2.x介绍"></a>opencv2.x介绍</h1><p>opencv2.x 学习笔记</p>
+<hr>
+<p>##一，opencv概览<br>opencv（open source computer vision library：<a href="http://opencv.org" target="_blank" rel="external">opencv官网</a>）是一个开源的计算机视觉库，该库包含了几百个计算机视觉处理算法。opencv库现阶段已经更新到3.x版本，但由于其不稳定性，故多采用opencv2.x版本。opencv1.x版本是基于c语言撰写的API，而opencv2.x是基于c++撰写的API。<br>opencv采用模块结构，这代表着该库包含了一些分享的或者是静态的库。下面就是各个主要模块的介绍：</p>
+<ul>
+<li>core-核心模块，该模块定义了opencv里面的基本的数据结构，包含了多维数组Mat和一些被其他模块使用的基本函数。</li>
+<li>imgproc-一个图像处理模块，该模块包含了线性和非线性的图像处理滤波器，几何图像转换（缩放，仿射变换，视图弯曲，映射），彩色空间变换，直方图等等。</li>
+<li>video-视频分析模块，该模块包含运动估计，背景去除和目标追踪算法。</li>
+<li>calib3d-3d校准模块，该模块包含基本的多视图几何算法，单一和立体摄像机校准，目标姿势估计，立体一致性算法和3d重建元素等。</li>
+<li>features2d-2d特征模块，改模块包含了显著特征检测器，描述符和描述符匹配器。</li>
+<li>objdetect-目标检测模块，该模块包含了目标检测和预定义类的实例（例如faces，eyes，mugs，people，cars等等）。</li>
+<li>highgui-该模块包含了一些处理视频捕获，图像和视频编码，以及一些简单的用户界面能力的易于使用的接口。</li>
+<li>gpu-该模块包含了为不同的opencv模块使用的GPU加速算法。</li>
+<li>其他-其他一些模块为帮助模块，例如FLANN和Google测试包装器，Python绑定等等。</li>
+</ul>
+<hr>
+<p>##二，opencv API特性简介</p>
+<ul>
+<li>cv命名空间</li>
+<li>自动内存管理</li>
+<li>输出数据的自动内存分配</li>
+<li>饱和数学</li>
+<li>固定像素类型，模板的限制使用</li>
+<li>输入数组和输出数组</li>
+<li>错误处理</li>
+<li>多线程</li>
+</ul>
+
       
     </div>
     <footer>
@@ -81,7 +107,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-12-16T11:44:41.833Z"><a href="/2015/12/16/hello-world/">2015-12-16</a></time>
+        <time datetime="2015-12-16T13:06:24.540Z"><a href="/2015/12/16/hello-world/">2015-12-16</a></time>
       
       
   
@@ -101,6 +127,38 @@
 <h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-12-16T12:38:34.000Z"><a href="/2015/12/16/kongsicong/">2015-12-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/12/16/kongsicong/">kongsicong</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        
       
     </div>
     <footer>
