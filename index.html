@@ -51,11 +51,139 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-12-24T04:57:29.000Z"><a href="/2015/12/24/二，opencv2-x模块core介绍（一）/">2015-12-24</a></time>
+        <time datetime="2015-12-25T01:47:50.000Z"><a href="/2015/12/25/三，opencv2-x模块core介绍（二）/">2015-12-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/12/24/二，opencv2-x模块core介绍（一）/">opencv2.x模块core介绍（一）</a></h1>
+    <h1 class="title"><a href="/2015/12/25/三，opencv2-x模块core介绍（二）/">opencv2.x模块core介绍（二）</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E8C_u90E8_u5206_u2014_u2014Operations_on_Arrays_uFF08_u5BF9_u6570_u7EC4_u7684_u64CD_u4F5C_uFF09"><a href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E8C_u90E8_u5206_u2014_u2014Operations_on_Arrays_uFF08_u5BF9_u6570_u7EC4_u7684_u64CD_u4F5C_uFF09" class="headerlink" title="一，opencv模块core内容第二部分——Operations on Arrays（对数组的操作）"></a>一，opencv模块core内容第二部分——Operations on Arrays（对数组的操作）</h2><p>计算机图像都是以矩阵的形式存储一个个像素点，而这些各种矩阵在计算机内存中实际上是以数组的形式真实存在的，只不过是通过类和面向对象的方式将其封装成了和matlab类似的矩阵。所以，各种对矩阵（数组）的操作也是opencv中核心内容之一。其基本功能和作用就相当于matlab中那些对矩阵操作的函数。</p>
+<hr>
+<h2 id="u4E8C_uFF0C_u5404_u4E2A_u64CD_u4F5C_u77E9_u9635_uFF08_u6570_u7EC4_uFF09_u7684_u51FD_u6570"><a href="#u4E8C_uFF0C_u5404_u4E2A_u64CD_u4F5C_u77E9_u9635_uFF08_u6570_u7EC4_uFF09_u7684_u51FD_u6570" class="headerlink" title="二，各个操作矩阵（数组）的函数"></a>二，各个操作矩阵（数组）的函数</h2><ul>
+<li><p>abs（绝对值函数）</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C++: MatExpr <span class="literal">abs</span>(<span class="keyword">const</span> <span class="keyword">Mat</span>&amp; <span class="keyword">m</span>)</span><br><span class="line">C++: MatExpr <span class="literal">abs</span>(<span class="keyword">const</span> MatExpr&amp; <span class="keyword">e</span>)</span><br><span class="line">Parameters:	</span><br><span class="line"><span class="keyword">m</span> – <span class="keyword">matrix</span>.</span><br><span class="line"><span class="keyword">e</span> – <span class="keyword">matrix</span> expression.</span><br><span class="line">MatExpr - 就是一个<span class="keyword">Mat</span></span><br><span class="line">C = <span class="literal">abs</span>(A);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>absdiff(计算两个矩阵差的绝对值)</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: void <span class="function"><span class="title">absdiff</span><span class="params">(InputArray src1, InputArray src2, OutputArray dst)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>两个输入参数src1和src2都是InputArray类型的，因而src1和src2不一定是Mat类型的数据。<br>有以下几种情况:</p>
+<pre><code>* src1 和src2是具有相同大小和类型的数组 `dst(I) = saturate(|src1(I) - src2(I)|)`
+* src1和src2分别是数组和Scalar，并且数组的元素都是Scalar，或者数组元素通道数和Scalar相同`dat(I) = saturate(|src1(I) - src2|)`
+*  与第二种情况相反`dat(I) = saturate(|src1 - src2（I）|)`
+</code></pre><p>注意：当数组的深度为CV_32S时，并不会对数组进行饱和操作，然后可能计算后数据溢出，得到一个负数（即使进行了绝对值操作）</p>
+<ul>
+<li><p>add(矩阵相加)</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> add(InputArray src1, InputArray src2, OutputArray dst, InputArray mask=noArray(), <span class="keyword">int</span> dtype=-1)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>addWeighted</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> addWeighted(InputArray src1, <span class="keyword">double</span> alpha, InputArray src2, <span class="keyword">double</span> beta, <span class="keyword">double</span> gamma, OutputArray dst, <span class="keyword">int</span> dtype=-1)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>也就是<code>dst(I) = saturate(src1(I) * alpha + src2(I) * beta +gama)</code> </p>
+<ul>
+<li>bitwise_add(按位相与)<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> bitwise_and(InputArray src1, InputArray src2, OutputArray dst, InputArray mask=noArray())</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>也就是将数组每个元素按位相与<br><code>dst(I) = saturate(src1(I) &amp; src2(I))</code><br><code>dat(I) = saturate(src1(I) &amp; src2)</code><br><code>dat(I) = saturate(src1 &amp; src2（I）)</code></p>
+<ul>
+<li>bitwise_not(按位取非)<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> bitwise_not(InputArray src, OutputArray dst, InputArray mask=noArray())</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>也就是将数组每个元素按位取反</p>
+<ul>
+<li>bitwise_or（按位相或）<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> bitwise_or(InputArray src1, InputArray src2, OutputArray dst, InputArray mask=noArray())</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>也就是将数组每个元素按位相或<br><code>dst(I) = saturate(src1(I) | src2(I))</code><br><code>dat(I) = saturate(src1(I) | src2)</code><br><code>dat(I) = saturate(src1 | src2（I）)</code></p>
+<ul>
+<li><p>bitwise_xor（按位异或）</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> bitwise_xor(InputArray src1, InputArray src2, OutputArray dst, InputArray mask=noArray())</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>calcCovarMatrix</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> calcCovarMatrix(<span class="keyword">const</span> Mat* samples, <span class="keyword">int</span> nsamples, Mat&amp; covar, Mat&amp; mean, <span class="keyword">int</span> flags, <span class="keyword">int</span> ctype=CV_64F)</span><br><span class="line">C++: <span class="keyword">void</span> calcCovarMatrix(InputArray samples, OutputArray covar, OutputArray mean, <span class="keyword">int</span> flags, <span class="keyword">int</span> ctype=CV_64F)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算数组的协方差矩阵，mean是数组的均值，covar是输出的协方差矩阵，flags的值决定了输出的协方差矩阵的计算方法<br>flags 可能的取值：</p>
+<pre><code>* CV_COVAR_SCRAMBLED ![Alt text](./1451011289963.png)
+* CV_COVAR_NORMAL  ![Alt text](./1451011378258.png)
+* CV_COVAR_USE_AVG 当flags被置为这个值时，mean将不再是输出的有输入数组计算出的均值，而是由我们提前计算好的或者是已知的均值作为参数传递进去
+* CV_COVAR_SCALE 当flags被置为这个值时，输出的协方差矩阵covar将会乘上一个缩放因子scale。在norma和scrambled两种模式下的缩放因子scale都是1，只要flags补位scale模式，缩放因子都会被置为1.
+* CV_COVAR_ROWS 当flags被置为这个值时，输入矩阵mat将会按行计算每一行的均值和协方差
+* CV_COVAR_COLS 当flags被置为这个值时，输入矩阵mat将会按列计算每一列的均值和协方差
+</code></pre><p>总之，本函数的主要作用就是计算输入数组的协方差，同时也可以计算其均值。</p>
+<ul>
+<li>cartToPolar<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> cartToPolar(InputArray x, InputArray y, OutputArray magnitude, OutputArray angle, bool angleInDegrees=<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>该函数将输入数组x和y转化为极坐标形式。<br><img src="./1451012216777.png" alt="Alt text"></p>
+<ul>
+<li>checkRange<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">bool</span> <span class="title">checkRange</span><span class="params">(InputArray a, <span class="keyword">bool</span> quiet=<span class="literal">true</span>, Point* pos=<span class="number">0</span>, <span class="keyword">double</span> minVal=-DBL_MAX, <span class="keyword">double</span> maxVal=DBL_MAX )</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>该函数的作用是检查输入数组的每一个元素的值是否在有效范围内。</p>
+<ul>
+<li>compare<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> compare(InputArray src1, InputArray src2, OutputArray dst, <span class="keyword">int</span> cmpop)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>该函数比较两个数组的每一个元素的大小或者比较一个数组和一个标量的大小<br>flag cmpop的值类型：</p>
+<pre><code>* CMP_EQ src1 == src2
+*  CMP_GT src1 &gt; src2
+*  CMP_GE src1 &gt;= src2
+*  CMP_LT src1&lt; src2
+*  CMP_LE src1 &lt;= src2
+*  CMP_NE src1 != src2
+</code></pre><ul>
+<li>completeSymm<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> completeSymm(InputOutputArray mtx, bool lowerToUpper=<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将输入矩阵（方阵）的下半或者是上半部分复制到另一半。构造了一个对称矩阵</p>
+<ul>
+<li>convertScaleAbs<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">convertScaleAbs</span><span class="params">(InputArray src, OutputArray dst, <span class="keyword">double</span> alpha=<span class="number">1</span>, <span class="keyword">double</span> beta=<span class="number">0</span>)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>该函数对输入数组的每个元素有三个操作。缩放（*scale），取绝对值（| |），转换到8bit数据。<br><img src="./1451025911271.png" alt="Alt text"></p>
+<ul>
+<li>countNonZero<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: int <span class="function"><span class="title">countNonZero</span><span class="params">(InputArray src)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算输入数组中的非零元素的个数</p>
+<ul>
+<li>cvarrToMat<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function">Mat <span class="title">cvarrToMat</span><span class="params">(<span class="keyword">const</span> CvArr* arr, <span class="keyword">bool</span> copyData=<span class="literal">false</span>, <span class="keyword">bool</span> allowND=<span class="literal">true</span>, <span class="keyword">int</span> coiMode=<span class="number">0</span> )</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将CvMat，IplImage或者是CvMatND等c语言类型的结构转换为Mat</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-12-24T04:57:29.000Z"><a href="/2015/12/24/二，opencv2.x模块core介绍（一）/">2015-12-24</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/12/24/二，opencv2.x模块core介绍（一）/">opencv2.x模块core介绍（一）</a></h1>
   
 
     </header>
@@ -294,7 +422,7 @@
   <h3 class="title">标签</h3>
   <ul class="entry">
   
-    <li><a href="/tags/opencv2-x-学习笔记/">opencv2.x 学习笔记</a><small>2</small></li>
+    <li><a href="/tags/opencv2-x-学习笔记/">opencv2.x 学习笔记</a><small>3</small></li>
   
   </ul>
 </div>
