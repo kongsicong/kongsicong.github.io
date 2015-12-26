@@ -109,8 +109,8 @@
 </li>
 </ul>
 <p>计算数组的协方差矩阵，mean是数组的均值，covar是输出的协方差矩阵，flags的值决定了输出的协方差矩阵的计算方法<br>flags 可能的取值：</p>
-<pre><code>* CV_COVAR_SCRAMBLED ![Alt text](./1451011289963.png)
-* CV_COVAR_NORMAL  ![Alt text](./1451011378258.png)
+<pre><code>* CV_COVAR_SCRAMBLED $scale*[vects[0] - mean, vects[1] - mean, ···]^T*[vects[0] - mean, vects[1] - mean, ···]$
+* CV_COVAR_NORMAL  $scale*[vects[0] - mean, vects[1] - mean, ···]*[vects[0] - mean, vects[1] - mean, ···]^T$
 * CV_COVAR_USE_AVG 当flags被置为这个值时，mean将不再是输出的有输入数组计算出的均值，而是由我们提前计算好的或者是已知的均值作为参数传递进去
 * CV_COVAR_SCALE 当flags被置为这个值时，输出的协方差矩阵covar将会乘上一个缩放因子scale。在norma和scrambled两种模式下的缩放因子scale都是1，只要flags补位scale模式，缩放因子都会被置为1.
 * CV_COVAR_ROWS 当flags被置为这个值时，输入矩阵mat将会按行计算每一行的均值和协方差
@@ -120,7 +120,7 @@
 <li>cartToPolar<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> cartToPolar(InputArray x, InputArray y, OutputArray magnitude, OutputArray angle, bool angleInDegrees=<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>该函数将输入数组x和y转化为极坐标形式。<br><img src="./1451012216777.png" alt="Alt text"></p>
+<p>该函数将输入数组x和y转化为极坐标形式。<br>$mangnitude(I)^2 = x(I)^2  + y(I)^2$<br>$angle(I) = atan2(y(I), x(I))[180*pi]$</p>
 <ul>
 <li>checkRange<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">bool</span> <span class="title">checkRange</span><span class="params">(InputArray a, <span class="keyword">bool</span> quiet=<span class="literal">true</span>, Point* pos=<span class="number">0</span>, <span class="keyword">double</span> minVal=-DBL_MAX, <span class="keyword">double</span> maxVal=DBL_MAX )</span></span></span><br></pre></td></tr></table></figure>
 </li>
@@ -146,7 +146,7 @@
 <li>convertScaleAbs<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">convertScaleAbs</span><span class="params">(InputArray src, OutputArray dst, <span class="keyword">double</span> alpha=<span class="number">1</span>, <span class="keyword">double</span> beta=<span class="number">0</span>)</span></span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>该函数对输入数组的每个元素有三个操作。缩放（*scale），取绝对值（| |），转换到8bit数据。<br><img src="./1451025911271.png" alt="Alt text"></p>
+<p>该函数对输入数组的每个元素有三个操作。缩放（<em>scale），取绝对值（| |），转换到8bit数据。<br>`dst(I) = saturate_cast&lt; uchar&gt;(|src(I) </em> alpha +beta|)`</p>
 <ul>
 <li>countNonZero<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: int <span class="function"><span class="title">countNonZero</span><span class="params">(InputArray src)</span></span></span><br></pre></td></tr></table></figure>
 </li>
@@ -157,6 +157,292 @@
 </li>
 </ul>
 <p>将CvMat，IplImage或者是CvMatND等c语言类型的结构转换为Mat</p>
+<ul>
+<li>dct<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> dct(InputArray src, OutputArray dst, <span class="keyword">int</span> flags=0)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对一维数组或者是二维数组执行一次正向或者是逆向的离散余弦变换<br>flags 的取值：DCT_INVERSE，对数组执行正想变换，而默认的是flags=0执行正向变换<br>                        DCT_ROWS，对输入矩阵的每一行执行正向或者是逆向变换<br>所有的可能情况：</p>
+<pre><code>1. 一维数组正向变换$Y = C^{(N)}  \cdot X$
+    同时$C^{(N)}_{jk}= \sqrt{\alpha_j/N} \cos \left ( \frac{\pi(2k+1)j}{2N} \right )$而且$\alpha_0=1, \alpha_j=2 for j &gt; 0.$
+2. 一维数组逆向变换$X =  \left (C^{(N)} \right )^{-1}  \cdot Y =  \left (C^{(N)} \right )^T  \cdot Y$ (因为$ C^{(N)}$是正交矩阵，满足：$ C^{(N)} \cdot \left(C^{(N)}\right)^T = I$ )
+3. 二维数组正向变换$Y = C^{(N)}  \cdot X  \cdot \left (C^{(N)} \right )^T$
+4. 二维数组逆向变换$X =  \left (C^{(N)} \right )^T  \cdot X  \cdot C^{(N)}$ 
+</code></pre><p>该函数根据输入数组的尺寸和flags的类型来决定执行何种操作。</p>
+<ul>
+<li>dft<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">dft</span><span class="params">(InputArray src, OutputArray dst, <span class="keyword">int</span> flags=<span class="number">0</span>, <span class="keyword">int</span> nonzeroRows=<span class="number">0</span>)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>该函数对输入浮点型数组（一维或者2维）执行向前或逆向的离散傅里叶变换<br>flags的可能取值为：<br>DFT_INVERSE， 执行逆向傅里叶变换，默认执行正向傅里叶变换<br>                                  DFT_SCALE，对结果进行缩放，通常和DFT_INVERSE一起使用<br>                                  DFT_ROWS，对输入矩阵的每一行执行傅里叶变换<br>                                  DFT_COMPLEX_OUTPUT，对实数数组执行傅里叶变换后，结果虽然是一个复数数组，但是却具有对偶性质，这样的数组可以包装成一个和原输入数组一样大小的实数数组，这种操作是默认的，而且快速。但是如果你非要使用原始的复数数组，那么就要设定这个参数了。这个函数就会产生一个原始大小的数组。<br>                                  DFT_REAL_OUTPUT，对复数数组执行傅里叶逆变换后，结果会是一个和复数数组一样大小的复数数组。但是如果输入的复数数组是一个具有复数对偶性质的数组（例如由实数数组通过 DFT_COMPLEX_OUTPUT得到的复数数组），结果就会是一个实数数组。由于函数本身不会检查输入数组的对偶性质，所以你可以传递 DFT_REAL_OUTPUT来让函数认为输入数组是对偶的，然后输出的就是实数数组了<br>nonzeroRows的作用：当该参数不为零时，函数会假定只有输入数组或者只有输出数组的第一个非零行包含非零值，然后函数就直接操作第一个非零行剩下的行了，这样会让计算速度加快，节省时间。<br>以下是离散傅里叶变换的基本公式：</p>
+<pre><code>1. 一维正变换$Y = F^{(N)}  \cdot X,F^{(N)}_{jk}=\exp(-2\pi i j k/N) $ and  $i=\sqrt{-1}$
+2. 一维逆变换$\begin{array}{l} X&apos;=  \left (F^{(N)} \right )^{-1}  \cdot Y =  \left (F^{(N)} \right )^*  \cdot y  \\ X = (1/N)  \cdot X, \end{array},F^*=\left(\textrm{Re}(F^{(N)})-\textrm{Im}(F^{(N)})\right)^T$
+3. 二维正变换$Y = F^{(M)}  \cdot X  \cdot F^{(N)}$
+4. 二维逆变换$\begin{array}{l} X&apos;=  \left (F^{(M)} \right )^*  \cdot Y  \cdot \left (F^{(N)} \right )^* \\ X =  \frac{1}{M \cdot N} \cdot X&apos; \end{array}$
+</code></pre><ul>
+<li>divide<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">divide</span><span class="params">(InputArray src1, InputArray src2, OutputArray dst, <span class="keyword">double</span> scale=<span class="number">1</span>, <span class="keyword">int</span> dtype=-<span class="number">1</span>)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>两个数组相除<br>具体情况有<br>$$\texttt{dst(I) = saturate(src1(I)*scale/src2(I))} $$<br>$$\texttt{dst(I) = saturate(scale/src2(I))} $$</p>
+<ul>
+<li>determinant<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: double <span class="function"><span class="title">determinant</span><span class="params">(InputArray mtx)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算浮点方阵的行列式（适用于小型矩阵），大型矩阵有其他更快速的算法。</p>
+<ul>
+<li>eigen<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: bool eigen(InputArray src, OutputArray eigenvalues, <span class="keyword">int</span> lowindex=-1, <span class="keyword">int</span> highindex=-1)</span><br><span class="line">C++: bool eigen(InputArray src, OutputArray eigenvalues, OutputArray eigenvectors, <span class="keyword">int</span> lowindex=-1, <span class="keyword">int</span> highindex=-1)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>该函数就算对称矩阵的特征值或者是特征值和特征向量</p>
+<ul>
+<li>exp<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: void <span class="function"><span class="title">exp</span><span class="params">(InputArray src, OutputArray dst)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对数组执行指数操作。<br>$\texttt{dst} [I] = e^{ src(I) }$</p>
+<ul>
+<li>extractImageCOI<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> extractImageCOI(<span class="keyword">const</span> CvArr* arr, OutputArray coiimg, <span class="keyword">int</span> coi=-1 )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>提取出选定的图像通道（该函数是从<code>c语言类型的老式图像中提取通道</code>）</p>
+<ul>
+<li>insertImageCOI<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> insertImageCOI(InputArray coiimg, CvArr* arr, <span class="keyword">int</span> coi=-1 )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将基于c++的选定的图像通道复制到基于c的图像数组中</p>
+<ul>
+<li>flip<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> flip(InputArray src, OutputArray dst, <span class="keyword">int</span> flipCode)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将一个2为数组在x或y或xy方向上进行反向<br>$$<br>\texttt{dst} <em>{ij} =<br>\left{<br>\begin{array}{l l}<br>\texttt{src} </em>{\texttt{src.rows}-i-1,j} &amp; if\;  \texttt{flipCode} = 0 \<br>\texttt{src} <em>{i, \texttt{src.cols} -j-1} &amp; if\;  \texttt{flipCode} &gt; 0 \<br>\texttt{src} </em>{ \texttt{src.rows} -i-1, \texttt{src.cols} -j-1} &amp; if\; \texttt{flipCode} &lt; 0 \<br>\end{array}<br>\right.<br>$$</p>
+<ul>
+<li>gemm<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> gemm(InputArray src1, InputArray src2, <span class="keyword">double</span> alpha, InputArray src3, <span class="keyword">double</span> beta, OutputArray dst, <span class="keyword">int</span> flags=0 )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>表示一个广义的数组相乘<br>$\texttt{dst} =  \texttt{alpha} \cdot \texttt{src1} ^T  \cdot \texttt{src2} +  \texttt{beta} \cdot \texttt{src3} ^T$<br>该函数可以被一个矩阵表达式替换<code>dst = alpha*src1.t()*src2 + beta*src3.t();</code></p>
+<ul>
+<li>getConvertElem<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: ConvertData getConvertElem(<span class="keyword">int</span> fromType, <span class="keyword">int</span> toType)</span><br><span class="line">C++: ConvertScaleData getConvertScaleElem(<span class="keyword">int</span> fromType, <span class="keyword">int</span> toType)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>返回一个单像素的变换值。该函数返回的是一个函数指针，该函数将一个像素值类型转到另一个类型。<br><figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">void</span> (*ConvertData)(<span class="keyword">const</span> <span class="keyword">void</span>* from, <span class="keyword">void</span>* to, <span class="keyword">int</span> cn)</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">void</span> (*ConvertScaleData)(<span class="keyword">const</span> <span class="keyword">void</span>* from, <span class="keyword">void</span>* to, <span class="keyword">int</span> cn, <span class="built_in">double</span> alpha, <span class="built_in">double</span> beta)</span><br></pre></td></tr></table></figure></p>
+<p>同时也可以对数组进行操作，只要设置cn = matrix.cols<em>matrix.rows</em>matrix.channels()。</p>
+<ul>
+<li>getOptimalDFTSize<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">int</span> getOptimalDFTSize(<span class="keyword">int</span> vecsize)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对一个给定的数组尺寸计算出它最好的DFT变换尺寸。</p>
+<ul>
+<li><p>idct，idft<br>逆余弦函数变换，逆傅里叶变换</p>
+</li>
+<li><p>inRange</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: void <span class="function"><span class="title">inRange</span><span class="params">(InputArray src, InputArray lowerb, InputArray upperb, OutputArray dst)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>检查输入数组是否在另外两个数组之间<br>单通道数组：<br>$$<br>\texttt{dst} (I)= \texttt{lowerb} (I)_0  \leq \texttt{src} (I)_0 \leq  \texttt{upperb} (I)_0<br>$$<br>双通道数组<br>$$<br>\texttt{dst} (I)= \texttt{lowerb} (I)_0  \leq \texttt{src} (I)_0 \leq  \texttt{upperb} (I)_0  \land \texttt{lowerb} (I)_1  \leq \texttt{src} (I)_1 \leq  \texttt{upperb} (I)_1<br>$$</p>
+<ul>
+<li>invert<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">double</span> invert(InputArray src, OutputArray dst, <span class="keyword">int</span> flags=DECOMP_LU)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>求一个矩阵的逆或者是伪逆矩阵（逆矩阵的广义形式）</p>
+<ul>
+<li>log<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: void <span class="function"><span class="title">log</span><span class="params">(InputArray src, OutputArray dst)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>求矩阵的对数</p>
+<p>$\texttt{dst} (I) =  {\log |\texttt{src}(I)| }     { if \texttt{src}(I) \ne 0  }$<br>$\texttt{dst} (I) = {\texttt{C }}                     { otherwise }$</p>
+<ul>
+<li>LUT<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> LUT(InputArray src, InputArray lut, OutputArray dst, <span class="keyword">int</span> interpolation=0 )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对数组执行 显示查找表（look-up table） 变换。<br>$ \texttt{dst} (I)  \leftarrow \texttt{lut(src(I) + d)}$<br>$d = {0} $ if src has depth CV_8U<br>$d = {128}$ if src has depth CV_8S</p>
+<ul>
+<li>magnitude<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: void <span class="function"><span class="title">magnitude</span><span class="params">(InputArray x, InputArray y, OutputArray magnitude)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算2维数组的模<br>$ \texttt{dst} (I) =  \sqrt{\texttt{x}(I)^2 + \texttt{y}(I)^2}$</p>
+<ul>
+<li>Mahalanobis<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: double <span class="function"><span class="title">Mahalanobis</span><span class="params">(InputArray v1, InputArray v2, InputArray icovar)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算两个数组间的马氏距离。<br>$d( \texttt{vec1} , \texttt{vec2} )= \sqrt{\sum_{i,j}{\texttt{icovar(i,j)}\cdot(\texttt{vec1}(I)-\texttt{vec2}(I))\cdot(\texttt{vec1(j)}-\texttt{vec2(j)})} }$</p>
+<ul>
+<li>max<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C++: MatExpr <span class="literal">max</span>(<span class="keyword">const</span> <span class="keyword">Mat</span>&amp; a, <span class="keyword">const</span> <span class="keyword">Mat</span>&amp; b)</span><br><span class="line">C++: MatExpr <span class="literal">max</span>(<span class="keyword">const</span> <span class="keyword">Mat</span>&amp; a, double s)</span><br><span class="line">C++: MatExpr <span class="literal">max</span>(double s, <span class="keyword">const</span> <span class="keyword">Mat</span>&amp; a)</span><br><span class="line">C++: void <span class="literal">max</span>(InputArray src1, InputArray src2, OutputArray dst)</span><br><span class="line">C++: void <span class="literal">max</span>(<span class="keyword">const</span> <span class="keyword">Mat</span>&amp; src1, <span class="keyword">const</span> <span class="keyword">Mat</span>&amp; src2, <span class="keyword">Mat</span>&amp; dst)</span><br><span class="line">C++: void <span class="literal">max</span>(<span class="keyword">const</span> <span class="keyword">Mat</span>&amp; src1, double src2, <span class="keyword">Mat</span>&amp; dst)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算两个数组或者一个数组和标量中的最大值<br>$\texttt{dst} (I)= \max ( \texttt{src1} (I), \texttt{src2} (I))$<br>$\texttt{dst} (I)= \max ( \texttt{src1} (I), \texttt{value} )$</p>
+<ul>
+<li>mean<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: Scalar <span class="function"><span class="title">mean</span><span class="params">(InputArray src, InputArray mask=noArray()</span></span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算数组的均值<br>$\begin{array}{l} N =  \sum _{I: \; \texttt{mask} (I) \ne 0} 1 \ M<em>c =  \left ( \sum </em>{I: \; \texttt{mask} (I) \ne 0}{ \texttt{mtx} (I)_c} \right )/N \end{array}$</p>
+<ul>
+<li>meanStdDev<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> meanStdDev(InputArray src, OutputArray mean, OutputArray stddev, InputArray mask=noArray())</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算数组的均值和标准差<br>$\begin{array}{l} N =  \sum _{I, \texttt{mask} (I)  \ne 0} 1 \ \texttt{mean} <em>c =  \frac{\sum</em>{ I: \; \texttt{mask}(I) \ne 0} \texttt{src} (I)_c}{N} \ \texttt{stddev} <em>c =  \sqrt{\frac{\sum</em>{ I: \; \texttt{mask}(I) \ne 0} \left ( \texttt{src} (I)_c -  \texttt{mean} _c \right )^2}{N}} \end{array}$</p>
+<ul>
+<li>merge<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: void <span class="operator"><span class="keyword">merge</span>(const Mat* mv, <span class="keyword">size_t</span> <span class="keyword">count</span>, OutputArray dst)</span><br><span class="line"><span class="keyword">C</span>++: <span class="built_in">void</span> <span class="keyword">merge</span>(InputArrayOfArrays mv, OutputArray dst)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将一些单通道数组合并为一个多通道数组。</p>
+<ul>
+<li>min<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C++: MatExpr <span class="literal">min</span>(<span class="keyword">const</span> <span class="keyword">Mat</span>&amp; a, <span class="keyword">const</span> <span class="keyword">Mat</span>&amp; b)</span><br><span class="line">C++: MatExpr <span class="literal">min</span>(<span class="keyword">const</span> <span class="keyword">Mat</span>&amp; a, double s)</span><br><span class="line">C++: MatExpr <span class="literal">min</span>(double s, <span class="keyword">const</span> <span class="keyword">Mat</span>&amp; a)</span><br><span class="line">C++: void <span class="literal">min</span>(InputArray src1, InputArray src2, OutputArray dst)</span><br><span class="line">C++: void <span class="literal">min</span>(<span class="keyword">const</span> <span class="keyword">Mat</span>&amp; src1, <span class="keyword">const</span> <span class="keyword">Mat</span>&amp; src2, <span class="keyword">Mat</span>&amp; dst)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算两个数组或者是数组和标量中的最小值<br>$\texttt{dst} (I)= \min ( \texttt{src1} (I), \texttt{src2} (I))$<br>$\texttt{dst} (I)= \min ( \texttt{src1} (I), \texttt{value} )$</p>
+<ul>
+<li>minMaxIdx<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> minMaxIdx(InputArray src, <span class="keyword">double</span>* minVal, <span class="keyword">double</span>* maxVal, <span class="keyword">int</span>* minIdx=0, <span class="keyword">int</span>* maxIdx=0, InputArray mask=noArray())</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>找到整个数组中最小的和最大的值，以及他们的索引<br>该函数只能对单通道数组进行操作，若要对多通道数组进行操作，需要提前将其分为单通道，可以用Mat::reshape()或者是extractImageCOI() , or mixChannels() , or split() 等。<br>加入输入矩阵是稀疏矩阵，最小值将会在非零元素中寻找。</p>
+<ul>
+<li>minMaxLoc<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> minMaxLoc(InputArray src, <span class="keyword">double</span>* minVal, <span class="keyword">double</span>* maxVal=0, Point* minLoc=0, Point* maxLoc=0, InputArray mask=noArray())</span><br><span class="line">C++: <span class="keyword">void</span> minMaxLoc(<span class="keyword">const</span> SparseMat&amp; a, <span class="keyword">double</span>* minVal, <span class="keyword">double</span>* maxVal, <span class="keyword">int</span>* minIdx=0, <span class="keyword">int</span>* maxIdx=0 )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在整个数组中找到最小值，最大值以及他们的位置。和minMaxIdx相似，不支持多通道数组。</p>
+<ul>
+<li>minChannels<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> mixChannels(<span class="keyword">const</span> Mat* src, size_t nsrcs, Mat* dst, size_t ndsts, <span class="keyword">const</span> <span class="keyword">int</span>* fromTo, size_t npairs)</span><br><span class="line">C++: <span class="keyword">void</span> mixChannels(<span class="keyword">const</span> vector&lt;Mat&gt;&amp; src, vector&lt;Mat&gt;&amp; dst, <span class="keyword">const</span> <span class="keyword">int</span>* fromTo, size_t npairs)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将输入数组中指定的通道数据复制到输出数组中指定的通道中。<br>fromTo 数组：<br>from[K<em>2]表示输入矩阵数组中的输入通道索引，而from[k</em>2+1]表示输出矩阵数组中的输出通道索引。第一幅输入图像（矩阵）的通道索引被放置在是0-src[0].channels()-1,第二幅输入图像（矩阵）的通道索引被放置在是src[0].channels()-src[0].channels+src[1].channels()-1，依次类推。相同的方法也应用于输出图像数组。作为一种特殊情况，当from[k*2]是负数时，相应的输出通道被0填充。<br>有如下实例<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Mat</span> rgba( 100, 100, CV_8UC4, <span class="literal">Scalar</span>(1,2,3,4) );</span><br><span class="line"><span class="keyword">Mat</span> bgr( rgba.rows, rgba.cols, CV_8UC3 );</span><br><span class="line"><span class="keyword">Mat</span> <span class="keyword">alpha</span>( rgba.rows, rgba.cols, CV_8UC1 );</span><br><span class="line"></span><br><span class="line"><span class="comment">// forming an array of matrices is a quite efficient operation,</span></span><br><span class="line"><span class="comment">// because the matrix data is not copied, only the headers</span></span><br><span class="line"><span class="keyword">Mat</span> <span class="keyword">out</span>[] = &#123; bgr, <span class="keyword">alpha</span> &#125;;</span><br><span class="line"><span class="comment">// rgba[0] -&gt; bgr[2], rgba[1] -&gt; bgr[1],</span></span><br><span class="line"><span class="comment">// rgba[2] -&gt; bgr[0], rgba[3] -&gt; alpha[0]</span></span><br><span class="line">int from_to[] = &#123; 0,2, 1,1, 2,0, 3,3 &#125;;</span><br><span class="line">mixChannels( &amp;rgba, 1, <span class="keyword">out</span>, 2, from_to, 4 );</span><br></pre></td></tr></table></figure></p>
+<p>该实例将4通道的rgba图像四个通道分别复制给了3通道的bgr和单通道的alpha。</p>
+<ul>
+<li>mulSpectrums<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> mulSpectrums(InputArray a, InputArray b, OutputArray c, <span class="keyword">int</span> flags, bool conjB=<span class="keyword">false</span> )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对两个傅里叶变换得到的频谱数组进行相乘运算。<br>该函数与dft（），idft（）一起被用于计算卷积（conjB=false）或者是相关性（conjB=true）。</p>
+<ul>
+<li>multiply<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">multiply</span><span class="params">(InputArray src1, InputArray src2, OutputArray dst, <span class="keyword">double</span> scale=<span class="number">1</span>, <span class="keyword">int</span> dtype=-<span class="number">1</span> )</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算两个数组的相乘（每个元素相乘，点乘）。<br>$\texttt{dst} (I)= \texttt{saturate} ( \texttt{scale} \cdot \texttt{src1} (I)  \cdot \texttt{src2} (I))$</p>
+<ul>
+<li>mulTransposed<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> mulTransposed(InputArray src, OutputArray dst, bool aTa, InputArray delta=noArray(), <span class="keyword">double</span> scale=1, <span class="keyword">int</span> dtype=-1 )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>$\texttt{dst} = \texttt{scale} ( \texttt{src} - \texttt{delta} )^T ( \texttt{src} - \texttt{delta} )$<br>if aTa=true , and<br>$\texttt{dst} = \texttt{scale} ( \texttt{src} - \texttt{delta} ) ( \texttt{src} - \texttt{delta} )^T$</p>
+<ul>
+<li>norm<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">double</span> norm(InputArray src1, <span class="keyword">int</span> normType=NORM_L2, InputArray mask=noArray())</span><br><span class="line">C++: <span class="keyword">double</span> norm(InputArray src1, InputArray src2, <span class="keyword">int</span> normType=NORM_L2, InputArray mask=noArray() )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算输入数组的标准基。<br>当仅有输入数组src1时<br>if normType = NORM<em>INF $norm =  {|\texttt{src1}|</em>{L_{\infty}} =  \max _I | \texttt{src1} (I)|}$<br>if normType = NORM<em>L1 $norm = { | \texttt{src1} | </em>{L_1} =  \sum _I | \texttt{src1} (I)|}$<br>if normType = NORM<em>L2 $norm = { | \texttt{src1} | </em>{L_2} =  \sqrt{\sum_I \texttt{src1}(I)^2} }$<br>当输入数组有src1 和src2时<br>if normType = NORM<em>INF $norm =  {\frac{|\texttt{src1}-\texttt{src2}|</em>{L<em>{\infty}}    }{|\texttt{src2}|</em>{L_{\infty}} }}$<br>if normType = NORM<em>L1 $norm = { \frac{|\texttt{src1}-\texttt{src2}|</em>{L<em>1} }{|\texttt{src2}|</em>{L_1}} }$<br>if normType = NORM<em>L2  $norm = { \frac{|\texttt{src1}-\texttt{src2}|</em>{L<em>2} }{|\texttt{src2}|</em>{L_2}} }$</p>
+<ul>
+<li><p>normalize</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> normalize(InputArray src, OutputArray dst, <span class="keyword">double</span> alpha=1, <span class="keyword">double</span> beta=0, <span class="keyword">int</span> norm_type=NORM_L2, <span class="keyword">int</span> dtype=-1, InputArray mask=noArray() )</span><br><span class="line">C++: <span class="keyword">void</span> normalize(<span class="keyword">const</span> SparseMat&amp; src, SparseMat&amp; dst, <span class="keyword">double</span> alpha, <span class="keyword">int</span> normType)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>PCA（主成分分析类）<br>该类用来计算一个数组集合的主要成分。这种主要成分包含了由输入数组集合计算得到的协方差矩阵的特征向量，PCA类也可以将向量和由主成分定义的新的坐标空间互相转换。在这个新的坐标系统中，每一个来自于输入集合的向量。······</p>
+</li>
+<li><p>phase</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> phase(InputArray x, InputArray y, OutputArray angle, bool angleInDegrees=<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算2D向量的相位（旋转角）。<br>$\texttt{angle} (I) =  \texttt{atan2} ( \texttt{y} (I), \texttt{x} (I))$<br>其计算精度大约是0.3度。</p>
+<ul>
+<li>polarToCart<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> polarToCart(InputArray magnitude, InputArray angle, OutputArray x, OutputArray y, bool angleInDegrees=<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>从输入数组的模和相位计算其直角坐标中的x和y。</p>
+<ul>
+<li>pow<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> pow(InputArray src, <span class="keyword">double</span> power, OutputArray dst)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算数组的幂次方<br>$\texttt{dst} (I) =  {\texttt{src}(I)^p }$  if power is integer<br>$\texttt{dst} (I) =  {|\texttt{src}(I)|^p }$ otherwise</p>
+<ul>
+<li><p>RNG<br>随机数生成器。</p>
+</li>
+<li><p>randu</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: template&lt;typename _Tp&gt; _Tp <span class="function"><span class="title">randu</span><span class="params">()</span></span></span><br><span class="line">C++: void <span class="function"><span class="title">randu</span><span class="params">(InputOutputArray dst, InputArray low, InputArray high)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>生成一组均匀分布的随机数组</p>
+<ul>
+<li>randn<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: void <span class="function"><span class="title">randn</span><span class="params">(InputOutputArray dst, InputArray mean, InputArray stddev)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>生成一组正太分布的随机数组</p>
+<ul>
+<li>randShuffle<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> randShuffle(InputOutputArray dst, <span class="keyword">double</span> iterFactor=1., RNG* rng=0 )¶</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将数组元素顺序打乱</p>
+<ul>
+<li>reduce<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> reduce(InputArray src, OutputArray dst, <span class="keyword">int</span> dim, <span class="keyword">int</span> rtype, <span class="keyword">int</span> dtype=-1 )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将一个矩阵将为一个向量。</p>
+<ul>
+<li>repeat<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> repeat(InputArray src, <span class="keyword">int</span> ny, <span class="keyword">int</span> nx, OutputArray dst)</span><br><span class="line">C++: Mat repeat(<span class="keyword">const</span> Mat&amp; src, <span class="keyword">int</span> ny, <span class="keyword">int</span> nx)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将一个数组（x和y方向上）重复的填充到输出数组中。</p>
+<ul>
+<li>scaleAdd<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> scaleAdd(InputArray src1, <span class="keyword">double</span> alpha, InputArray src2, OutputArray dst)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>$\texttt{dst} (I)= \texttt{scale} \cdot \texttt{src1} (I) +  \texttt{src2} (I)$</p>
+<ul>
+<li>setIdentity<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> setIdentity(InputOutputArray mtx, <span class="keyword">const</span> Scalar&amp; s=Scalar(1) )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>得到一个被缩放的I矩阵。</p>
+<ul>
+<li>solve<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">bool</span> solve(InputArray src1, InputArray src2, OutputArray dst, <span class="keyword">int</span> flags=DECO<span class="built_in">MP_LU</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>解决一个或者多个线性系统或者最小二乘法问题。</p>
+<ul>
+<li>solveCubic<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: int <span class="function"><span class="title">solveCubic</span><span class="params">(InputArray coeffs, OutputArray roots)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>找到一个3次多项式的实根或者复根<br>$\texttt{coeffs} [0] x^3 +  \texttt{coeffs} [1] x^2 +  \texttt{coeffs} [2] x +  \texttt{coeffs} [3] = 0$<br>$x^3 +  \texttt{coeffs} [0] x^2 +  \texttt{coeffs} [1] x +  \texttt{coeffs} [2] = 0$</p>
+<ul>
+<li>solvePoly<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">double</span> solvePoly(InputArray coeffs, OutputArray roots, <span class="keyword">int</span> maxIters=300 )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>$\texttt{coeffs} [n] x^{n} +  \texttt{coeffs} [n-1] x^{n-1} + … +  \texttt{coeffs} [1] x +  \texttt{coeffs} [0] = 0$<br>找到一个多项式等式的实根或者复根。</p>
+<ul>
+<li>sort<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> sort(InputArray src, OutputArray dst, <span class="keyword">int</span> flags)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>为一个矩阵的每行或者每列排序</p>
+<ul>
+<li>sortIdx<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> sortIdx(InputArray src, OutputArray dst, <span class="keyword">int</span> flags)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>为一个矩阵的每行或者每列排序</p>
+<ul>
+<li>split<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: void <span class="keyword">split</span>(<span class="keyword">const</span> <span class="keyword">Mat</span>&amp; src, <span class="keyword">Mat</span>* mvbegin)</span><br><span class="line">C++: void <span class="keyword">split</span>(InputArray <span class="keyword">m</span>, OutputArrayOfArrays mv)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将一个多通道数组分解为几个单通道数组。<br>$\texttt{mv} <a href="I">c</a> =  \texttt{src} (I)_c$</p>
+<ul>
+<li>sqrt</li>
+<li>subtract<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> subtract(InputArray src1, InputArray src2, OutputArray dst, InputArray mask=noArray(), <span class="keyword">int</span> dtype=-1)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算两个数组或者一个数组和一个标量相减。</p>
+<ul>
+<li>SVD<br>一个为浮点类型的矩阵计算单值分解的类。</li>
+<li>sum<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: Scalar <span class="function"><span class="title">sum</span><span class="params">(InputArray src)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>计算数组元素的和</p>
+<ul>
+<li>trace<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: Scalar <span class="function"><span class="title">trace</span><span class="params">(InputArray mtx)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>返回矩阵的迹<br>$\mathrm{tr} ( \texttt{mtx} ) =  \sum _i  \texttt{mtx} (i,i)$</p>
+<ul>
+<li>theRNG<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: RNG&amp; <span class="function"><span class="title">theRNG</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>返回默认的随机数生成器</p>
+<ul>
+<li><p>transform</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: void <span class="function"><span class="title">transform</span><span class="params">(InputArray src, OutputArray dst, InputArray m)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>transpose</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: void <span class="function"><span class="title">transpose</span><span class="params">(InputArray src, OutputArray dst)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>矩阵转置<br>$\texttt{dst} (i,j) =  \texttt{src} (j,i)$</p>
 
       
     </div>
