@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>opencv2.x模块core介绍（二） | 孔小葱的博客</title>
+  <title>三，opencv2.x模块core介绍（二） | 孔小葱的博客</title>
   <meta name="author" content="kongsicong">
   
-  <meta name="description" content="一，opencv模块core内容第二部分——Operations on Arrays（对数组的操作）计算机图像都是以矩阵的形式存储一个个像素点，而这些各种矩阵在计算机内存中实际上是以数组的形式真实存在的，只不过是通过类和面向对象的方式将其封装成了和matlab类似的矩阵。所以，各种对矩阵（数组）的操">
+  <meta name="description" content="一，opencv模块core内容第二部分——Operations on Arrays（对数组的操作）计算机图像都是以矩阵的形式存储一个个像素点，而这些各种矩阵在计算机内存中实际上是以数组的形式真实存在的，只不过是通过类和面向对象的方式将其封装成了和matlab类似的矩阵。所以，各种对矩阵（数组）的操作也是opencv中核心内容之一。其基本功能和作用就相当于matlab中那些对矩阵操作的函数。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="opencv2.x模块core介绍（二）"/>
+  <meta property="og:title" content="三，opencv2.x模块core介绍（二）"/>
   <meta property="og:site_name" content="孔小葱的博客"/>
 
   
@@ -52,19 +52,18 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-12-25T01:47:50.000Z"><a href="/2015/12/25/三，opencv2-x模块core介绍（二）/">2015-12-25</a></time>
+        <time datetime="2015-12-25T01:47:50.000Z"><a href="/2015/12/25/三，opencv2.x模块core介绍（二）/">2015-12-25</a></time>
       
       
   
-    <h1 class="title">opencv2.x模块core介绍（二）</h1>
+    <h1 class="title">三，opencv2.x模块core介绍（二）</h1>
   
 
     </header>
     <div class="entry">
       
         <h2 id="u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E8C_u90E8_u5206_u2014_u2014Operations_on_Arrays_uFF08_u5BF9_u6570_u7EC4_u7684_u64CD_u4F5C_uFF09"><a href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E8C_u90E8_u5206_u2014_u2014Operations_on_Arrays_uFF08_u5BF9_u6570_u7EC4_u7684_u64CD_u4F5C_uFF09" class="headerlink" title="一，opencv模块core内容第二部分——Operations on Arrays（对数组的操作）"></a>一，opencv模块core内容第二部分——Operations on Arrays（对数组的操作）</h2><p>计算机图像都是以矩阵的形式存储一个个像素点，而这些各种矩阵在计算机内存中实际上是以数组的形式真实存在的，只不过是通过类和面向对象的方式将其封装成了和matlab类似的矩阵。所以，各种对矩阵（数组）的操作也是opencv中核心内容之一。其基本功能和作用就相当于matlab中那些对矩阵操作的函数。</p>
-<hr>
-<h2 id="u4E8C_uFF0C_u5404_u4E2A_u64CD_u4F5C_u77E9_u9635_uFF08_u6570_u7EC4_uFF09_u7684_u51FD_u6570"><a href="#u4E8C_uFF0C_u5404_u4E2A_u64CD_u4F5C_u77E9_u9635_uFF08_u6570_u7EC4_uFF09_u7684_u51FD_u6570" class="headerlink" title="二，各个操作矩阵（数组）的函数"></a>二，各个操作矩阵（数组）的函数</h2><ul>
+<h2 id="3C_21-more-_3E"><a href="#3C_21-more-_3E" class="headerlink" title="<a id=" more"=""></a>"><!--more--></h2><h2 id="u4E8C_uFF0C_u5404_u4E2A_u64CD_u4F5C_u77E9_u9635_uFF08_u6570_u7EC4_uFF09_u7684_u51FD_u6570"><a href="#u4E8C_uFF0C_u5404_u4E2A_u64CD_u4F5C_u77E9_u9635_uFF08_u6570_u7EC4_uFF09_u7684_u51FD_u6570" class="headerlink" title="二，各个操作矩阵（数组）的函数"></a>二，各个操作矩阵（数组）的函数</h2><ul>
 <li><p>abs（绝对值函数）</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C++: MatExpr <span class="literal">abs</span>(<span class="keyword">const</span> <span class="keyword">Mat</span>&amp; <span class="keyword">m</span>)</span><br><span class="line">C++: MatExpr <span class="literal">abs</span>(<span class="keyword">const</span> MatExpr&amp; <span class="keyword">e</span>)</span><br><span class="line">Parameters:	</span><br><span class="line"><span class="keyword">m</span> – <span class="keyword">matrix</span>.</span><br><span class="line"><span class="keyword">e</span> – <span class="keyword">matrix</span> expression.</span><br><span class="line">MatExpr - 就是一个<span class="keyword">Mat</span></span><br><span class="line">C = <span class="literal">abs</span>(A);</span><br></pre></td></tr></table></figure>
 </li>
@@ -496,7 +495,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://yoursite.com/2015/12/25/三，opencv2-x模块core介绍（二）/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://yoursite.com/2015/12/25/三，opencv2.x模块core介绍（二）/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
@@ -517,7 +516,7 @@
   <h3 class="title">标签</h3>
   <ul class="entry">
   
-    <li><a href="/tags/opencv2-x-学习笔记/">opencv2.x 学习笔记</a><small>3</small></li>
+    <li><a href="/tags/opencv2-x-学习笔记/">opencv2.x 学习笔记</a><small>4</small></li>
   
   </ul>
 </div>

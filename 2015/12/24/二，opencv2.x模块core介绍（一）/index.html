@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>opencv2.x模块core介绍（一） | 孔小葱的博客</title>
+  <title>二，opencv2.x模块core介绍（一） | 孔小葱的博客</title>
   <meta name="author" content="kongsicong">
   
-  <meta name="description" content="一，opencv模块core内容第一部分——Basic Structures（基本数据结构）该模块中包含了opencv所利用到的最基本的数据结构，是opencv最基础最核心，也是最需要掌握的内容，本章节主要介绍opencv2.x基于c++的类，只是顺带提一下opencv1.x中的基于c语言类型的数据">
+  <meta name="description" content="一，opencv模块core内容第一部分——Basic Structures（基本数据结构）该模块中包含了opencv所利用到的最基本的数据结构，是opencv最基础最核心，也是最需要掌握的内容，本章节主要介绍opencv2.x基于c++的类，只是顺带提一下opencv1.x中的基于c语言类型的数据结构。opencv2.x中最基础的数据类型有如下几个：DataType——数据类型Point,Point3——点（x，y，z）Size——尺寸（width*heigth）Rect,RotatedRect——矩形（x，y，width，height）TermCriteria——终止条件Matx——小矩阵Vec——向量Scalar——标量Range——范围Ptr——指针(重点，难点，需花时间)Mat,Mat——矩阵（最重要，最核心，需要很多时间）InputArray,OutputArray——输入输出数组NartMatIterator——矩阵迭代SparseMat,SparseMat_——稀疏矩阵Algorithm——算法">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="opencv2.x模块core介绍（一）"/>
+  <meta property="og:title" content="二，opencv2.x模块core介绍（一）"/>
   <meta property="og:site_name" content="孔小葱的博客"/>
 
   
@@ -56,15 +56,14 @@
       
       
   
-    <h1 class="title">opencv2.x模块core介绍（一）</h1>
+    <h1 class="title">二，opencv2.x模块core介绍（一）</h1>
   
 
     </header>
     <div class="entry">
       
         <h2 id="u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E00_u90E8_u5206_u2014_u2014Basic_Structures_uFF08_u57FA_u672C_u6570_u636E_u7ED3_u6784_uFF09"><a href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E00_u90E8_u5206_u2014_u2014Basic_Structures_uFF08_u57FA_u672C_u6570_u636E_u7ED3_u6784_uFF09" class="headerlink" title="一，opencv模块core内容第一部分——Basic Structures（基本数据结构）"></a>一，opencv模块core内容第一部分——Basic Structures（基本数据结构）</h2><p>该模块中包含了opencv所利用到的最基本的数据结构，是opencv最基础最核心，也是最需要掌握的内容，本章节主要介绍opencv2.x基于c++的类，只是顺带提一下opencv1.x中的基于c语言类型的数据结构。<br>opencv2.x中最基础的数据类型有如下几个：<br>DataType——数据类型<br>Point<em>,Point3</em>——点（x，y，z）<br>Size<em>——尺寸（width*heigth）<br>Rect</em>,RotatedRect——矩形（x，y，width，height）<br>TermCriteria——终止条件<br>Matx——小矩阵<br>Vec——向量<br>Scalar<em>——标量<br>Range——范围<br><code>Ptr</code>——指针(<code>重点，难点，需花时间</code>)<br><code>Mat</code>,Mat</em>——矩阵<code>（最重要，最核心，需要很多时间）</code><br>InputArray,OutputArray——输入输出数组<br>NartMatIterator——矩阵迭代<br>SparseMat,SparseMat_——稀疏矩阵<br>Algorithm——算法</p>
-<hr>
-<h2 id="u4E8C_uFF0CDataType"><a href="#u4E8C_uFF0CDataType" class="headerlink" title="二，DataType"></a>二，DataType</h2><h3 id="u6570_u636E_u7C7B_u578B_u7B80_u4ECB_uFF1A"><a href="#u6570_u636E_u7C7B_u578B_u7B80_u4ECB_uFF1A" class="headerlink" title="数据类型简介："></a>数据类型简介：</h3><p>该类是opencv的最原始的数据类型，opencv的基本的数据类型有<code>unsigned char, bool, signed char, unsigned short, signed short, int , float, double 或者是这些类型的多个元素的组合（rgb，三通道数据类型）</code>。以上列表中任何原始数据类型都可以被<code>CV_ &lt;bit-depth&gt;{U|S|F}C(&lt;number_of_channels&gt;)</code>来定义。例如，<code>uchar——CV_8UC1，3个元素的浮点元组——CV_32FC3</code>等等。一个通用的能够存储这样一个原始数据类型的opencv结构就是Vec。这样的数据类型的实例可以被存储在std::vector, Mat, Mat<em>, SparseMat, SparseMat</em>, 或者是任何其他能偶存储Vec实例的容器类。<br><code>结论:DataType就是opencv最基本的数据类型，</code>CV_8UC1<code>之类的东西。</code></p>
+<h2 id="3C_21-more-_3E"><a href="#3C_21-more-_3E" class="headerlink" title="<a id=" more"=""></a>"> <!--more--></h2><h2 id="u4E8C_uFF0CDataType"><a href="#u4E8C_uFF0CDataType" class="headerlink" title="二，DataType"></a>二，DataType</h2><h3 id="u6570_u636E_u7C7B_u578B_u7B80_u4ECB_uFF1A"><a href="#u6570_u636E_u7C7B_u578B_u7B80_u4ECB_uFF1A" class="headerlink" title="数据类型简介："></a>数据类型简介：</h3><p>该类是opencv的最原始的数据类型，opencv的基本的数据类型有<code>unsigned char, bool, signed char, unsigned short, signed short, int , float, double 或者是这些类型的多个元素的组合（rgb，三通道数据类型）</code>。以上列表中任何原始数据类型都可以被<code>CV_ &lt;bit-depth&gt;{U|S|F}C(&lt;number_of_channels&gt;)</code>来定义。例如，<code>uchar——CV_8UC1，3个元素的浮点元组——CV_32FC3</code>等等。一个通用的能够存储这样一个原始数据类型的opencv结构就是Vec。这样的数据类型的实例可以被存储在std::vector, Mat, Mat<em>, SparseMat, SparseMat</em>, 或者是任何其他能偶存储Vec实例的容器类。<br><code>结论:DataType就是opencv最基本的数据类型，</code>CV_8UC1<code>之类的东西。</code></p>
 <h3 id="u7C7B_u5B9A_u4E49"><a href="#u7C7B_u5B9A_u4E49" class="headerlink" title="类定义"></a>类定义</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">class</span> DataType&lt;uchar&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">typedef</span> uchar value_type;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">int</span> work_type;</span><br><span class="line">    <span class="keyword">typedef</span> uchar channel_type;</span><br><span class="line">    <span class="keyword">enum</span> &#123; channel_type = CV_8U, channels = <span class="number">1</span>, fmt=<span class="string">'u'</span>, type = CV_8U &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; DataType&lt;<span class="built_in">std</span>::<span class="keyword">complex</span>&lt;_Tp&gt; &gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="keyword">complex</span>&lt;_Tp&gt; value_type;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="keyword">complex</span>&lt;_Tp&gt; work_type;</span><br><span class="line">    <span class="keyword">typedef</span> _Tp channel_type;</span><br><span class="line">    <span class="comment">// DataDepth is another helper trait class</span></span><br><span class="line">    <span class="keyword">enum</span> &#123; depth = DataDepth&lt;_Tp&gt;::value, channels=<span class="number">2</span>,</span><br><span class="line">        fmt=(channels-<span class="number">1</span>)*<span class="number">256</span>+DataDepth&lt;_Tp&gt;::fmt,</span><br><span class="line">        type=CV_MAKETYPE(depth, channels) &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>这个类的作用就是讲可确定编译时间类型的数据转化为opencv特定的可编译数据类型。例如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// allocates a 30x40 floating-point matrix</span></span><br><span class="line"><span class="function">Mat <span class="title">A</span><span class="params">(<span class="number">30</span>, <span class="number">40</span>, DataType&lt;<span class="keyword">float</span>&gt;::type)</span></span>;</span><br><span class="line"></span><br><span class="line">Mat B = Mat_&lt;<span class="built_in">std</span>::<span class="keyword">complex</span>&lt;<span class="keyword">double</span>&gt; &gt;(<span class="number">3</span>, <span class="number">3</span>);</span><br><span class="line"><span class="comment">// the statement below will print 6, 2 /*, that is depth == CV_64F, channels == 2 */</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; B.depth() &lt;&lt; <span class="string">", "</span> &lt;&lt; B.channels() &lt;&lt; endl;</span><br></pre></td></tr></table></figure></p>
 <p>在平常的使用中，一般不会直接使用这个类的对象，而是直接使用<code>CV_8UC3</code>等预定义常量</p>
@@ -200,7 +199,7 @@
   <h3 class="title">标签</h3>
   <ul class="entry">
   
-    <li><a href="/tags/opencv2-x-学习笔记/">opencv2.x 学习笔记</a><small>3</small></li>
+    <li><a href="/tags/opencv2-x-学习笔记/">opencv2.x 学习笔记</a><small>4</small></li>
   
   </ul>
 </div>

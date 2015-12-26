@@ -3,15 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>opencv2.x介绍 | 孔小葱的博客</title>
+  <title>一，opencv2.x介绍 | 孔小葱的博客</title>
   <meta name="author" content="kongsicong">
   
-  <meta name="description" content="一，opencv概览opencv（open source computer vision library：opencv官网是一个开源的计算机视觉库，该库包含了几百个计算机视觉处理算法。opencv库现阶段已经更新到3.x版本，但由于其不稳定性，故多采用opencv2.x版本。opencv1.x版本是">
+  <meta name="description" content="一，opencv概览opencv（open source computer vision library：opencv官网是一个开源的计算机视觉库，该库包含了几百个计算机视觉处理算法。opencv库现阶段已经更新到3.x版本，但由于其不稳定性，故多采用opencv2.x版本。opencv1.x版本是基于c语言撰写的API，而opencv2.x是基于c++撰写的API。opencv采用模块结构，这代表着该库包含了一些分享的或者是静态的库。下面就是各个主要模块的介绍：
+
+core-核心模块，该模块定义了opencv里面的基本的数据结构，包含了多维数组Mat和一些被其他模块使用的基本函数。
+imgproc-一个图像处理模块，该模块包含了线性和非线性的图像处理滤波器，几何图像转换（缩放，仿射变换，视图弯曲，映射），彩色空间变换，直方图等等。
+video-视频分析模块，该模块包含运动估计，背景去除和目标追踪算法。
+calib3d-3d校准模块，该模块包含基本的多视图几何算法，单一和立体摄像机校准，目标姿势估计，立体一致性算法和3d重建元素等。
+features2d-2d特征模块，改模块包含了显著特征检测器，描述符和描述符匹配器。
+objdetect-目标检测模块，该模块包含了目标检测和预定义类的实例（例如faces，eyes，mugs，people，cars等等）。
+highgui-该模块包含了一些处理视频捕获，图像和视频编码，以及一些简单的用户界面能力的易于使用的接口。
+gpu-该模块包含了为不同的opencv模块使用的GPU加速算法。
+其他-其他一些模块为帮助模块，例如FLANN和Google测试包装器，Python绑定等等。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="opencv2.x介绍"/>
+  <meta property="og:title" content="一，opencv2.x介绍"/>
   <meta property="og:site_name" content="孔小葱的博客"/>
 
   
@@ -56,7 +66,7 @@
       
       
   
-    <h1 class="title">opencv2.x介绍</h1>
+    <h1 class="title">一，opencv2.x介绍</h1>
   
 
     </header>
@@ -74,8 +84,7 @@
 <li>gpu-该模块包含了为不同的opencv模块使用的GPU加速算法。</li>
 <li>其他-其他一些模块为帮助模块，例如FLANN和Google测试包装器，Python绑定等等。</li>
 </ul>
-<hr>
-<h2 id="u4E8C_uFF0Copencv_API_u7279_u6027_u7B80_u4ECB"><a href="#u4E8C_uFF0Copencv_API_u7279_u6027_u7B80_u4ECB" class="headerlink" title="二，opencv API特性简介"></a>二，opencv API特性简介</h2><ul>
+<h2 id="3C_21-more-_3E"><a href="#3C_21-more-_3E" class="headerlink" title="<a id=" more"=""></a>"><!--more--></h2><h2 id="u4E8C_uFF0Copencv_API_u7279_u6027_u7B80_u4ECB"><a href="#u4E8C_uFF0Copencv_API_u7279_u6027_u7B80_u4ECB" class="headerlink" title="二，opencv API特性简介"></a>二，opencv API特性简介</h2><ul>
 <li><p><code>cv命名空间</code><br> 所有的opencv类和函数都被放在cv namespace内了。<br> 访问opencv示例：</p>
  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"opencv2/core/core.hpp"</span></span></span><br><span class="line">...</span><br><span class="line">cv::Mat H = cv::findHomography(points1, points2, CV_RANSAC, <span class="number">5</span>);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p> 或者</p>
@@ -193,7 +202,7 @@
   <h3 class="title">标签</h3>
   <ul class="entry">
   
-    <li><a href="/tags/opencv2-x-学习笔记/">opencv2.x 学习笔记</a><small>3</small></li>
+    <li><a href="/tags/opencv2-x-学习笔记/">opencv2.x 学习笔记</a><small>4</small></li>
   
   </ul>
 </div>
