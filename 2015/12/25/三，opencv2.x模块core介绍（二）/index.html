@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
   <title>三，opencv2.x模块core介绍（二） | 孔小葱的博客</title>
   <meta name="author" content="kongsicong">
@@ -21,14 +21,14 @@
   <link href="/favicon.png" rel="icon">
   <link rel="alternate" href="/atom.xml" title="孔小葱的博客" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 </head>
 
 
 <body>
-  <header id="header" class="inner"><div class="alignleft">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
   <h1><a href="/">孔小葱的博客</a></h1>
   <h2><a href="/"></a></h2>
 </div>
@@ -211,7 +211,7 @@
 <li>flip<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> flip(InputArray src, OutputArray dst, <span class="keyword">int</span> flipCode)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>将一个2为数组在x或y或xy方向上进行反向<br>$$<br>\texttt{dst} <em>{ij} =<br>\left{<br>\begin{array}{l l}<br>\texttt{src} </em>{\texttt{src.rows}-i-1,j} &amp; if\;  \texttt{flipCode} = 0 \<br>\texttt{src} <em>{i, \texttt{src.cols} -j-1} &amp; if\;  \texttt{flipCode} &gt; 0 \<br>\texttt{src} </em>{ \texttt{src.rows} -i-1, \texttt{src.cols} -j-1} &amp; if\; \texttt{flipCode} &lt; 0 \<br>\end{array}<br>\right.<br>$$</p>
+<p>将一个2为数组在x或y或xy方向上进行反向<br>$$<br>\texttt{dst} _{ij} =<br>\left\{<br>\begin{array}{l l}<br>\texttt{src} _{\texttt{src.rows}-i-1,j} &amp; if\;  \texttt{flipCode} = 0 \\<br>\texttt{src} _{i, \texttt{src.cols} -j-1} &amp; if\;  \texttt{flipCode} &gt; 0 \\<br>\texttt{src} _{ \texttt{src.rows} -i-1, \texttt{src.cols} -j-1} &amp; if\; \texttt{flipCode} &lt; 0 \\<br>\end{array}<br>\right.<br>$$</p>
 <ul>
 <li>gemm<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> gemm(InputArray src1, InputArray src2, <span class="keyword">double</span> alpha, InputArray src3, <span class="keyword">double</span> beta, OutputArray dst, <span class="keyword">int</span> flags=0 )</span><br></pre></td></tr></table></figure>
 </li>
@@ -271,12 +271,12 @@
 <li>mean<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: Scalar <span class="function"><span class="title">mean</span><span class="params">(InputArray src, InputArray mask=noArray()</span></span>)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>计算数组的均值<br>$\begin{array}{l} N =  \sum _{I: \; \texttt{mask} (I) \ne 0} 1 \ M<em>c =  \left ( \sum </em>{I: \; \texttt{mask} (I) \ne 0}{ \texttt{mtx} (I)_c} \right )/N \end{array}$</p>
+<p>计算数组的均值<br>$\begin{array}{l} N =  \sum _{I: \; \texttt{mask} (I) \ne 0} 1 \ M_c =  \left ( \sum _{I: \; \texttt{mask} (I) \ne 0}{ \texttt{mtx} (I)_c} \right )/N \end{array}$</p>
 <ul>
 <li>meanStdDev<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> meanStdDev(InputArray src, OutputArray mean, OutputArray stddev, InputArray mask=noArray())</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>计算数组的均值和标准差<br>$\begin{array}{l} N =  \sum _{I, \texttt{mask} (I)  \ne 0} 1 \ \texttt{mean} <em>c =  \frac{\sum</em>{ I: \; \texttt{mask}(I) \ne 0} \texttt{src} (I)_c}{N} \ \texttt{stddev} <em>c =  \sqrt{\frac{\sum</em>{ I: \; \texttt{mask}(I) \ne 0} \left ( \texttt{src} (I)_c -  \texttt{mean} _c \right )^2}{N}} \end{array}$</p>
+<p>计算数组的均值和标准差<br>$\begin{array}{l} N =  \sum _{I, \texttt{mask} (I)  \ne 0} 1 \ \texttt{mean} _c =  \frac{\sum_{ I: \; \texttt{mask}(I) \ne 0} \texttt{src} (I)_c}{N} \ \texttt{stddev} _c =  \sqrt{\frac{\sum_{ I: \; \texttt{mask}(I) \ne 0} \left ( \texttt{src} (I)_c -  \texttt{mean} _c \right )^2}{N}} \end{array}$</p>
 <ul>
 <li>merge<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: void <span class="operator"><span class="keyword">merge</span>(const Mat* mv, <span class="keyword">size_t</span> <span class="keyword">count</span>, OutputArray dst)</span><br><span class="line"><span class="keyword">C</span>++: <span class="built_in">void</span> <span class="keyword">merge</span>(InputArrayOfArrays mv, OutputArray dst)</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -322,7 +322,7 @@
 <li>norm<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">double</span> norm(InputArray src1, <span class="keyword">int</span> normType=NORM_L2, InputArray mask=noArray())</span><br><span class="line">C++: <span class="keyword">double</span> norm(InputArray src1, InputArray src2, <span class="keyword">int</span> normType=NORM_L2, InputArray mask=noArray() )</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>计算输入数组的标准基。<br>当仅有输入数组src1时<br>if normType = NORM<em>INF $norm =  {|\texttt{src1}|</em>{L_{\infty}} =  \max _I | \texttt{src1} (I)|}$<br>if normType = NORM<em>L1 $norm = { | \texttt{src1} | </em>{L_1} =  \sum _I | \texttt{src1} (I)|}$<br>if normType = NORM<em>L2 $norm = { | \texttt{src1} | </em>{L_2} =  \sqrt{\sum_I \texttt{src1}(I)^2} }$<br>当输入数组有src1 和src2时<br>if normType = NORM<em>INF $norm =  {\frac{|\texttt{src1}-\texttt{src2}|</em>{L<em>{\infty}}    }{|\texttt{src2}|</em>{L_{\infty}} }}$<br>if normType = NORM<em>L1 $norm = { \frac{|\texttt{src1}-\texttt{src2}|</em>{L<em>1} }{|\texttt{src2}|</em>{L_1}} }$<br>if normType = NORM<em>L2  $norm = { \frac{|\texttt{src1}-\texttt{src2}|</em>{L<em>2} }{|\texttt{src2}|</em>{L_2}} }$</p>
+<p>计算输入数组的标准基。<br>当仅有输入数组src1时<br>if normType = NORM_INF $norm =  {|\texttt{src1}|_{L_{\infty}} =  \max _I | \texttt{src1} (I)|}$<br>if normType = NORM_L1 $norm = { | \texttt{src1} | _{L_1} =  \sum _I | \texttt{src1} (I)|}$<br>if normType = NORM_L2 $norm = { | \texttt{src1} | _{L_2} =  \sqrt{\sum_I \texttt{src1}(I)^2} }$<br>当输入数组有src1 和src2时<br>if normType = NORM_INF $norm =  {\frac{|\texttt{src1}-\texttt{src2}|_{L_{\infty}}    }{|\texttt{src2}|_{L_{\infty}} }}$<br>if normType = NORM_L1 $norm = { \frac{|\texttt{src1}-\texttt{src2}|_{L_1} }{|\texttt{src2}|_{L_1}} }$<br>if normType = NORM_L2  $norm = { \frac{|\texttt{src1}-\texttt{src2}|_{L_2} }{|\texttt{src2}|_{L_2}} }$</p>
 <ul>
 <li><p>normalize</p>
 <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> normalize(InputArray src, OutputArray dst, <span class="keyword">double</span> alpha=1, <span class="keyword">double</span> beta=0, <span class="keyword">int</span> norm_type=NORM_L2, <span class="keyword">int</span> dtype=-1, InputArray mask=noArray() )</span><br><span class="line">C++: <span class="keyword">void</span> normalize(<span class="keyword">const</span> SparseMat&amp; src, SparseMat&amp; dst, <span class="keyword">double</span> alpha, <span class="keyword">int</span> normType)</span><br></pre></td></tr></table></figure>
@@ -516,6 +516,10 @@
   <h3 class="title">标签</h3>
   <ul class="entry">
   
+    <li><a href="/tags/C-C/">C/C++</a><small>1</small></li>
+  
+    <li><a href="/tags/deeplearning/">deeplearning</a><small>1</small></li>
+  
     <li><a href="/tags/opencv2-x-学习笔记/">opencv2.x 学习笔记</a><small>5</small></li>
   
   </ul>
@@ -543,7 +547,24 @@
 (function($){
   $('.fancybox').fancybox();
 })(jQuery);
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 </html>

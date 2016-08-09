@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
   <title>一，opencv2.x介绍 | 孔小葱的博客</title>
   <meta name="author" content="kongsicong">
@@ -31,14 +31,14 @@ gpu-该模块包含了为不同的opencv模块使用的GPU加速算法。
   <link href="/favicon.png" rel="icon">
   <link rel="alternate" href="/atom.xml" title="孔小葱的博客" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 </head>
 
 
 <body>
-  <header id="header" class="inner"><div class="alignleft">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
   <h1><a href="/">孔小葱的博客</a></h1>
   <h2><a href="/"></a></h2>
 </div>
@@ -123,7 +123,7 @@ gpu-该模块包含了为不同的opencv模块使用的GPU加速算法。
 </code></pre><p>每个函数的支持类型的子集都已经从实践需要中预定义了，而且可能在未来因为新的需要而扩展。</p>
 <ul>
 <li><code>输入数组和输出数组</code><br> 许多opencv的函数处理2维和多维的数字数组。通常，一些函数采用cpp::class:Mat 作为参数，但是在一些情况下，使用std::vector(例如一个指针集合) 或者Matx&lt;&gt;（例如一个3*3矩阵）是更方便的。为了避免API中的过多的复制，特殊的“代理proxy”类便出现了。最基本的“代理”类是InputArray，在一个函数输入中，他被用于传递只读数组，从InputArrray派生出来的OutputArray类被用于为一个函数确定一个输出数组。通常，你不需要关注其内在类型，它将会自动工作。你可以假设不是使用InputArray和OutputArray，而是使用Mat, std::vector&lt;&gt;, Matx&lt;&gt;, 或者是标量。当一个函数有可选的输入或者输出数组时，你没有该数组，可以传递cv::noArray()。</li>
-<li><p><code>错误处理</code><br> opencv使用exceptions来标识重要的错误。当输入数据有一个正确的格式而且属于特定的值范围，但是因为某些原因（如最优化算法没有收敛）算法不能成功执行，它会返回一个特殊的错误码（典型情况是一个boolean值）。<br> exceptions可以是cv::Exception 类或者是它的派生类，而cv::Exception 是std::Exception的派生类。所以它可以在代码中使用标准c++库中的部分优雅的处理。<br> exception 是典型的使用CV_Error(errcode, description)宏，或者它的CV<em>Error</em>(errcode, printf-spec, (printf-args)),或者CV_Assert(condition)宏。对于性能至关重要的代码，使用CV_DbgAssert(condition)。因为自动内存分配，为了防止突然间的错误所有的内部的内存区都是自动解除分配：</p>
+<li><p><code>错误处理</code><br> opencv使用exceptions来标识重要的错误。当输入数据有一个正确的格式而且属于特定的值范围，但是因为某些原因（如最优化算法没有收敛）算法不能成功执行，它会返回一个特殊的错误码（典型情况是一个boolean值）。<br> exceptions可以是cv::Exception 类或者是它的派生类，而cv::Exception 是std::Exception的派生类。所以它可以在代码中使用标准c++库中的部分优雅的处理。<br> exception 是典型的使用CV_Error(errcode, description)宏，或者它的CV_Error_(errcode, printf-spec, (printf-args)),或者CV_Assert(condition)宏。对于性能至关重要的代码，使用CV_DbgAssert(condition)。因为自动内存分配，为了防止突然间的错误所有的内部的内存区都是自动解除分配：</p>
  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    ... <span class="comment">// call OpenCV</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>( cv::Exception&amp; e )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* err_msg = e.what();</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"exception caught: "</span> &lt;&lt; err_msg &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>多线程</code><br> 当前opencv的实现是 re-enterable  ，就是说，相同的函数，一个类实例的相同的常量方法，或者不同的类的相同的非常量方法都可以在不同的线程中被调用。相同的cv::Mat可以在不同的线程中被使用，因为引用计数操作使用了the architecture-specific atomic instructions.</p>
@@ -202,6 +202,10 @@ gpu-该模块包含了为不同的opencv模块使用的GPU加速算法。
   <h3 class="title">标签</h3>
   <ul class="entry">
   
+    <li><a href="/tags/C-C/">C/C++</a><small>1</small></li>
+  
+    <li><a href="/tags/deeplearning/">deeplearning</a><small>1</small></li>
+  
     <li><a href="/tags/opencv2-x-学习笔记/">opencv2.x 学习笔记</a><small>5</small></li>
   
   </ul>
@@ -229,7 +233,24 @@ gpu-该模块包含了为不同的opencv模块使用的GPU加速算法。
 (function($){
   $('.fancybox').fancybox();
 })(jQuery);
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 </html>
