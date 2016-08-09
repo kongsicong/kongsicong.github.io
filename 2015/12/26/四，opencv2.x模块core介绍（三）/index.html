@@ -6,16 +6,16 @@
   <title>四，opencv2.x模块core介绍（三） | 孔小葱的博客</title>
   <meta name="author" content="kongsicong">
   
-  <meta name="description" content="一，opencv模块core内容第三部分——Drawing Functions（绘图函数）绘图函数可以再任意深度的矩阵（图像）上工作。这些函数就是在图像矩阵上绘出特定的图像。主要有以下几种简单的绘图功能。
+  <meta name="description" content="&amp;#x4E00;&amp;#xFF0C;opencv&amp;#x6A21;&amp;#x5757;core&amp;#x5185;&amp;#x5BB9;&amp;#x7B2C;&amp;#x4E09;&amp;#x90E8;&amp;#x5206;&amp;#x2014;&amp;#x2014;Drawing Functions&amp;#xFF08;&amp;#x7ED8;&amp;#x56FE;&amp;#x51FD;&amp;#x6570;&amp;#xFF09;&amp;#x7ED8;&amp;#x56FE;&amp;#x51FD;&amp;#x6570;&amp;#x53EF;&amp;#x4EE5;&amp;#x518D;&amp;#x4EFB;&amp;#x610F;&amp;#x6DF1;&amp;#x5EA6;&amp;#x7684;&amp;#x77E9;&amp;#x9635;&amp;#xFF08;&amp;#x56FE;&amp;#x50CF;&amp;#xFF09;&amp;#x4E0A;&amp;#x5DE5;&amp;#x4F5C;&amp;#x3002;&amp;#x8FD9;&amp;#x4E9B;&amp;#x51FD;&amp;#x6570;&amp;#x5C31;&amp;#x662F;&amp;#x5728;&amp;#x56FE;&amp;#x50CF;&amp;#x77E9;&amp;#x9635;&amp;#x4E0A;&amp;#x7ED8;&amp;#x51FA;&amp;#x7279;&amp;#x5B9A;&amp;#x7684;&amp;#x56FE;&amp;#x50CF;&amp;#x3002;&amp;#x4E3B;&amp;#x8981;&amp;#x6709;&amp;#x4EE5;&amp;#x4E0B;&amp;#x51E0;&amp;#x79CD;&amp;#x7B80;&amp;#x5355;&amp;#x7684;&amp;#x7ED8;&amp;#x56FE;&amp;#x529F;&amp;#x80FD;&amp;#x3002;
 
-绘制文字putText
-绘制矩形rectangle
-绘制圆形circle
-绘制椭圆ellipse
-绘制线段line
-绘制箭头arrowedLine
-绘制曲线polylines
-其余一些帮助函数clipLine, ellipse2Poly, fillConvexPoly, fillPoly, getTextSize, InitFont">
+&amp;#x7ED8;&amp;#x5236;&amp;#x6587;&amp;#x5B57;putText
+&amp;#x7ED8;&amp;#x5236;&amp;#x77E9;&amp;#x5F62;rectangle
+&amp;#x7ED8;&amp;#x5236;&amp;#x5706;&amp;#x5F62;circle
+&amp;#x7ED8;&amp;#x5236;&amp;#x692D;&amp;#x5706;ellipse
+&amp;#x7ED8;&amp;#x5236;&amp;#x7EBF;&amp;#x6BB5;line
+&amp;#x7ED8;&amp;#x5236;&amp;#x7BAD;&amp;#x5934;arrowedLine
+&amp;#x7ED8;&amp;#x5236;&amp;#x66F2;&amp;#x7EBF;polylines
+&amp;#x5176;&amp;#x4F59;&amp;#x4E00;&amp;#x4E9B;&amp;#x5E2E;&amp;#x52A9;&amp;#x51FD;&amp;#x6570;clipLine, ellipse2Poly, fillConvexPoly, fillPoly, getTextSize, InitFont">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -71,47 +71,47 @@
     </header>
     <div class="entry">
       
-        <h2 id="u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E09_u90E8_u5206_u2014_u2014Drawing_Functions_uFF08_u7ED8_u56FE_u51FD_u6570_uFF09"><a href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E09_u90E8_u5206_u2014_u2014Drawing_Functions_uFF08_u7ED8_u56FE_u51FD_u6570_uFF09" class="headerlink" title="一，opencv模块core内容第三部分——Drawing Functions（绘图函数）"></a>一，opencv模块core内容第三部分——Drawing Functions（绘图函数）</h2><p>绘图函数可以再任意深度的矩阵（图像）上工作。这些函数就是在图像矩阵上绘出特定的图像。主要有以下几种简单的绘图功能。</p>
+        <h2 id="u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E09_u90E8_u5206_u2014_u2014Drawing_Functions_uFF08_u7ED8_u56FE_u51FD_u6570_uFF09"><a href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E09_u90E8_u5206_u2014_u2014Drawing_Functions_uFF08_u7ED8_u56FE_u51FD_u6570_uFF09" class="headerlink" title="&#x4E00;&#xFF0C;opencv&#x6A21;&#x5757;core&#x5185;&#x5BB9;&#x7B2C;&#x4E09;&#x90E8;&#x5206;&#x2014;&#x2014;Drawing Functions&#xFF08;&#x7ED8;&#x56FE;&#x51FD;&#x6570;&#xFF09;"></a>&#x4E00;&#xFF0C;opencv&#x6A21;&#x5757;core&#x5185;&#x5BB9;&#x7B2C;&#x4E09;&#x90E8;&#x5206;&#x2014;&#x2014;Drawing Functions&#xFF08;&#x7ED8;&#x56FE;&#x51FD;&#x6570;&#xFF09;</h2><p>&#x7ED8;&#x56FE;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x518D;&#x4EFB;&#x610F;&#x6DF1;&#x5EA6;&#x7684;&#x77E9;&#x9635;&#xFF08;&#x56FE;&#x50CF;&#xFF09;&#x4E0A;&#x5DE5;&#x4F5C;&#x3002;&#x8FD9;&#x4E9B;&#x51FD;&#x6570;&#x5C31;&#x662F;&#x5728;&#x56FE;&#x50CF;&#x77E9;&#x9635;&#x4E0A;&#x7ED8;&#x51FA;&#x7279;&#x5B9A;&#x7684;&#x56FE;&#x50CF;&#x3002;&#x4E3B;&#x8981;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#x7B80;&#x5355;&#x7684;&#x7ED8;&#x56FE;&#x529F;&#x80FD;&#x3002;</p>
 <ol>
-<li>绘制文字putText</li>
-<li>绘制矩形rectangle</li>
-<li>绘制圆形circle</li>
-<li>绘制椭圆ellipse</li>
-<li>绘制线段line</li>
-<li>绘制箭头arrowedLine</li>
-<li>绘制曲线polylines</li>
-<li>其余一些帮助函数clipLine, ellipse2Poly, fillConvexPoly, fillPoly, getTextSize, InitFont<a id="more"></a>
+<li>&#x7ED8;&#x5236;&#x6587;&#x5B57;putText</li>
+<li>&#x7ED8;&#x5236;&#x77E9;&#x5F62;rectangle</li>
+<li>&#x7ED8;&#x5236;&#x5706;&#x5F62;circle</li>
+<li>&#x7ED8;&#x5236;&#x692D;&#x5706;ellipse</li>
+<li>&#x7ED8;&#x5236;&#x7EBF;&#x6BB5;line</li>
+<li>&#x7ED8;&#x5236;&#x7BAD;&#x5934;arrowedLine</li>
+<li>&#x7ED8;&#x5236;&#x66F2;&#x7EBF;polylines</li>
+<li>&#x5176;&#x4F59;&#x4E00;&#x4E9B;&#x5E2E;&#x52A9;&#x51FD;&#x6570;clipLine, ellipse2Poly, fillConvexPoly, fillPoly, getTextSize, InitFont<a id="more"></a>
 </li>
 </ol>
 <hr>
-<h2 id="u4E8C_uFF0C_u5177_u4F53_u7ED8_u5236_u51FD_u6570_u8BE6_u89E3"><a href="#u4E8C_uFF0C_u5177_u4F53_u7ED8_u5236_u51FD_u6570_u8BE6_u89E3" class="headerlink" title="二，具体绘制函数详解"></a>二，具体绘制函数详解</h2><ol>
-<li>绘制文字putText<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">putText</span><span class="params">(Mat&amp; img, <span class="keyword">const</span> <span class="built_in">string</span>&amp; text, Point org, <span class="keyword">int</span> fontFace, <span class="keyword">double</span> fontScale, Scalar color, <span class="keyword">int</span> thickness=<span class="number">1</span>, <span class="keyword">int</span> lineType=<span class="number">8</span>, <span class="keyword">bool</span> bottomLeftOrigin=<span class="literal">false</span> )</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="u4E8C_uFF0C_u5177_u4F53_u7ED8_u5236_u51FD_u6570_u8BE6_u89E3"><a href="#u4E8C_uFF0C_u5177_u4F53_u7ED8_u5236_u51FD_u6570_u8BE6_u89E3" class="headerlink" title="&#x4E8C;&#xFF0C;&#x5177;&#x4F53;&#x7ED8;&#x5236;&#x51FD;&#x6570;&#x8BE6;&#x89E3;"></a>&#x4E8C;&#xFF0C;&#x5177;&#x4F53;&#x7ED8;&#x5236;&#x51FD;&#x6570;&#x8BE6;&#x89E3;</h2><ol>
+<li>&#x7ED8;&#x5236;&#x6587;&#x5B57;putText<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">putText</span><span class="params">(Mat&amp; img, <span class="keyword">const</span> <span class="built_in">string</span>&amp; text, Point org, <span class="keyword">int</span> fontFace, <span class="keyword">double</span> fontScale, Scalar color, <span class="keyword">int</span> thickness=<span class="number">1</span>, <span class="keyword">int</span> lineType=<span class="number">8</span>, <span class="keyword">bool</span> bottomLeftOrigin=<span class="literal">false</span> )</span></span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>在目标图像上写上自己指定的字符串。<br>其中部分参数详解：<br>org——文字框左下角在目标图像的坐标，相当于字符串的位置坐标<br>fontFace——字体类型可能有以下几种：<code>FONT_HERSHEY_SIMPLEX, FONT_HERSHEY_PLAIN, FONT_HERSHEY_DUPLEX, FONT_HERSHEY_COMPLEX, FONT_HERSHEY_TRIPLEX, FONT_HERSHEY_COMPLEX_SMALL, FONT_HERSHEY_SCRIPT_SIMPLEX, or FONT_HERSHEY_SCRIPT_COMPLEX</code><br>fontScale——字体大小。相对于基本大小的缩放<br>color——字体颜色<br>thickness——字符串线条粗细<br>lineType——线型<br>bottomLeftOrigin——确定字符串图像的原点是坐下点还是左上点。<br>通常会通过辅助函数getTextSize（）来帮助绘图。</p>
+<p>&#x5728;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x4E0A;&#x5199;&#x4E0A;&#x81EA;&#x5DF1;&#x6307;&#x5B9A;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;<br>&#x5176;&#x4E2D;&#x90E8;&#x5206;&#x53C2;&#x6570;&#x8BE6;&#x89E3;&#xFF1A;<br>org&#x2014;&#x2014;&#x6587;&#x5B57;&#x6846;&#x5DE6;&#x4E0B;&#x89D2;&#x5728;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x5750;&#x6807;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x4F4D;&#x7F6E;&#x5750;&#x6807;<br>fontFace&#x2014;&#x2014;&#x5B57;&#x4F53;&#x7C7B;&#x578B;&#x53EF;&#x80FD;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#xFF1A;<code>FONT_HERSHEY_SIMPLEX, FONT_HERSHEY_PLAIN, FONT_HERSHEY_DUPLEX, FONT_HERSHEY_COMPLEX, FONT_HERSHEY_TRIPLEX, FONT_HERSHEY_COMPLEX_SMALL, FONT_HERSHEY_SCRIPT_SIMPLEX, or FONT_HERSHEY_SCRIPT_COMPLEX</code><br>fontScale&#x2014;&#x2014;&#x5B57;&#x4F53;&#x5927;&#x5C0F;&#x3002;&#x76F8;&#x5BF9;&#x4E8E;&#x57FA;&#x672C;&#x5927;&#x5C0F;&#x7684;&#x7F29;&#x653E;<br>color&#x2014;&#x2014;&#x5B57;&#x4F53;&#x989C;&#x8272;<br>thickness&#x2014;&#x2014;&#x5B57;&#x7B26;&#x4E32;&#x7EBF;&#x6761;&#x7C97;&#x7EC6;<br>lineType&#x2014;&#x2014;&#x7EBF;&#x578B;<br>bottomLeftOrigin&#x2014;&#x2014;&#x786E;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;&#x56FE;&#x50CF;&#x7684;&#x539F;&#x70B9;&#x662F;&#x5750;&#x4E0B;&#x70B9;&#x8FD8;&#x662F;&#x5DE6;&#x4E0A;&#x70B9;&#x3002;<br>&#x901A;&#x5E38;&#x4F1A;&#x901A;&#x8FC7;&#x8F85;&#x52A9;&#x51FD;&#x6570;getTextSize&#xFF08;&#xFF09;&#x6765;&#x5E2E;&#x52A9;&#x7ED8;&#x56FE;&#x3002;</p>
 <ol>
-<li>绘制矩形rectangle<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> rectangle(Mat&amp; img, Point pt1, Point pt2, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=1, <span class="keyword">int</span> lineType=8, <span class="keyword">int</span> shift=0)</span><br><span class="line">C++: <span class="keyword">void</span> rectangle(Mat&amp; img, Rect rec, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=1, <span class="keyword">int</span> lineType=8, <span class="keyword">int</span> shift=0 )</span><br></pre></td></tr></table></figure>
+<li>&#x7ED8;&#x5236;&#x77E9;&#x5F62;rectangle<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> rectangle(Mat&amp; img, Point pt1, Point pt2, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=1, <span class="keyword">int</span> lineType=8, <span class="keyword">int</span> shift=0)</span><br><span class="line">C++: <span class="keyword">void</span> rectangle(Mat&amp; img, Rect rec, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=1, <span class="keyword">int</span> lineType=8, <span class="keyword">int</span> shift=0 )</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>在目标图像上绘制一个简单的确定粗细的矩形框，或者是填充矩形。</p>
+<p>&#x5728;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x4E0A;&#x7ED8;&#x5236;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x786E;&#x5B9A;&#x7C97;&#x7EC6;&#x7684;&#x77E9;&#x5F62;&#x6846;&#xFF0C;&#x6216;&#x8005;&#x662F;&#x586B;&#x5145;&#x77E9;&#x5F62;&#x3002;</p>
 <ol>
-<li><p>绘制圆形circle</p>
+<li><p>&#x7ED8;&#x5236;&#x5706;&#x5F62;circle</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">circle</span><span class="params">(Mat&amp; img, Point center, <span class="keyword">int</span> radius, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=<span class="number">1</span>, <span class="keyword">int</span> lineType=<span class="number">8</span>, <span class="keyword">int</span> shift=<span class="number">0</span>)</span></span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>绘制椭圆ellipse</p>
+<li><p>&#x7ED8;&#x5236;&#x692D;&#x5706;ellipse</p>
 <figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> <span class="built_in">ellipse</span>(Mat&amp; img, Point center, Size axes, <span class="keyword">double</span> angle, <span class="keyword">double</span> startAngle, <span class="keyword">double</span> endAngle, <span class="keyword">const</span> Scalar&amp; <span class="built_in">color</span>, <span class="built_in">int</span> thickness=<span class="number">1</span>, <span class="built_in">int</span> lineType=<span class="number">8</span>, <span class="built_in">int</span> shift=<span class="number">0</span>)</span><br><span class="line">C++: <span class="keyword">void</span> <span class="built_in">ellipse</span>(Mat&amp; img, <span class="keyword">const</span> RotatedRect&amp; <span class="built_in">box</span>, <span class="keyword">const</span> Scalar&amp; <span class="built_in">color</span>, <span class="built_in">int</span> thickness=<span class="number">1</span>, <span class="built_in">int</span> lineType=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>绘制线段line</p>
+<li><p>&#x7ED8;&#x5236;&#x7EBF;&#x6BB5;line</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">line</span><span class="params">(Mat&amp; img, Point pt1, Point pt2, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=<span class="number">1</span>, <span class="keyword">int</span> lineType=<span class="number">8</span>, <span class="keyword">int</span> shift=<span class="number">0</span>)</span></span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>绘制箭头arrowedLine</p>
+<li><p>&#x7ED8;&#x5236;&#x7BAD;&#x5934;arrowedLine</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">arrowedLine</span><span class="params">(Mat&amp; img, Point pt1, Point pt2, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=<span class="number">1</span>, <span class="keyword">int</span> line_type=<span class="number">8</span>, <span class="keyword">int</span> shift=<span class="number">0</span>, <span class="keyword">double</span> tipLength=<span class="number">0.1</span>)</span></span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>绘制曲线polylines</p>
+<li><p>&#x7ED8;&#x5236;&#x66F2;&#x7EBF;polylines</p>
 <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> polylines(Mat&amp; img, <span class="keyword">const</span> Point** pts, <span class="keyword">const</span> <span class="keyword">int</span>* npts, <span class="keyword">int</span> ncontours, bool isClosed, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=1, <span class="keyword">int</span> lineType=8, <span class="keyword">int</span> shift=0 )</span><br><span class="line">C++: <span class="keyword">void</span> polylines(InputOutputArray img, InputArrayOfArrays pts, bool isClosed, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=1, <span class="keyword">int</span> lineType=8, <span class="keyword">int</span> shift=0 )</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>部分参数详解<br>pts——多边形曲线的数组<br>npts——多边形定点计数的数组<br>ncontours——曲线的数量<br>isClosed——决定绘制曲线是否闭合。<br>该函数可以画出一根或多跟曲线。</p>
+<p>&#x90E8;&#x5206;&#x53C2;&#x6570;&#x8BE6;&#x89E3;<br>pts&#x2014;&#x2014;&#x591A;&#x8FB9;&#x5F62;&#x66F2;&#x7EBF;&#x7684;&#x6570;&#x7EC4;<br>npts&#x2014;&#x2014;&#x591A;&#x8FB9;&#x5F62;&#x5B9A;&#x70B9;&#x8BA1;&#x6570;&#x7684;&#x6570;&#x7EC4;<br>ncontours&#x2014;&#x2014;&#x66F2;&#x7EBF;&#x7684;&#x6570;&#x91CF;<br>isClosed&#x2014;&#x2014;&#x51B3;&#x5B9A;&#x7ED8;&#x5236;&#x66F2;&#x7EBF;&#x662F;&#x5426;&#x95ED;&#x5408;&#x3002;<br>&#x8BE5;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x753B;&#x51FA;&#x4E00;&#x6839;&#x6216;&#x591A;&#x8DDF;&#x66F2;&#x7EBF;&#x3002;</p>
 
       
     </div>

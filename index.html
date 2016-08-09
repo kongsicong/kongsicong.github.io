@@ -51,54 +51,27 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-08-09T07:05:59.000Z"><a href="/2016/08/09/年龄识别-1/">2016-08-09</a></time>
+        <time datetime="2016-08-09T07:05:59.000Z"><a href="/2016/08/09/年龄识别/">2016-08-09</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/08/09/年龄识别-1/">年龄识别</a></h1>
+    <h1 class="title"><a href="/2016/08/09/年龄识别/">年龄识别</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id="1_uFF0C_u5BF9_u53C2_u8003_u8BBA_u6587Ordinal_Regression_with_Multiple_Output_CNN_for_Age_Estimation_u7406_u89E3"><a href="#1_uFF0C_u5BF9_u53C2_u8003_u8BBA_u6587Ordinal_Regression_with_Multiple_Output_CNN_for_Age_Estimation_u7406_u89E3" class="headerlink" title="1，对参考论文Ordinal Regression with Multiple Output CNN for Age Estimation理解"></a>1，对参考论文<a href="http://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Niu_Ordinal_Regression_With_CVPR_2016_paper.pdf" target="_blank" rel="external">Ordinal Regression with Multiple Output CNN for Age Estimation</a>理解</h2><ol>
-<li>简介：<br>该论文是2016年最新的一篇关于年龄识别的论文。它的主要贡献在于提出了一种新的<strong>结合深度学习网络和回归模型的端到端的学习方法</strong>进行年龄识别，该方法既没有传统年龄识别方法需要手动构造特征进行学习过程的繁琐，又没有一些深度学习网络的庞大，它通过仅仅3层卷积层和一个全连接层就实现快速而准确地年龄识别过程。同时该论文还构造了一个新的年龄数据库<strong>AFAD（Asian Face Age Dataset）</strong>，从人人网上爬下了约164,432张人脸图，年龄分布从15岁到40岁，其中有63,680张女性人脸图以及100,752张男性人脸图。</li>
-<li>Ordinal Regression with CNN：</li>
+        <h2 id="1_uFF0C_u5BF9_u53C2_u8003_u8BBA_u6587Ordinal_Regression_with_Multiple_Output_CNN_for_Age_Estimation_u7406_u89E3"><a href="#1_uFF0C_u5BF9_u53C2_u8003_u8BBA_u6587Ordinal_Regression_with_Multiple_Output_CNN_for_Age_Estimation_u7406_u89E3" class="headerlink" title="1&#xFF0C;&#x5BF9;&#x53C2;&#x8003;&#x8BBA;&#x6587;Ordinal Regression with Multiple Output CNN for Age Estimation&#x7406;&#x89E3;"></a>1&#xFF0C;&#x5BF9;&#x53C2;&#x8003;&#x8BBA;&#x6587;<a href="http://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Niu_Ordinal_Regression_With_CVPR_2016_paper.pdf">Ordinal Regression with Multiple Output CNN for Age Estimation</a>&#x7406;&#x89E3;</h2><ol>
+<li>&#x7B80;&#x4ECB;&#xFF1A;<br>&#x8BE5;&#x8BBA;&#x6587;&#x662F;2016&#x5E74;&#x6700;&#x65B0;&#x7684;&#x4E00;&#x7BC7;&#x5173;&#x4E8E;&#x5E74;&#x9F84;&#x8BC6;&#x522B;&#x7684;&#x8BBA;&#x6587;&#x3002;&#x5B83;&#x7684;&#x4E3B;&#x8981;&#x8D21;&#x732E;&#x5728;&#x4E8E;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x79CD;&#x65B0;&#x7684;<strong>&#x7ED3;&#x5408;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x7F51;&#x7EDC;&#x548C;&#x56DE;&#x5F52;&#x6A21;&#x578B;&#x7684;&#x7AEF;&#x5230;&#x7AEF;&#x7684;&#x5B66;&#x4E60;&#x65B9;&#x6CD5;</strong>&#x8FDB;&#x884C;&#x5E74;&#x9F84;&#x8BC6;&#x522B;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x65E2;&#x6CA1;&#x6709;&#x4F20;&#x7EDF;&#x5E74;&#x9F84;&#x8BC6;&#x522B;&#x65B9;&#x6CD5;&#x9700;&#x8981;&#x624B;&#x52A8;&#x6784;&#x9020;&#x7279;&#x5F81;&#x8FDB;&#x884C;&#x5B66;&#x4E60;&#x8FC7;&#x7A0B;&#x7684;&#x7E41;&#x7410;&#xFF0C;&#x53C8;&#x6CA1;&#x6709;&#x4E00;&#x4E9B;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x7F51;&#x7EDC;&#x7684;&#x5E9E;&#x5927;&#xFF0C;&#x5B83;&#x901A;&#x8FC7;&#x4EC5;&#x4EC5;3&#x5C42;&#x5377;&#x79EF;&#x5C42;&#x548C;&#x4E00;&#x4E2A;&#x5168;&#x8FDE;&#x63A5;&#x5C42;&#x5C31;&#x5B9E;&#x73B0;&#x5FEB;&#x901F;&#x800C;&#x51C6;&#x786E;&#x5730;&#x5E74;&#x9F84;&#x8BC6;&#x522B;&#x8FC7;&#x7A0B;&#x3002;&#x540C;&#x65F6;&#x8BE5;&#x8BBA;&#x6587;&#x8FD8;&#x6784;&#x9020;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5E74;&#x9F84;&#x6570;&#x636E;&#x5E93;<strong>AFAD&#xFF08;Asian Face Age Dataset&#xFF09;</strong>&#xFF0C;&#x4ECE;&#x4EBA;&#x4EBA;&#x7F51;&#x4E0A;&#x722C;&#x4E0B;&#x4E86;&#x7EA6;164,432&#x5F20;&#x4EBA;&#x8138;&#x56FE;&#xFF0C;&#x5E74;&#x9F84;&#x5206;&#x5E03;&#x4ECE;15&#x5C81;&#x5230;40&#x5C81;&#xFF0C;&#x5176;&#x4E2D;&#x6709;63,680&#x5F20;&#x5973;&#x6027;&#x4EBA;&#x8138;&#x56FE;&#x4EE5;&#x53CA;100,752&#x5F20;&#x7537;&#x6027;&#x4EBA;&#x8138;&#x56FE;&#x3002;</li>
 </ol>
-<ul>
-<li>问题构建：<br>首先假设输入的第i张图片用${x}_{i} \in \chi$来表示，而输出结果用${y}_{i} \in \gamma = ({r}_{1}, {r}_{2},…,{r}_{k})$来表示,其中${r}_{k} \succ {r}_{k-1} \succ … \succ{r}_{1}$， 符号$\succ$标示着两个不同级别的顺序。给定训练样本${D} = ({x}_{i}, {y}_{i}{)}_{i = 1}^{N}$，ordinal regression就是要找到一个函数映射关系$h(.):\chi \rightarrow \gamma$，目标则是将自定义的代价函数$R(h) = c “:” \chi \times \gamma \rightarrow R$最小化。<br>其中代价矩阵$C$被用来计算预测到的等级序列与实际的等级序列的误差。其中， $C$是一个$K \times K$的矩阵，而${C}_{y, r}$代表着预测某个样本$(x, y)$的等级序列$r$</li>
-<li>提出方法：<br>在本文中，为了直接利用已经拥有的分类算法，作者将ordinal regression转化为了一系列的二分类子问题。更明确的说就是将一个拥有K个等级的ordinal regression问题转化为了K - 1个更加简单的二分类子问题。对于每一个输出等级${r}_{k} \in (r_1, r_2, …, r_{K-1})$， 其中每一个二分类器都用来预测输出$y_i$是否高于等级$r_k$。最后根据这K-1个二分类器的输出结果判定最后的预测等级。<br>应用到年龄识别这个特定问题上就是：输出$y_i$的年龄值原本为1-100岁，现在将这个问题转化为100个子问题，判断该样本图片预测年龄是否大于$i \in (1, 2, 3, …, 100)$岁，若大于i，则该子问题输出为1，否则为0。最后根据所有的100个子问题的输出结果计算预测年龄，其计算公式为：<br>$predict_age = 1 + \sum_{k=1}^{K-1}{f}_{k}(x^,)$</li>
-<li>CNN体系结构<img src="./artichture_OR_CNN.png" alt="网络架构"> </li>
-<li>损失函数的计算：<br>因为作者提出的方法是基于caffe的深度学习框架的网络，而且是一种多任务的计算模型，在caffe的源码中并没有这样的layer定义，所以需要我们自己构建自定义的loss_layer来计算。其核心公式如下：<br>我们有N个训练样本，对于子问题中的某一个问题来说，我们采用cross-entropy函数用作损失函数，则最后的损失函数为<br>$E_s = -\frac{1}{N}\sum_{i=1}^{N}(1(o_i = y_i)w_ilog(p(o_i|x_i, W))$<br>但是我们有K=100个子任务，所以我们最后的损失函数公式为<br>$E_m = -\frac{1}{N}\sum_{i=1}^{N}\sum_{t=1}^{T}(\lambda^t1(o_i^t = y_i^t)w_i^tlog(p(o_i^t|x_i, W^t)))$<br>其中$\lambda^t$代表着第t个子任务的数据权重，也就是每个年龄数据量在总数据量中的比重，其计算公式为$\lambda^t = \frac{\sqrt{N_t}}{\sum_{i=1}^{T}{\sqrt{N_i}}}$<br>而$w_i$则代表着带每一个二分类子问题中每一个类别的权重，可以简单地设为1。<br>最后再利用反向梯度传播来实现参数最优化。</li>
-</ul>
-<ol>
-<li>图像预处理<br>该论文作者对用于训练的图像做了如下预处理过程</li>
-</ol>
-<ul>
-<li>检脸器检脸</li>
-<li>根据检脸框用AAM做标点</li>
-<li>根据眼睛标点结果做一个简单的脸部矫正</li>
-<li>根据矫正后的图片裁剪一个64*64的人脸图片，保证鼻尖点位于裁剪图片的中心</li>
-<li>为了防止过拟合的情况，从64<em>64的人脸图片中随机裁剪一个60</em>60的人脸图，用于最后的输入。</li>
-</ul>
-<ol>
-<li>实验结果分析<br>该论文在morph数据库和AFAD数据库上分别做了对比试验，其中利用提出的方法得到的最好结果的MAE是在morph上的3.27岁，在AFAD数据集上的最好结果是3.34岁。同时也做了彩色图和灰度图的对比试验，结果显示彩色图比灰度图mae小大约0.1岁左右。<br>但是由于论文中用于训练的数据中年龄分布缺少15岁以下的图片，所以其实用性有待验证。</li>
-</ol>
-<hr>
-<h2 id="2_uFF0C_u8BAD_u7EC3_u8FC7_u7A0B"><a href="#2_uFF0C_u8BAD_u7EC3_u8FC7_u7A0B" class="headerlink" title="2，训练过程"></a>2，训练过程</h2><h3 id="uFF081_uFF09_uFF0C_u5E74_u9F84_u6570_u636E_u96C6_u7684_u51C6_u5907"><a href="#uFF081_uFF09_uFF0C_u5E74_u9F84_u6570_u636E_u96C6_u7684_u51C6_u5907" class="headerlink" title="（1），年龄数据集的准备"></a>（1），年龄数据集的准备</h3><p>为了产生更大的数据量和更广泛更均匀的数据分布，我采用多个数据集混合训练的方法进行训练及测试过程。现在网上有的年龄数据库有imdb（含有大约46万张图片），wiki（含有大约62000张图片），但是这两个数据库中的标签不太准确，含有大量的噪声数据，筛选过程比较麻烦。fg-net（只有约1000张图片），morph（有大约65000张图片），外加新增的Tutu1-15（主要收集了其他数据库缺乏的1-15岁小孩的图片数据，每个年龄有大约1500张图片，由Tutu公司构建）。</p>
-<h3 id="uFF082_uFF09_uFF0C_u56FE_u7247_u9884_u5904_u7406"><a href="#uFF082_uFF09_uFF0C_u56FE_u7247_u9884_u5904_u7406" class="headerlink" title="（2），图片预处理"></a>（2），图片预处理</h3><p>原论文中进行了人脸矫正以及随机crop的过程，而我在实际训练过程中简化了步骤，只做了一步检脸过程，直接用检脸器产生的脸部数据resize到60*60，然后将数据进行简单的归一化，即将每张图片数据中的像素值减去128后再除以128，是输入数据归一化到-1~1，最后将数据保存为hdf5数据进行训练过程。</p>
-<h3 id="uFF083_uFF09_uFF0C_u81EA_u5B9A_u4E49loss_layer"><a href="#uFF083_uFF09_uFF0C_u81EA_u5B9A_u4E49loss_layer" class="headerlink" title="（3），自定义loss_layer"></a>（3），自定义loss_layer</h3><p>一共需要自定义两个layer，其中一个是loss_layer用于计算多任务的损失函数，另一个是用于计算实际年龄误差的mae_layer层。这两个自定义层的源代码保存在OrdinalRegerssion的文件夹中。（具体添加过程见文件夹中README.md）</p>
-<h3 id="uFF084_uFF09_uFF0C_u8BAD_u7EC3"><a href="#uFF084_uFF09_uFF0C_u8BAD_u7EC3" class="headerlink" title="（4），训练"></a>（4），训练</h3><p>定义训练网络文件及solver文件，该文件保存在train文件夹中。修改train.prototxt中的data层的数据路径以及loss层的weight_file权值文件就可以开始训练。其中loss层的weight_file参数代表着每个年龄段的权重，用于最后的损失函数计算过程。</p>
-<h3 id="uFF085_uFF09_uFF0C_u81EA_u6211_u8BAD_u7EC3_u7ED3_u679C_u8BC4_u4EF7"><a href="#uFF085_uFF09_uFF0C_u81EA_u6211_u8BAD_u7EC3_u7ED3_u679C_u8BC4_u4EF7" class="headerlink" title="（5），自我训练结果评价"></a>（5），自我训练结果评价</h3><ul>
-<li>直接采用检脸后的数据进行训练出现了过拟合的情况，后来加入了人脸矫正的过程可以解决这个问题，同时在实际测试中对检脸程序的一致性要求极高，检脸参数设置稍微不同都会导致结果的极大误差，这都证明了我对数据预处理过程的粗糙。同时也证明了论文中人脸矫正以及随机crop过程的重要性</li>
-<li>直接采用灰度图进行训练，因为彩色图和灰度图最终得到的实验结果误差相差不大，而灰度图可以适应更广泛极端的情况，所以在实际使用中最好使用灰度图训练及测试。</li>
-<li>输入数据分布尽量均匀效果会更好，在混合所有的训练数据后，训练误差和测试误差都可达5岁以内，验证集mae误差也能达到5岁。但是在实测情况中出现对16-30对之间的人的年龄预判出错，分析其原因一是因为年龄数据集中的人物年龄分类不准，而是东方人与西方人年龄与面向的不同。说明了数据集对于训练结果的重要性。若要改善，需要重构数据集。</li>
-</ul>
-
       
     </div>
     <footer>
       
+        
+          <div class="alignleft">
+            <a href="/2016/08/09/年龄识别/#more" class="more-link">Read More</a>
+          </div>
         
         
       
@@ -158,12 +131,12 @@
     </header>
     <div class="entry">
       
-        <h2 id="u4E00_uFF0Copencv2-x__u6A21_u5757highgui_u4ECB_u7ECD"><a href="#u4E00_uFF0Copencv2-x__u6A21_u5757highgui_u4ECB_u7ECD" class="headerlink" title="一，opencv2.x 模块highgui介绍"></a>一，opencv2.x 模块highgui介绍</h2><p>opencv被设计的能偶适应各种应用程序，也能用于需要功能丰富的UI框架或者是一点都不需要UI的应用。但是某些时候我们需要快速尝试一些功能并且能将其可视化，所以就设计了HighGUI这个模块，用于帮助显示数据。<br>该模块主要提供了以下一些简单易用的接口：</p>
+        <h2 id="u4E00_uFF0Copencv2-x__u6A21_u5757highgui_u4ECB_u7ECD"><a href="#u4E00_uFF0Copencv2-x__u6A21_u5757highgui_u4ECB_u7ECD" class="headerlink" title="&#x4E00;&#xFF0C;opencv2.x &#x6A21;&#x5757;highgui&#x4ECB;&#x7ECD;"></a>&#x4E00;&#xFF0C;opencv2.x &#x6A21;&#x5757;highgui&#x4ECB;&#x7ECD;</h2><p>opencv&#x88AB;&#x8BBE;&#x8BA1;&#x7684;&#x80FD;&#x5076;&#x9002;&#x5E94;&#x5404;&#x79CD;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x4E5F;&#x80FD;&#x7528;&#x4E8E;&#x9700;&#x8981;&#x529F;&#x80FD;&#x4E30;&#x5BCC;&#x7684;UI&#x6846;&#x67B6;&#x6216;&#x8005;&#x662F;&#x4E00;&#x70B9;&#x90FD;&#x4E0D;&#x9700;&#x8981;UI&#x7684;&#x5E94;&#x7528;&#x3002;&#x4F46;&#x662F;&#x67D0;&#x4E9B;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5FEB;&#x901F;&#x5C1D;&#x8BD5;&#x4E00;&#x4E9B;&#x529F;&#x80FD;&#x5E76;&#x4E14;&#x80FD;&#x5C06;&#x5176;&#x53EF;&#x89C6;&#x5316;&#xFF0C;&#x6240;&#x4EE5;&#x5C31;&#x8BBE;&#x8BA1;&#x4E86;HighGUI&#x8FD9;&#x4E2A;&#x6A21;&#x5757;&#xFF0C;&#x7528;&#x4E8E;&#x5E2E;&#x52A9;&#x663E;&#x793A;&#x6570;&#x636E;&#x3002;<br>&#x8BE5;&#x6A21;&#x5757;&#x4E3B;&#x8981;&#x63D0;&#x4F9B;&#x4E86;&#x4EE5;&#x4E0B;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x6613;&#x7528;&#x7684;&#x63A5;&#x53E3;&#xFF1A;</p>
 <ol>
-<li>建造和操作窗口，这些窗口能够显示图像和存储图像内容。</li>
-<li>对窗口增加控制条，能够处理一些简单的鼠标事件和键盘命令。</li>
-<li>将图像写入内存或磁盘，或者从内存和磁盘读取图像</li>
-<li>从相机或者是文件读取视频，或者将视频写入文件。</li>
+<li>&#x5EFA;&#x9020;&#x548C;&#x64CD;&#x4F5C;&#x7A97;&#x53E3;&#xFF0C;&#x8FD9;&#x4E9B;&#x7A97;&#x53E3;&#x80FD;&#x591F;&#x663E;&#x793A;&#x56FE;&#x50CF;&#x548C;&#x5B58;&#x50A8;&#x56FE;&#x50CF;&#x5185;&#x5BB9;&#x3002;</li>
+<li>&#x5BF9;&#x7A97;&#x53E3;&#x589E;&#x52A0;&#x63A7;&#x5236;&#x6761;&#xFF0C;&#x80FD;&#x591F;&#x5904;&#x7406;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x7684;&#x9F20;&#x6807;&#x4E8B;&#x4EF6;&#x548C;&#x952E;&#x76D8;&#x547D;&#x4EE4;&#x3002;</li>
+<li>&#x5C06;&#x56FE;&#x50CF;&#x5199;&#x5165;&#x5185;&#x5B58;&#x6216;&#x78C1;&#x76D8;&#xFF0C;&#x6216;&#x8005;&#x4ECE;&#x5185;&#x5B58;&#x548C;&#x78C1;&#x76D8;&#x8BFB;&#x53D6;&#x56FE;&#x50CF;</li>
+<li>&#x4ECE;&#x76F8;&#x673A;&#x6216;&#x8005;&#x662F;&#x6587;&#x4EF6;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#xFF0C;&#x6216;&#x8005;&#x5C06;&#x89C6;&#x9891;&#x5199;&#x5165;&#x6587;&#x4EF6;&#x3002;</li>
 </ol>
       
     </div>
@@ -200,16 +173,16 @@
     </header>
     <div class="entry">
       
-        <h2 id="u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E09_u90E8_u5206_u2014_u2014Drawing_Functions_uFF08_u7ED8_u56FE_u51FD_u6570_uFF09"><a href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E09_u90E8_u5206_u2014_u2014Drawing_Functions_uFF08_u7ED8_u56FE_u51FD_u6570_uFF09" class="headerlink" title="一，opencv模块core内容第三部分——Drawing Functions（绘图函数）"></a>一，opencv模块core内容第三部分——Drawing Functions（绘图函数）</h2><p>绘图函数可以再任意深度的矩阵（图像）上工作。这些函数就是在图像矩阵上绘出特定的图像。主要有以下几种简单的绘图功能。</p>
+        <h2 id="u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E09_u90E8_u5206_u2014_u2014Drawing_Functions_uFF08_u7ED8_u56FE_u51FD_u6570_uFF09"><a href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E09_u90E8_u5206_u2014_u2014Drawing_Functions_uFF08_u7ED8_u56FE_u51FD_u6570_uFF09" class="headerlink" title="&#x4E00;&#xFF0C;opencv&#x6A21;&#x5757;core&#x5185;&#x5BB9;&#x7B2C;&#x4E09;&#x90E8;&#x5206;&#x2014;&#x2014;Drawing Functions&#xFF08;&#x7ED8;&#x56FE;&#x51FD;&#x6570;&#xFF09;"></a>&#x4E00;&#xFF0C;opencv&#x6A21;&#x5757;core&#x5185;&#x5BB9;&#x7B2C;&#x4E09;&#x90E8;&#x5206;&#x2014;&#x2014;Drawing Functions&#xFF08;&#x7ED8;&#x56FE;&#x51FD;&#x6570;&#xFF09;</h2><p>&#x7ED8;&#x56FE;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x518D;&#x4EFB;&#x610F;&#x6DF1;&#x5EA6;&#x7684;&#x77E9;&#x9635;&#xFF08;&#x56FE;&#x50CF;&#xFF09;&#x4E0A;&#x5DE5;&#x4F5C;&#x3002;&#x8FD9;&#x4E9B;&#x51FD;&#x6570;&#x5C31;&#x662F;&#x5728;&#x56FE;&#x50CF;&#x77E9;&#x9635;&#x4E0A;&#x7ED8;&#x51FA;&#x7279;&#x5B9A;&#x7684;&#x56FE;&#x50CF;&#x3002;&#x4E3B;&#x8981;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#x7B80;&#x5355;&#x7684;&#x7ED8;&#x56FE;&#x529F;&#x80FD;&#x3002;</p>
 <ol>
-<li>绘制文字putText</li>
-<li>绘制矩形rectangle</li>
-<li>绘制圆形circle</li>
-<li>绘制椭圆ellipse</li>
-<li>绘制线段line</li>
-<li>绘制箭头arrowedLine</li>
-<li>绘制曲线polylines</li>
-<li>其余一些帮助函数clipLine, ellipse2Poly, fillConvexPoly, fillPoly, getTextSize, InitFont
+<li>&#x7ED8;&#x5236;&#x6587;&#x5B57;putText</li>
+<li>&#x7ED8;&#x5236;&#x77E9;&#x5F62;rectangle</li>
+<li>&#x7ED8;&#x5236;&#x5706;&#x5F62;circle</li>
+<li>&#x7ED8;&#x5236;&#x692D;&#x5706;ellipse</li>
+<li>&#x7ED8;&#x5236;&#x7EBF;&#x6BB5;line</li>
+<li>&#x7ED8;&#x5236;&#x7BAD;&#x5934;arrowedLine</li>
+<li>&#x7ED8;&#x5236;&#x66F2;&#x7EBF;polylines</li>
+<li>&#x5176;&#x4F59;&#x4E00;&#x4E9B;&#x5E2E;&#x52A9;&#x51FD;&#x6570;clipLine, ellipse2Poly, fillConvexPoly, fillPoly, getTextSize, InitFont</li></ol>
       
     </div>
     <footer>
@@ -245,8 +218,8 @@
     </header>
     <div class="entry">
       
-        <h2 id="u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E8C_u90E8_u5206_u2014_u2014Operations_on_Arrays_uFF08_u5BF9_u6570_u7EC4_u7684_u64CD_u4F5C_uFF09"><a href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E8C_u90E8_u5206_u2014_u2014Operations_on_Arrays_uFF08_u5BF9_u6570_u7EC4_u7684_u64CD_u4F5C_uFF09" class="headerlink" title="一，opencv模块core内容第二部分——Operations on Arrays（对数组的操作）"></a>一，opencv模块core内容第二部分——Operations on Arrays（对数组的操作）</h2><p>计算机图像都是以矩阵的形式存储一个个像素点，而这些各种矩阵在计算机内存中实际上是以数组的形式真实存在的，只不过是通过类和面向对象的方式将其封装成了和matlab类似的矩阵。所以，各种对矩阵（数组）的操作也是opencv中核心内容之一。其基本功能和作用就相当于matlab中那些对矩阵操作的函数。</p>
-<h2 id="3C_21-more-_3E"><a href="#3C_21-more-_3E" class="headerlink" title="
+        <h2 id="u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E8C_u90E8_u5206_u2014_u2014Operations_on_Arrays_uFF08_u5BF9_u6570_u7EC4_u7684_u64CD_u4F5C_uFF09"><a href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E8C_u90E8_u5206_u2014_u2014Operations_on_Arrays_uFF08_u5BF9_u6570_u7EC4_u7684_u64CD_u4F5C_uFF09" class="headerlink" title="&#x4E00;&#xFF0C;opencv&#x6A21;&#x5757;core&#x5185;&#x5BB9;&#x7B2C;&#x4E8C;&#x90E8;&#x5206;&#x2014;&#x2014;Operations on Arrays&#xFF08;&#x5BF9;&#x6570;&#x7EC4;&#x7684;&#x64CD;&#x4F5C;&#xFF09;"></a>&#x4E00;&#xFF0C;opencv&#x6A21;&#x5757;core&#x5185;&#x5BB9;&#x7B2C;&#x4E8C;&#x90E8;&#x5206;&#x2014;&#x2014;Operations on Arrays&#xFF08;&#x5BF9;&#x6570;&#x7EC4;&#x7684;&#x64CD;&#x4F5C;&#xFF09;</h2><p>&#x8BA1;&#x7B97;&#x673A;&#x56FE;&#x50CF;&#x90FD;&#x662F;&#x4EE5;&#x77E9;&#x9635;&#x7684;&#x5F62;&#x5F0F;&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x4E2A;&#x50CF;&#x7D20;&#x70B9;&#xFF0C;&#x800C;&#x8FD9;&#x4E9B;&#x5404;&#x79CD;&#x77E9;&#x9635;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x5185;&#x5B58;&#x4E2D;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x4EE5;&#x6570;&#x7EC4;&#x7684;&#x5F62;&#x5F0F;&#x771F;&#x5B9E;&#x5B58;&#x5728;&#x7684;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x662F;&#x901A;&#x8FC7;&#x7C7B;&#x548C;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x5F0F;&#x5C06;&#x5176;&#x5C01;&#x88C5;&#x6210;&#x4E86;&#x548C;matlab&#x7C7B;&#x4F3C;&#x7684;&#x77E9;&#x9635;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5404;&#x79CD;&#x5BF9;&#x77E9;&#x9635;&#xFF08;&#x6570;&#x7EC4;&#xFF09;&#x7684;&#x64CD;&#x4F5C;&#x4E5F;&#x662F;opencv&#x4E2D;&#x6838;&#x5FC3;&#x5185;&#x5BB9;&#x4E4B;&#x4E00;&#x3002;&#x5176;&#x57FA;&#x672C;&#x529F;&#x80FD;&#x548C;&#x4F5C;&#x7528;&#x5C31;&#x76F8;&#x5F53;&#x4E8E;matlab&#x4E2D;&#x90A3;&#x4E9B;&#x5BF9;&#x77E9;&#x9635;&#x64CD;&#x4F5C;&#x7684;&#x51FD;&#x6570;&#x3002;</p>
+<h2 id="3C_21-more-_3E"></h2>
       
     </div>
     <footer>
@@ -282,8 +255,8 @@
     </header>
     <div class="entry">
       
-        <h2 id="u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E00_u90E8_u5206_u2014_u2014Basic_Structures_uFF08_u57FA_u672C_u6570_u636E_u7ED3_u6784_uFF09"><a href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E00_u90E8_u5206_u2014_u2014Basic_Structures_uFF08_u57FA_u672C_u6570_u636E_u7ED3_u6784_uFF09" class="headerlink" title="一，opencv模块core内容第一部分——Basic Structures（基本数据结构）"></a>一，opencv模块core内容第一部分——Basic Structures（基本数据结构）</h2><p>该模块中包含了opencv所利用到的最基本的数据结构，是opencv最基础最核心，也是最需要掌握的内容，本章节主要介绍opencv2.x基于c++的类，只是顺带提一下opencv1.x中的基于c语言类型的数据结构。<br>opencv2.x中最基础的数据类型有如下几个：<br>DataType——数据类型<br>Point_,Point3_——点（x，y，z）<br>Size_——尺寸（width*heigth）<br>Rect_,RotatedRect——矩形（x，y，width，height）<br>TermCriteria——终止条件<br>Matx——小矩阵<br>Vec——向量<br>Scalar_——标量<br>Range——范围<br><code>Ptr</code>——指针(<code>重点，难点，需花时间</code>)<br><code>Mat</code>,Mat_——矩阵<code>（最重要，最核心，需要很多时间）</code><br>InputArray,OutputArray——输入输出数组<br>NartMatIterator——矩阵迭代<br>SparseMat,SparseMat_——稀疏矩阵<br>Algorithm——算法</p>
-<h2 id="3C_21-more-_3E"><a href="#3C_21-more-_3E" class="headerlink" title="
+        <h2 id="u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E00_u90E8_u5206_u2014_u2014Basic_Structures_uFF08_u57FA_u672C_u6570_u636E_u7ED3_u6784_uFF09"><a href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E00_u90E8_u5206_u2014_u2014Basic_Structures_uFF08_u57FA_u672C_u6570_u636E_u7ED3_u6784_uFF09" class="headerlink" title="&#x4E00;&#xFF0C;opencv&#x6A21;&#x5757;core&#x5185;&#x5BB9;&#x7B2C;&#x4E00;&#x90E8;&#x5206;&#x2014;&#x2014;Basic Structures&#xFF08;&#x57FA;&#x672C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF09;"></a>&#x4E00;&#xFF0C;opencv&#x6A21;&#x5757;core&#x5185;&#x5BB9;&#x7B2C;&#x4E00;&#x90E8;&#x5206;&#x2014;&#x2014;Basic Structures&#xFF08;&#x57FA;&#x672C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF09;</h2><p>&#x8BE5;&#x6A21;&#x5757;&#x4E2D;&#x5305;&#x542B;&#x4E86;opencv&#x6240;&#x5229;&#x7528;&#x5230;&#x7684;&#x6700;&#x57FA;&#x672C;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x662F;opencv&#x6700;&#x57FA;&#x7840;&#x6700;&#x6838;&#x5FC3;&#xFF0C;&#x4E5F;&#x662F;&#x6700;&#x9700;&#x8981;&#x638C;&#x63E1;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x672C;&#x7AE0;&#x8282;&#x4E3B;&#x8981;&#x4ECB;&#x7ECD;opencv2.x&#x57FA;&#x4E8E;c++&#x7684;&#x7C7B;&#xFF0C;&#x53EA;&#x662F;&#x987A;&#x5E26;&#x63D0;&#x4E00;&#x4E0B;opencv1.x&#x4E2D;&#x7684;&#x57FA;&#x4E8E;c&#x8BED;&#x8A00;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;<br>opencv2.x&#x4E2D;&#x6700;&#x57FA;&#x7840;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x6709;&#x5982;&#x4E0B;&#x51E0;&#x4E2A;&#xFF1A;<br>DataType&#x2014;&#x2014;&#x6570;&#x636E;&#x7C7B;&#x578B;<br>Point_,Point3_&#x2014;&#x2014;&#x70B9;&#xFF08;x&#xFF0C;y&#xFF0C;z&#xFF09;<br>Size_&#x2014;&#x2014;&#x5C3A;&#x5BF8;&#xFF08;width*heigth&#xFF09;<br>Rect_,RotatedRect&#x2014;&#x2014;&#x77E9;&#x5F62;&#xFF08;x&#xFF0C;y&#xFF0C;width&#xFF0C;height&#xFF09;<br>TermCriteria&#x2014;&#x2014;&#x7EC8;&#x6B62;&#x6761;&#x4EF6;<br>Matx&#x2014;&#x2014;&#x5C0F;&#x77E9;&#x9635;<br>Vec&#x2014;&#x2014;&#x5411;&#x91CF;<br>Scalar_&#x2014;&#x2014;&#x6807;&#x91CF;<br>Range&#x2014;&#x2014;&#x8303;&#x56F4;<br><code>Ptr</code>&#x2014;&#x2014;&#x6307;&#x9488;(<code>&#x91CD;&#x70B9;&#xFF0C;&#x96BE;&#x70B9;&#xFF0C;&#x9700;&#x82B1;&#x65F6;&#x95F4;</code>)<br><code>Mat</code>,Mat_&#x2014;&#x2014;&#x77E9;&#x9635;<code>&#xFF08;&#x6700;&#x91CD;&#x8981;&#xFF0C;&#x6700;&#x6838;&#x5FC3;&#xFF0C;&#x9700;&#x8981;&#x5F88;&#x591A;&#x65F6;&#x95F4;&#xFF09;</code><br>InputArray,OutputArray&#x2014;&#x2014;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x6570;&#x7EC4;<br>NartMatIterator&#x2014;&#x2014;&#x77E9;&#x9635;&#x8FED;&#x4EE3;<br>SparseMat,SparseMat_&#x2014;&#x2014;&#x7A00;&#x758F;&#x77E9;&#x9635;<br>Algorithm&#x2014;&#x2014;&#x7B97;&#x6CD5;</p>
+<h2 id="3C_21-more-_3E"></h2>
       
     </div>
     <footer>
@@ -319,19 +292,19 @@
     </header>
     <div class="entry">
       
-        <h2 id="u4E00_uFF0Copencv_u6982_u89C8"><a href="#u4E00_uFF0Copencv_u6982_u89C8" class="headerlink" title="一，opencv概览"></a>一，opencv概览</h2><p>opencv（open source computer vision library：<a href="http://opencv.org">opencv官网</a>是一个开源的计算机视觉库，该库包含了几百个计算机视觉处理算法。opencv库现阶段已经更新到3.x版本，但由于其不稳定性，故多采用opencv2.x版本。opencv1.x版本是基于c语言撰写的API，而opencv2.x是基于c++撰写的API。<br>opencv采用模块结构，这代表着该库包含了一些分享的或者是静态的库。下面就是各个主要模块的介绍：</p>
+        <h2 id="u4E00_uFF0Copencv_u6982_u89C8"><a href="#u4E00_uFF0Copencv_u6982_u89C8" class="headerlink" title="&#x4E00;&#xFF0C;opencv&#x6982;&#x89C8;"></a>&#x4E00;&#xFF0C;opencv&#x6982;&#x89C8;</h2><p>opencv&#xFF08;open source computer vision library&#xFF1A;<a href="http://opencv.org">opencv&#x5B98;&#x7F51;</a>&#x662F;&#x4E00;&#x4E2A;&#x5F00;&#x6E90;&#x7684;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x5E93;&#xFF0C;&#x8BE5;&#x5E93;&#x5305;&#x542B;&#x4E86;&#x51E0;&#x767E;&#x4E2A;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x5904;&#x7406;&#x7B97;&#x6CD5;&#x3002;opencv&#x5E93;&#x73B0;&#x9636;&#x6BB5;&#x5DF2;&#x7ECF;&#x66F4;&#x65B0;&#x5230;3.x&#x7248;&#x672C;&#xFF0C;&#x4F46;&#x7531;&#x4E8E;&#x5176;&#x4E0D;&#x7A33;&#x5B9A;&#x6027;&#xFF0C;&#x6545;&#x591A;&#x91C7;&#x7528;opencv2.x&#x7248;&#x672C;&#x3002;opencv1.x&#x7248;&#x672C;&#x662F;&#x57FA;&#x4E8E;c&#x8BED;&#x8A00;&#x64B0;&#x5199;&#x7684;API&#xFF0C;&#x800C;opencv2.x&#x662F;&#x57FA;&#x4E8E;c++&#x64B0;&#x5199;&#x7684;API&#x3002;<br>opencv&#x91C7;&#x7528;&#x6A21;&#x5757;&#x7ED3;&#x6784;&#xFF0C;&#x8FD9;&#x4EE3;&#x8868;&#x7740;&#x8BE5;&#x5E93;&#x5305;&#x542B;&#x4E86;&#x4E00;&#x4E9B;&#x5206;&#x4EAB;&#x7684;&#x6216;&#x8005;&#x662F;&#x9759;&#x6001;&#x7684;&#x5E93;&#x3002;&#x4E0B;&#x9762;&#x5C31;&#x662F;&#x5404;&#x4E2A;&#x4E3B;&#x8981;&#x6A21;&#x5757;&#x7684;&#x4ECB;&#x7ECD;&#xFF1A;</p>
 <ul>
-<li>core-核心模块，该模块定义了opencv里面的基本的数据结构，包含了多维数组Mat和一些被其他模块使用的基本函数。</li>
-<li>imgproc-一个图像处理模块，该模块包含了线性和非线性的图像处理滤波器，几何图像转换（缩放，仿射变换，视图弯曲，映射），彩色空间变换，直方图等等。</li>
-<li>video-视频分析模块，该模块包含运动估计，背景去除和目标追踪算法。</li>
-<li>calib3d-3d校准模块，该模块包含基本的多视图几何算法，单一和立体摄像机校准，目标姿势估计，立体一致性算法和3d重建元素等。</li>
-<li>features2d-2d特征模块，改模块包含了显著特征检测器，描述符和描述符匹配器。</li>
-<li>objdetect-目标检测模块，该模块包含了目标检测和预定义类的实例（例如faces，eyes，mugs，people，cars等等）。</li>
-<li>highgui-该模块包含了一些处理视频捕获，图像和视频编码，以及一些简单的用户界面能力的易于使用的接口。</li>
-<li>gpu-该模块包含了为不同的opencv模块使用的GPU加速算法。</li>
-<li>其他-其他一些模块为帮助模块，例如FLANN和Google测试包装器，Python绑定等等。</li>
+<li>core-&#x6838;&#x5FC3;&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5B9A;&#x4E49;&#x4E86;opencv&#x91CC;&#x9762;&#x7684;&#x57FA;&#x672C;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x5305;&#x542B;&#x4E86;&#x591A;&#x7EF4;&#x6570;&#x7EC4;Mat&#x548C;&#x4E00;&#x4E9B;&#x88AB;&#x5176;&#x4ED6;&#x6A21;&#x5757;&#x4F7F;&#x7528;&#x7684;&#x57FA;&#x672C;&#x51FD;&#x6570;&#x3002;</li>
+<li>imgproc-&#x4E00;&#x4E2A;&#x56FE;&#x50CF;&#x5904;&#x7406;&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5305;&#x542B;&#x4E86;&#x7EBF;&#x6027;&#x548C;&#x975E;&#x7EBF;&#x6027;&#x7684;&#x56FE;&#x50CF;&#x5904;&#x7406;&#x6EE4;&#x6CE2;&#x5668;&#xFF0C;&#x51E0;&#x4F55;&#x56FE;&#x50CF;&#x8F6C;&#x6362;&#xFF08;&#x7F29;&#x653E;&#xFF0C;&#x4EFF;&#x5C04;&#x53D8;&#x6362;&#xFF0C;&#x89C6;&#x56FE;&#x5F2F;&#x66F2;&#xFF0C;&#x6620;&#x5C04;&#xFF09;&#xFF0C;&#x5F69;&#x8272;&#x7A7A;&#x95F4;&#x53D8;&#x6362;&#xFF0C;&#x76F4;&#x65B9;&#x56FE;&#x7B49;&#x7B49;&#x3002;</li>
+<li>video-&#x89C6;&#x9891;&#x5206;&#x6790;&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5305;&#x542B;&#x8FD0;&#x52A8;&#x4F30;&#x8BA1;&#xFF0C;&#x80CC;&#x666F;&#x53BB;&#x9664;&#x548C;&#x76EE;&#x6807;&#x8FFD;&#x8E2A;&#x7B97;&#x6CD5;&#x3002;</li>
+<li>calib3d-3d&#x6821;&#x51C6;&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5305;&#x542B;&#x57FA;&#x672C;&#x7684;&#x591A;&#x89C6;&#x56FE;&#x51E0;&#x4F55;&#x7B97;&#x6CD5;&#xFF0C;&#x5355;&#x4E00;&#x548C;&#x7ACB;&#x4F53;&#x6444;&#x50CF;&#x673A;&#x6821;&#x51C6;&#xFF0C;&#x76EE;&#x6807;&#x59FF;&#x52BF;&#x4F30;&#x8BA1;&#xFF0C;&#x7ACB;&#x4F53;&#x4E00;&#x81F4;&#x6027;&#x7B97;&#x6CD5;&#x548C;3d&#x91CD;&#x5EFA;&#x5143;&#x7D20;&#x7B49;&#x3002;</li>
+<li>features2d-2d&#x7279;&#x5F81;&#x6A21;&#x5757;&#xFF0C;&#x6539;&#x6A21;&#x5757;&#x5305;&#x542B;&#x4E86;&#x663E;&#x8457;&#x7279;&#x5F81;&#x68C0;&#x6D4B;&#x5668;&#xFF0C;&#x63CF;&#x8FF0;&#x7B26;&#x548C;&#x63CF;&#x8FF0;&#x7B26;&#x5339;&#x914D;&#x5668;&#x3002;</li>
+<li>objdetect-&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5305;&#x542B;&#x4E86;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x548C;&#x9884;&#x5B9A;&#x4E49;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#xFF08;&#x4F8B;&#x5982;faces&#xFF0C;eyes&#xFF0C;mugs&#xFF0C;people&#xFF0C;cars&#x7B49;&#x7B49;&#xFF09;&#x3002;</li>
+<li>highgui-&#x8BE5;&#x6A21;&#x5757;&#x5305;&#x542B;&#x4E86;&#x4E00;&#x4E9B;&#x5904;&#x7406;&#x89C6;&#x9891;&#x6355;&#x83B7;&#xFF0C;&#x56FE;&#x50CF;&#x548C;&#x89C6;&#x9891;&#x7F16;&#x7801;&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x7684;&#x7528;&#x6237;&#x754C;&#x9762;&#x80FD;&#x529B;&#x7684;&#x6613;&#x4E8E;&#x4F7F;&#x7528;&#x7684;&#x63A5;&#x53E3;&#x3002;</li>
+<li>gpu-&#x8BE5;&#x6A21;&#x5757;&#x5305;&#x542B;&#x4E86;&#x4E3A;&#x4E0D;&#x540C;&#x7684;opencv&#x6A21;&#x5757;&#x4F7F;&#x7528;&#x7684;GPU&#x52A0;&#x901F;&#x7B97;&#x6CD5;&#x3002;</li>
+<li>&#x5176;&#x4ED6;-&#x5176;&#x4ED6;&#x4E00;&#x4E9B;&#x6A21;&#x5757;&#x4E3A;&#x5E2E;&#x52A9;&#x6A21;&#x5757;&#xFF0C;&#x4F8B;&#x5982;FLANN&#x548C;Google&#x6D4B;&#x8BD5;&#x5305;&#x88C5;&#x5668;&#xFF0C;Python&#x7ED1;&#x5B9A;&#x7B49;&#x7B49;&#x3002;</li>
 </ul>
-<h2 id="3C_21-more-_3E"><a href="#3C_21-more-_3E" class="headerlink" title="
+<h2 id="3C_21-more-_3E"></h2>
       
     </div>
     <footer>
@@ -368,7 +341,7 @@
     <div class="entry">
       
         <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
