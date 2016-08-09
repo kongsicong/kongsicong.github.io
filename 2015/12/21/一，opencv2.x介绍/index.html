@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>一，opencv2.x介绍 | 孔小葱的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;#x4E00;&amp;#xFF0C;opencv&amp;#x6982;&amp;#x89C8;opencv&amp;#xFF08;open source computer vision library&amp;#xFF1A;opencv&amp;#x5B98;&amp;#x7F51;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F00;&amp;#x6E90;&amp;#x7684;&amp;#x8BA1;&amp;#x7B97;&amp;#x673A;&amp;#x89C6;&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一，opencv2.x介绍">
+<meta property="og:url" content="http://yoursite.com/2015/12/21/一，opencv2.x介绍/index.html">
+<meta property="og:site_name" content="孔小葱的博客">
+<meta property="og:description" content="&amp;#x4E00;&amp;#xFF0C;opencv&amp;#x6982;&amp;#x89C8;opencv&amp;#xFF08;open source computer vision library&amp;#xFF1A;opencv&amp;#x5B98;&amp;#x7F51;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F00;&amp;#x6E90;&amp;#x7684;&amp;#x8BA1;&amp;#x7B97;&amp;#x673A;&amp;#x89C6;&amp;#x">
+<meta property="og:updated_time" content="2015-12-26T07:41:46.540Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一，opencv2.x介绍">
+<meta name="twitter:description" content="&amp;#x4E00;&amp;#xFF0C;opencv&amp;#x6982;&amp;#x89C8;opencv&amp;#xFF08;open source computer vision library&amp;#xFF1A;opencv&amp;#x5B98;&amp;#x7F51;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F00;&amp;#x6E90;&amp;#x7684;&amp;#x8BA1;&amp;#x7B97;&amp;#x673A;&amp;#x89C6;&amp;#x">
+  
+    <link rel="alternative" href="/atom.xml" title="孔小葱的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">kongsicong</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/luuman" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/lishangmou" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="http://i.youku.com/shangmou" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="http: //twitter.com/luuman" title="twitter">twitter</a>
+                            
+                                <a class="fl facebook" target="_blank" href="/#" title="facebook">facebook</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/deeplearning/" style="font-size: 10px;">deeplearning</a> <a href="/tags/opencv2-x-学习笔记/" style="font-size: 20px;">opencv2.x 学习笔记</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://MOxFIVE.github.io/">MOxFIVE</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vsay.cn/">DoubleV</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ccwebsite.com/">兮兮</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.dandyweng.com/">翁天信</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.plqblog.com/views/index.php">潘利强</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.waydrow.com/">waydrow</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">kongsicong</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">kongsicong</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/luuman" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/lishangmou" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="http://i.youku.com/shangmou" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="http: //twitter.com/luuman" title="twitter">twitter</a>
+                    
+                        <a class="facebook" target="_blank" href="/#" title="facebook">facebook</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-一，opencv2.x介绍" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/21/一，opencv2.x介绍/" class="article-date">
+      <time datetime="2015-12-21T02:17:40.000Z" itemprop="datePublished">2015-12-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一，opencv2.x介绍
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv2-x-学习笔记/">opencv2.x 学习笔记</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="u4E00_uFF0Copencv_u6982_u89C8"><a href="#u4E00_uFF0Copencv_u6982_u89C8" class="headerlink" title="&#x4E00;&#xFF0C;opencv&#x6982;&#x89C8;"></a>&#x4E00;&#xFF0C;opencv&#x6982;&#x89C8;</h2><p>opencv&#xFF08;open source computer vision library&#xFF1A;<a href="http://opencv.org" target="_blank" rel="external">opencv&#x5B98;&#x7F51;</a>&#x662F;&#x4E00;&#x4E2A;&#x5F00;&#x6E90;&#x7684;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x5E93;&#xFF0C;&#x8BE5;&#x5E93;&#x5305;&#x542B;&#x4E86;&#x51E0;&#x767E;&#x4E2A;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x5904;&#x7406;&#x7B97;&#x6CD5;&#x3002;opencv&#x5E93;&#x73B0;&#x9636;&#x6BB5;&#x5DF2;&#x7ECF;&#x66F4;&#x65B0;&#x5230;3.x&#x7248;&#x672C;&#xFF0C;&#x4F46;&#x7531;&#x4E8E;&#x5176;&#x4E0D;&#x7A33;&#x5B9A;&#x6027;&#xFF0C;&#x6545;&#x591A;&#x91C7;&#x7528;opencv2.x&#x7248;&#x672C;&#x3002;opencv1.x&#x7248;&#x672C;&#x662F;&#x57FA;&#x4E8E;c&#x8BED;&#x8A00;&#x64B0;&#x5199;&#x7684;API&#xFF0C;&#x800C;opencv2.x&#x662F;&#x57FA;&#x4E8E;c++&#x64B0;&#x5199;&#x7684;API&#x3002;<br>opencv&#x91C7;&#x7528;&#x6A21;&#x5757;&#x7ED3;&#x6784;&#xFF0C;&#x8FD9;&#x4EE3;&#x8868;&#x7740;&#x8BE5;&#x5E93;&#x5305;&#x542B;&#x4E86;&#x4E00;&#x4E9B;&#x5206;&#x4EAB;&#x7684;&#x6216;&#x8005;&#x662F;&#x9759;&#x6001;&#x7684;&#x5E93;&#x3002;&#x4E0B;&#x9762;&#x5C31;&#x662F;&#x5404;&#x4E2A;&#x4E3B;&#x8981;&#x6A21;&#x5757;&#x7684;&#x4ECB;&#x7ECD;&#xFF1A;</p>
+<ul>
+<li>core-&#x6838;&#x5FC3;&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5B9A;&#x4E49;&#x4E86;opencv&#x91CC;&#x9762;&#x7684;&#x57FA;&#x672C;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x5305;&#x542B;&#x4E86;&#x591A;&#x7EF4;&#x6570;&#x7EC4;Mat&#x548C;&#x4E00;&#x4E9B;&#x88AB;&#x5176;&#x4ED6;&#x6A21;&#x5757;&#x4F7F;&#x7528;&#x7684;&#x57FA;&#x672C;&#x51FD;&#x6570;&#x3002;</li>
+<li>imgproc-&#x4E00;&#x4E2A;&#x56FE;&#x50CF;&#x5904;&#x7406;&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5305;&#x542B;&#x4E86;&#x7EBF;&#x6027;&#x548C;&#x975E;&#x7EBF;&#x6027;&#x7684;&#x56FE;&#x50CF;&#x5904;&#x7406;&#x6EE4;&#x6CE2;&#x5668;&#xFF0C;&#x51E0;&#x4F55;&#x56FE;&#x50CF;&#x8F6C;&#x6362;&#xFF08;&#x7F29;&#x653E;&#xFF0C;&#x4EFF;&#x5C04;&#x53D8;&#x6362;&#xFF0C;&#x89C6;&#x56FE;&#x5F2F;&#x66F2;&#xFF0C;&#x6620;&#x5C04;&#xFF09;&#xFF0C;&#x5F69;&#x8272;&#x7A7A;&#x95F4;&#x53D8;&#x6362;&#xFF0C;&#x76F4;&#x65B9;&#x56FE;&#x7B49;&#x7B49;&#x3002;</li>
+<li>video-&#x89C6;&#x9891;&#x5206;&#x6790;&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5305;&#x542B;&#x8FD0;&#x52A8;&#x4F30;&#x8BA1;&#xFF0C;&#x80CC;&#x666F;&#x53BB;&#x9664;&#x548C;&#x76EE;&#x6807;&#x8FFD;&#x8E2A;&#x7B97;&#x6CD5;&#x3002;</li>
+<li>calib3d-3d&#x6821;&#x51C6;&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5305;&#x542B;&#x57FA;&#x672C;&#x7684;&#x591A;&#x89C6;&#x56FE;&#x51E0;&#x4F55;&#x7B97;&#x6CD5;&#xFF0C;&#x5355;&#x4E00;&#x548C;&#x7ACB;&#x4F53;&#x6444;&#x50CF;&#x673A;&#x6821;&#x51C6;&#xFF0C;&#x76EE;&#x6807;&#x59FF;&#x52BF;&#x4F30;&#x8BA1;&#xFF0C;&#x7ACB;&#x4F53;&#x4E00;&#x81F4;&#x6027;&#x7B97;&#x6CD5;&#x548C;3d&#x91CD;&#x5EFA;&#x5143;&#x7D20;&#x7B49;&#x3002;</li>
+<li>features2d-2d&#x7279;&#x5F81;&#x6A21;&#x5757;&#xFF0C;&#x6539;&#x6A21;&#x5757;&#x5305;&#x542B;&#x4E86;&#x663E;&#x8457;&#x7279;&#x5F81;&#x68C0;&#x6D4B;&#x5668;&#xFF0C;&#x63CF;&#x8FF0;&#x7B26;&#x548C;&#x63CF;&#x8FF0;&#x7B26;&#x5339;&#x914D;&#x5668;&#x3002;</li>
+<li>objdetect-&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x6A21;&#x5757;&#xFF0C;&#x8BE5;&#x6A21;&#x5757;&#x5305;&#x542B;&#x4E86;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x548C;&#x9884;&#x5B9A;&#x4E49;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#xFF08;&#x4F8B;&#x5982;faces&#xFF0C;eyes&#xFF0C;mugs&#xFF0C;people&#xFF0C;cars&#x7B49;&#x7B49;&#xFF09;&#x3002;</li>
+<li>highgui-&#x8BE5;&#x6A21;&#x5757;&#x5305;&#x542B;&#x4E86;&#x4E00;&#x4E9B;&#x5904;&#x7406;&#x89C6;&#x9891;&#x6355;&#x83B7;&#xFF0C;&#x56FE;&#x50CF;&#x548C;&#x89C6;&#x9891;&#x7F16;&#x7801;&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x7684;&#x7528;&#x6237;&#x754C;&#x9762;&#x80FD;&#x529B;&#x7684;&#x6613;&#x4E8E;&#x4F7F;&#x7528;&#x7684;&#x63A5;&#x53E3;&#x3002;</li>
+<li>gpu-&#x8BE5;&#x6A21;&#x5757;&#x5305;&#x542B;&#x4E86;&#x4E3A;&#x4E0D;&#x540C;&#x7684;opencv&#x6A21;&#x5757;&#x4F7F;&#x7528;&#x7684;GPU&#x52A0;&#x901F;&#x7B97;&#x6CD5;&#x3002;</li>
+<li>&#x5176;&#x4ED6;-&#x5176;&#x4ED6;&#x4E00;&#x4E9B;&#x6A21;&#x5757;&#x4E3A;&#x5E2E;&#x52A9;&#x6A21;&#x5757;&#xFF0C;&#x4F8B;&#x5982;FLANN&#x548C;Google&#x6D4B;&#x8BD5;&#x5305;&#x88C5;&#x5668;&#xFF0C;Python&#x7ED1;&#x5B9A;&#x7B49;&#x7B49;&#x3002;</li>
+</ul>
+<h2 id="3C_21-more-_3E"><a href="#3C_21-more-_3E" class="headerlink" title="&lt;a id=" more"=""></a>&quot;&gt;<!--more--></h2><h2 id="u4E8C_uFF0Copencv_API_u7279_u6027_u7B80_u4ECB"><a href="#u4E8C_uFF0Copencv_API_u7279_u6027_u7B80_u4ECB" class="headerlink" title="&#x4E8C;&#xFF0C;opencv API&#x7279;&#x6027;&#x7B80;&#x4ECB;"></a>&#x4E8C;&#xFF0C;opencv API&#x7279;&#x6027;&#x7B80;&#x4ECB;</h2><ul>
+<li><p><code>cv&#x547D;&#x540D;&#x7A7A;&#x95F4;</code><br> &#x6240;&#x6709;&#x7684;opencv&#x7C7B;&#x548C;&#x51FD;&#x6570;&#x90FD;&#x88AB;&#x653E;&#x5728;cv namespace&#x5185;&#x4E86;&#x3002;<br> &#x8BBF;&#x95EE;opencv&#x793A;&#x4F8B;&#xFF1A;</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&quot;opencv2/core/core.hpp&quot;</span></span></span><br><span class="line">...</span><br><span class="line">cv::Mat H = cv::findHomography(points1, points2, CV_RANSAC, <span class="number">5</span>);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p> &#x6216;&#x8005;</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&quot;opencv2/core/core.hpp&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line">...</span><br><span class="line">Mat H = findHomography(points1, points2, CV_RANSAC, <span class="number">5</span> );</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p> &#x4E00;&#x4E9B;&#x73B0;&#x6709;&#x7684;&#x6216;&#x8005;&#x662F;&#x672A;&#x6765;&#x7684;opencv&#x5916;&#x90E8;&#x547D;&#x540D;&#x53EF;&#x80FD;&#x4F1A;&#x4E0E;STL&#x6216;&#x8005;&#x5176;&#x4ED6;&#x5E93;&#x4E2D;&#x7684;&#x547D;&#x540D;&#x51B2;&#x7A81;&#xFF0C;&#x6240;&#x6709;&#x6700;&#x597D;&#x663E;&#x793A;&#x7684;&#x4F7F;&#x7528;opencv&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x6765;&#x89E3;&#x51B3;&#x51B2;&#x7A81;&#x95EE;&#x9898;&#x3002; </p>
+</li>
+<li><p><code>&#x81EA;&#x52A8;&#x5185;&#x5B58;&#x7BA1;&#x7406;</code><br> opencv&#x81EA;&#x52A8;&#x5904;&#x7406;&#x6240;&#x6709;&#x7684;&#x5185;&#x5B58;&#x95EE;&#x9898;&#x3002;<br> &#x9996;&#x5148;&#xFF0C;std::vector, Mat&#x548C;&#x5176;&#x4ED6;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x90FD;&#x6709;&#x6790;&#x6784;&#x51FD;&#x6570;&#x6765;&#x89E3;&#x9664;&#x5DF2;&#x7ECF;&#x5206;&#x914D;&#x51FA;&#x53BB;&#x7684;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x3002;&#x4F46;&#x5BF9;&#x4E8E;cv::Mat&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x5E76;&#x4E0D;&#x610F;&#x5473;&#x7740;&#x6790;&#x6784;&#x51FD;&#x6570;&#x5E76;&#x603B;&#x662F;&#x89E3;&#x9664;&#x5185;&#x5B58;&#x5206;&#x914D;&#xFF0C;&#x56E0;&#x4E3A;opencv&#x5C06;&#x6570;&#x636E;&#x5171;&#x4EAB;&#x8003;&#x8651;&#x5728;&#x5185;&#x4E86;&#x3002;&#x4E00;&#x4E2A;&#x6790;&#x6784;&#x5668;&#x5C06;&#x4F1A;&#x51CF;&#x5C11;&#x4E0E;Mat&#x6570;&#x636E;&#x5185;&#x5B58;&#x76F8;&#x5173;&#x7684;&#x5F15;&#x7528;&#x6307;&#x9488;&#x6570;&#x91CF;&#xFF0C;&#x5F53;&#x5F15;&#x7528;&#x6570;&#x91CF;&#x964D;&#x5230;0&#x65F6;&#x610F;&#x5473;&#x7740;&#x6CA1;&#x6709;&#x53D8;&#x91CF;&#x518D;&#x4F7F;&#x7528;&#x8FD9;&#x5757;&#x5185;&#x5B58;&#xFF0C;&#x4ECE;&#x800C;&#x8FD9;&#x5757;&#x5185;&#x5B58;&#x4F1A;&#x88AB;&#x91CA;&#x653E;&#x3002;&#x76F8;&#x4F3C;&#x7684;&#xFF0C;&#x5F53;&#x4E00;&#x4E2A;Mat&#x5B9E;&#x4F8B;&#x88AB;&#x590D;&#x5236;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5176;&#x5B9E;&#x5E76;&#x6CA1;&#x6709;&#x771F;&#x7684;&#x5F00;&#x8F9F;&#x4E00;&#x5757;&#x65B0;&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x6765;&#x5B58;&#x50A8;&#x6570;&#x636E;&#xFF0C;&#x800C;&#x662F;&#x5F15;&#x7528;&#x6570;&#x91CF;&#xFF0B;1&#xFF0C;&#x800C;&#x8BE5;&#x5F15;&#x7528;&#x662F;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x5757;&#x7684;&#x53E6;&#x4E00;&#x4E2A;&#x62E5;&#x6709;&#x8005;&#x3002;&#x4F46;&#x662F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;Mat::clone&#xFF08;&#xFF09;&#x51FD;&#x6570;&#x6765;&#x521B;&#x9020;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x5B58;&#x50A8;&#x6570;&#x636E;&#x3002;<br> &#x5982;&#x4E0B;&#x4EE3;&#x7801;&#x4F1A;&#x5E2E;&#x52A9;&#x4F60;&#x66F4;&#x597D;&#x7684;&#x7406;&#x89E3;&#x5176;&#x4E2D;&#x7684;&#x5185;&#x6DB5;&#xFF1A;</p>
+ <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// create a big 8Mb matrix</span></span><br><span class="line"><span class="keyword">Mat</span> A(1000, 1000, CV_64F);</span><br><span class="line"></span><br><span class="line"><span class="comment">// create another header for the same matrix;</span></span><br><span class="line"><span class="comment">// this is an instant operation, regardless of the matrix size.</span></span><br><span class="line"><span class="keyword">Mat</span> B = A;</span><br><span class="line"><span class="comment">// create another header for the 3-rd row of A; no data is copied either</span></span><br><span class="line"><span class="keyword">Mat</span> C = B.row(3);</span><br><span class="line"><span class="comment">// now create a separate copy of the matrix</span></span><br><span class="line"><span class="keyword">Mat</span> <span class="keyword">D</span> = B.clone();</span><br><span class="line"><span class="comment">// copy the 5-th row of B to C, that is, copy the 5-th row of A</span></span><br><span class="line"><span class="comment">// to the 3-rd row of A.</span></span><br><span class="line">B.row(5).copyTo(C);</span><br><span class="line"><span class="comment">// now let A and D share the data; after that the modified version</span></span><br><span class="line"><span class="comment">// of A is still referenced by B and C.</span></span><br><span class="line">A = <span class="keyword">D</span>;</span><br><span class="line"><span class="comment">// now make B an empty matrix (which references no memory buffers),</span></span><br><span class="line"><span class="comment">// but the modified version of A will still be referenced by C,</span></span><br><span class="line"><span class="comment">// despite that C is just a single row of the original A</span></span><br><span class="line">B.release();</span><br><span class="line"></span><br><span class="line"><span class="comment">// finally, make a full copy of C. As a result, the big modified</span></span><br><span class="line"><span class="comment">// matrix will be deallocated, since it is not referenced by anyone</span></span><br><span class="line">C = C.clone();</span><br></pre></td></tr></table></figure>
+<p> &#x56E0;&#x6B64;&#xFF0C;&#x4F7F;&#x7528;Mat&#x548C;&#x5176;&#x4ED6;&#x4E00;&#x4E9B;&#x57FA;&#x7840;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x662F;&#x975E;&#x5E38;&#x5BB9;&#x6613;&#x7684;&#x3002;&#x4F46;&#x662F;&#x8FD8;&#x6709;&#x5176;&#x4ED6;&#x4E00;&#x4E9B;&#x9AD8;&#x6C34;&#x5E73;&#x6570;&#x636E;&#x6216;&#x8005;&#x662F;&#x7528;&#x6237;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF08;&#x6CA1;&#x6709;&#x81EA;&#x52A8;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x529F;&#x80FD;&#xFF09;&#x5462;&#xFF1F;opencv&#x4E3A;&#x6B64;&#x63D0;&#x4F9B;&#x4E86;Ptr&lt;&gt;&#x8FD9;&#x4E2A;&#x6A21;&#x677F;&#x7C7B;&#x6765;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#xFF0C;&#x8BE5;&#x7C7B;&#x4E0E;std::shared_ptr&#x7C7B;&#x4F3C;&#x3002;<br> &#x6240;&#x4EE5;&#x5728;&#x4F7F;&#x7528;&#x5176;&#x4ED6;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x65F6;&#xFF1A;&#x4E0D;&#x7528;T* ptr = new T(&#x2026;); &#x800C;&#x662F;&#x4F7F;&#x7528;Ptr<t> ptr = new T(&#x2026;);<br> &#x8BE6;&#x60C5;&#x8BF7;&#x770B;<a href="http://docs.opencv.org/2.4.11/modules/core/doc/basic_structures.html#Ptr" target="_blank" rel="external">Ptr&lt;&gt;</a>&#x89E3;&#x6790;</t></p>
+</li>
+<li><p><code>&#x8F93;&#x51FA;&#x6570;&#x636E;&#x7684;&#x81EA;&#x52A8;&#x5185;&#x5B58;&#x5206;&#x914D;</code><br> opencv&#x81EA;&#x52A8;&#x89E3;&#x9664;&#x5185;&#x5B58;&#x5206;&#x914D;&#xFF0C;&#x540C;&#x6837;&#x5728;&#x5927;&#x591A;&#x6570;&#x65F6;&#x5019;&#x4E5F;&#x4F1A;&#x81EA;&#x52A8;&#x4E3A;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x81EA;&#x52A8;&#x5206;&#x914D;&#x5185;&#x5B58;&#x3002;&#x56E0;&#x6B64;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x591A;&#x4E2A;&#x8F93;&#x5165;&#x6570;&#x7EC4;&#xFF08;cv::Mat instances&#xFF09; &#x548C;&#x4E00;&#x4E9B;&#x8F93;&#x51FA;&#x6570;&#x7EC4;&#xFF0C;&#x8F93;&#x51FA;&#x6570;&#x7EC4;&#x4F1A;&#x81EA;&#x52A8;&#x7684;&#x5206;&#x914D;&#x6216;&#x8005;&#x91CD;&#x65B0;&#x5206;&#x914D;&#x5185;&#x5B58;&#x3002;&#x8F93;&#x51FA;&#x6570;&#x7EC4;&#x7684;&#x5927;&#x5C0F;&#x548C;&#x7C7B;&#x578B;&#x90FD;&#x7531;&#x8F93;&#x5165;&#x6570;&#x7EC4;&#x7684;&#x5927;&#x5C0F;&#x548C;&#x7C7B;&#x578B;&#x51B3;&#x5B9A;&#x3002;&#x5982;&#x679C;&#x9700;&#x8981;&#x7684;&#x8BDD;&#xFF0C;&#x51FD;&#x6570;&#x8FD8;&#x4F1A;&#x91C7;&#x7528;&#x989D;&#x5916;&#x7684;&#x53C2;&#x6570;&#x6765;&#x5E2E;&#x52A9;&#x8BA1;&#x7B97;&#x8F93;&#x51FA;&#x6570;&#x7EC4;&#x7684;&#x6027;&#x8D28;&#x3002;&#x5982;&#x4EE5;&#x4E0B;&#x4F8B;&#x5B50;&#xFF1A;</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&quot;cv.h&quot;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&quot;highgui.h&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">char</span>**)</span></span><br><span class="line"></span>{</span><br><span class="line">    <span class="function">VideoCapture <span class="title">cap</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">if</span>(!cap.isOpened()) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    Mat frame, edges;</span><br><span class="line">    namedWindow(<span class="string">&quot;edges&quot;</span>,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(;;)</span><br><span class="line">    {</span><br><span class="line">        cap &gt;&gt; frame;</span><br><span class="line">        cvtColor(frame, edges, CV_BGR2GRAY);</span><br><span class="line">        GaussianBlur(edges, edges, Size(<span class="number">7</span>,<span class="number">7</span>), <span class="number">1.5</span>, <span class="number">1.5</span>);</span><br><span class="line">        Canny(edges, edges, <span class="number">0</span>, <span class="number">30</span>, <span class="number">3</span>);</span><br><span class="line">        imshow(<span class="string">&quot;edges&quot;</span>, edges);</span><br><span class="line">        <span class="keyword">if</span>(waitKey(<span class="number">30</span>) &gt;= <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p> &#x5176;&#x4E2D;&#x6570;&#x7EC4;frame&#x662F;&#x7531;&gt;&gt;&#x64CD;&#x4F5C;&#x7B26;&#x81EA;&#x52A8;&#x5206;&#x914D;&#x5185;&#x5B58;&#x7684;&#x3002;&#x56E0;&#x4E3A;&#x5BF9;&#x4E8E;&#x89C6;&#x9891;&#x6355;&#x83B7;&#x6A21;&#x5757;&#x6765;&#x8BF4;&#x89C6;&#x9891;frame&#x7684;&#x5206;&#x8FA8;&#x7387;&#x548C;&#x4F4D;&#x6DF1;&#x5EA6;&#x90FD;&#x662F;&#x672A;&#x77E5;&#x7684;&#x3002;&#x6570;&#x7EC4;edges&#x662F;&#x7531;cvtColor&#x51FD;&#x6570;&#x81EA;&#x52A8;&#x5206;&#x914D;&#x5185;&#x5B58;&#x7684;&#x3002;edges&#x548C;&#x8F93;&#x5165;&#x6570;&#x7EC4;frame&#x6709;&#x76F8;&#x540C;&#x7684;&#x5927;&#x5C0F;&#x548C;&#x4F4D;&#x6DF1;&#x5EA6;&#x3002;&#x800C;&#x56E0;&#x4E3A;&#x5F69;&#x8272;&#x53D8;&#x6362;&#x7801;CV_BGR2GRAY&#x88AB;&#x4F20;&#x9012;&#x5230;&#x51FD;&#x6570;&#x4E2D;&#x6240;&#x4EE5;edges&#x7684;&#x901A;&#x9053;&#x6570;&#x4E3A;1&#x3002;&#x540C;&#x65F6;&#x5E94;&#x8BE5;&#x6CE8;&#x610F;&#x5230;frame&#x548C;edges&#x53EA;&#x6709;&#x5728;&#x5FAA;&#x73AF;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x6B21;&#x6267;&#x884C;&#x65F6;&#x624D;&#x88AB;&#x5206;&#x914D;&#x5185;&#x5B58;&#xFF0C;&#x56E0;&#x4E3A;&#x4ECE;&#x6B64;&#x4EE5;&#x540E;&#x7684;&#x6240;&#x6709;&#x89C6;&#x9891;frame&#x90FD;&#x6709;&#x76F8;&#x540C;&#x7684;&#x5206;&#x8FA8;&#x7387;&#x3002;&#x5982;&#x679C;&#x4F60;&#x6539;&#x53D8;&#x4E86;&#x89C6;&#x9891;&#x5206;&#x8FA8;&#x7387;&#xFF0C;&#x90A3;&#x6570;&#x7EC4;frame&#x5219;&#x4F1A;&#x518D;&#x6B21;&#x81EA;&#x52A8;&#x91CD;&#x65B0;&#x5206;&#x914D;&#x5185;&#x5B58;&#x3002;<br> &#x8FD9;&#x4E2A;&#x6280;&#x672F;&#x7684;&#x5173;&#x952E;&#x90E8;&#x5206;&#x5C31;&#x662F;Mat::create &#x51FD;&#x6570;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x5C06;&#x9700;&#x8981;&#x7684;&#x6570;&#x7EC4;&#x5927;&#x5C0F;&#x548C;&#x7C7B;&#x578B;&#x90FD;&#x5229;&#x7528;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x6570;&#x7EC4;&#x5DF2;&#x7ECF;&#x6709;&#x4E86;&#x7279;&#x5B9A;&#x7684;&#x5927;&#x5C0F;&#x548C;&#x7C7B;&#x578B;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x4EC0;&#x4E48;&#x90FD;&#x4E0D;&#x4F1A;&#x505A;&#x3002;&#x76F8;&#x53CD;&#xFF0C;&#x4ED6;&#x4F1A;&#x91CA;&#x653E;&#x5DF2;&#x7ECF;&#x5206;&#x914D;&#x7684;&#x5185;&#x5B58;&#x7136;&#x540E;&#x91CD;&#x65B0;&#x5206;&#x914D;&#x4E00;&#x5757;&#x8981;&#x6C42;&#x5927;&#x5C0F;&#x7684;&#x65B0;&#x7684;&#x5185;&#x5B58;&#x3002;&#x5927;&#x591A;&#x6570;&#x7684;&#x51FD;&#x6570;&#x90FD;&#x4F1A;&#x4E3A;&#x8F93;&#x51FA;&#x6570;&#x7EC4;&#x8C03;&#x7528;Mat::create&#x65B9;&#x6CD5;&#xFF0C;&#x7136;&#x540E;&#x5C31;&#x5B9E;&#x73B0;&#x4E86;&#x4E3A;&#x8F93;&#x51FA;&#x6570;&#x7EC4;&#x81EA;&#x52A8;&#x5206;&#x914D;&#x5185;&#x5B58;&#x3002;<br> &#x6765;&#x81EA;&#x4E8E;&#x8FD9;&#x4E2A;&#x65B9;&#x6848;&#x7684;&#x4E00;&#x4E9B;&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x5F02;&#x5E38;&#x5C31;&#x662F;cv::minChannels, cv::RNG::fill&#x4EE5;&#x53CA;&#x4E00;&#x4E9B;&#x5176;&#x4ED6;&#x7684;&#x51FD;&#x6570;&#x548C;&#x65B9;&#x6CD5;&#x3002;&#x4ED6;&#x4EEC;&#x5E76;&#x4E0D;&#x80FD;&#x4E3A;&#x8F93;&#x51FA;&#x6570;&#x7EC4;&#x81EA;&#x52A8;&#x5206;&#x914D;&#x5185;&#x5B58;&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x5FC5;&#x987B;&#x81EA;&#x5DF1;&#x63D0;&#x524D;&#x5B8C;&#x6210;&#x8FD9;&#x4E2A;&#x5DE5;&#x4F5C;&#x3002;</p>
+</li>
+<li><code>&#x9971;&#x548C;&#x7B97;&#x6CD5;</code><br> opencv&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x5E93;&#xFF0C;&#x5B83;&#x7ECF;&#x5E38;&#x5904;&#x7406;&#x4E00;&#x4E9B;&#x56FE;&#x50CF;&#x50CF;&#x7D20;&#xFF0C;&#x8FD9;&#x4E9B;&#x50CF;&#x7D20;&#x5E38;&#x88AB;&#x7F16;&#x7801;&#x4E3A;&#x6BCF;&#x901A;&#x9053;8&#x6216;&#x8005;16&#x6BD4;&#x7279;&#x56E0;&#x6B64;&#x4ED6;&#x4EEC;&#x5F97;&#x6570;&#x503C;&#x8303;&#x56F4;&#x6709;&#x9650;&#x5236;&#x3002;&#x4F8B;&#x5982;&#x5BF9;&#x56FE;&#x50CF;&#x8FDB;&#x884C;&#x7279;&#x6027;&#x64CD;&#x4F5C;&#xFF0C;&#x5982;&#x5F69;&#x8272;&#x7A7A;&#x95F4;&#x53D8;&#x6362;&#xFF0C;&#x4EAE;&#x5EA6;&#x52A0;&#x5F3A;&#xFF0C;&#x5BF9;&#x9F50;&#xFF0C;&#x9510;&#x5316;&#x4EE5;&#x53CA;&#x590D;&#x6742;&#x7684;&#x63D2;&#x503C;&#x64CD;&#x4F5C;&#x90FD;&#x4F1A;&#x4EA7;&#x751F;&#x8D85;&#x51FA;&#x5141;&#x8BB8;&#x8303;&#x56F4;&#x7684;&#x6570;&#x503C;&#x3002;&#x5982;&#x679C;&#x4F60;&#x4EC5;&#x4EC5;&#x7528;&#x6700;&#x4F4E;&#x7684;8&#x4F4D;&#x6216;&#x8005;16&#x4F4D;&#x6765;&#x5B58;&#x50A8;&#x7ED3;&#x679C;&#xFF0C;&#x8FD9;&#x4E9B;&#x7ED3;&#x679C;&#x53EF;&#x80FD;&#x4F1A;&#x5F71;&#x54CD;&#x8FDB;&#x4E00;&#x6B65;&#x7684;&#x56FE;&#x50CF;&#x5206;&#x6790;&#x3002;&#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x88AB;&#x79F0;&#x4F5C;&#x9971;&#x548C;&#x7B97;&#x6CD5;&#x7684;&#x4E1C;&#x897F;&#x5C31;&#x51FA;&#x73B0;&#x4E86;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x4E3A;&#x4E86;&#x5B58;&#x50A8;r&#xFF08;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x7684;&#x7ED3;&#x679C;&#x6570;&#x636E;&#xFF09;&#x5230;8&#x4F4D;&#x6DF1;&#x5EA6;&#x7684;&#x56FE;&#x50CF;&#x91CC;&#xFF0C;&#x4F60;&#x53D1;&#x73B0;&#x5728;0~255&#x5185;&#x6700;&#x8FD1;&#x7684;&#x503C;&#xFF1A;<br> I(x,y)= min ( max (round(r), 0), 255);<br> &#x76F8;&#x4F3C;&#x7684;&#x6CD5;&#x5219;&#x88AB;&#x5E94;&#x7528;&#x5230;&#x6709;&#x7B26;&#x53F7;8&#x4F4D;&#xFF0C;&#x6709;&#x7B26;&#x53F7;16&#x4F4D;&#x4EE5;&#x53CA;&#x65E0;&#x7B26;&#x53F7;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x4E2D;&#x4E86;&#x3002;&#x8FD9;&#x79CD;&#x8BED;&#x4E49;&#x5728;opencv&#x5E93;&#x4E2D;&#x5230;&#x5904;&#x90FD;&#x6709;&#x4F7F;&#x7528;&#x3002;&#x5728;c++&#x4E2D;&#xFF0C;&#x4F1A;&#x91C7;&#x7528;saturate_cast&lt;&gt;&#x51FD;&#x6570;&#xFF08;&#x7C7B;&#x4F3C;&#x4E8E;&#x6807;&#x51C6;c++&#x7684;&#x8F6C;&#x6362;&#x64CD;&#x4F5C;&#xFF09;&#xFF0C;&#x5982;&#x4EE5;&#x4E0B;&#x4F8B;&#x5B50;&#xFF1A;<br> I.at<uchar>(y, x) = saturate_cast<uchar>(r);<br> cv::uchar&#x662F;opencv&#x7684;8&#x4F4D;&#x65E0;&#x7B26;&#x53F7;&#x6574;&#x578B;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x3002;<br> &#x6CE8;&#x610F;&#xFF1A;&#x9971;&#x548C;&#x7B97;&#x6CD5;&#x5E76;&#x4E0D;&#x4F1A;&#x4F5C;&#x7528;&#x4E8E;32&#x4F4D;&#x7684;&#x6574;&#x578B;&#x7ED3;&#x679C;&#x3002;</uchar></uchar></li>
+<li><code>&#x56FA;&#x5B9A;&#x50CF;&#x7D20;&#x7C7B;&#x578B;&#xFF0C;&#x6A21;&#x677F;&#x7684;&#x9650;&#x5236;&#x4F7F;&#x7528;</code><br> &#x6A21;&#x677F;&#x662F;c++&#x7684;&#x4E00;&#x4E2A;&#x91CD;&#x5927;&#x7279;&#x6027;&#xFF0C;&#x8BE5;&#x7279;&#x6027;&#x63D0;&#x4F9B;&#x4E86;&#x975E;&#x5E38;&#x5F3A;&#x6709;&#x529B;&#x7684;&#x9AD8;&#x6548;&#x7684;&#x800C;&#x4E14;&#x5B89;&#x5168;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x7B97;&#x6CD5;&#x7684;&#x5B9E;&#x73B0;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x6A21;&#x677F;&#x7684;&#x6269;&#x5C55;&#x4F7F;&#x53EF;&#x80FD;&#x4F1A;&#x589E;&#x52A0;&#x7F16;&#x8BD1;&#x65F6;&#x95F4;&#x548C;&#x4EE3;&#x7801;&#x91CF;&#x3002;&#x9664;&#x6B64;&#x4E4B;&#x5916;&#xFF0C;&#x5F53;&#x6A21;&#x677F;&#x88AB;&#x72EC;&#x7ACB;&#x4F7F;&#x7528;&#x7684;&#x65F6;&#x5019;&#x63A5;&#x53E3;&#x548C;&#x5B9E;&#x73B0;&#x5C06;&#x4F1A;&#x5F88;&#x96BE;&#x5206;&#x79BB;&#x3002;&#x5BF9;&#x4E8E;&#x57FA;&#x672C;&#x7684;&#x7B97;&#x6CD5;&#x6765;&#x8BF4;&#x8FD9;&#x6837;&#x5F88;&#x597D;&#xFF0C;&#x4F46;&#x662F;&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x7B97;&#x6CD5;&#x53EF;&#x80FD;&#x5305;&#x542B;&#x51E0;&#x5343;&#x884C;&#x4EE3;&#x7801;&#x7684;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x5E93;&#x6765;&#x8BF4;&#x8FD9;&#x6837;&#x5E76;&#x4E0D;&#x53CB;&#x597D;&#x3002;&#x4E3A;&#x4E86;&#x7B80;&#x5316;&#x4E0E;&#x5176;&#x4ED6;&#x8BED;&#x8A00;&#xFF08;&#x5982;Python&#xFF0C;java&#xFF0C;matlab&#x8FD9;&#x4E9B;&#x53EF;&#x80FD;&#x6CA1;&#x6709;&#x6A21;&#x677F;&#x6216;&#x53EA;&#x6709;&#x6709;&#x9650;&#x7684;&#x6A21;&#x677F;&#x80FD;&#x529B;&#x7684;&#x8BED;&#x8A00;&#xFF09;&#x7684;&#x7ED1;&#x5B9A;&#x53D1;&#x5C55;&#xFF0C;&#x73B0;&#x4ECA;&#x7684;opencv&#x5B9E;&#x73B0;&#x662F;&#x57FA;&#x4E8E;&#x591A;&#x6001;&#x548C;&#x8FD0;&#x884C;&#x65F6;&#x5206;&#x914D;&#x800C;&#x975E;&#x6A21;&#x677F;&#x3002;&#x5728;&#x90A3;&#x4E9B;&#x8FD0;&#x884C;&#x65F6;&#x5206;&#x914D;&#x53EF;&#x80FD;&#x4F1A;&#x5F88;&#x6162;&#x7684;&#x5730;&#x65B9;&#xFF08;&#x5982;&#x50CF;&#x7D20;&#x8BBF;&#x95EE;&#x8FD0;&#x7B97;&#x7B26;&#xFF09;&#xFF0C;&#x6216;&#x8005;&#x4E0D;&#x53EF;&#x80FD;&#xFF08;&#x5982;&#x901A;&#x7528;&#x7684;Ptr&lt;&gt;&#x7684;&#x5B9E;&#x73B0;&#xFF09;&#x6216;&#x8005;&#x975E;&#x5E38;&#x4E0D;&#x65B9;&#x4FBF;&#xFF08;&#x5982;saturate_cast&lt;&gt;&#xFF09;&#x73B0;&#x5728;&#x7684;&#x5B9E;&#x73B0;&#x4ECB;&#x7ECD;&#x4E86;&#x4E00;&#x4E9B;&#x5C0F;&#x578B;&#x7684;&#x6A21;&#x677F;&#x7C7B;&#xFF0C;&#x65B9;&#x6CD5;&#x548C;&#x51FD;&#x6570;&#x3002;&#x800C;opencv&#x4E2D;&#x4EFB;&#x4F55;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x90FD;&#x662F;&#x6536;&#x5230;&#x9650;&#x5236;&#x7684;&#x3002;<br> &#x56E0;&#x6B64;&#xFF0C;&#x53EA;&#x6709;&#x6709;&#x9650;&#x7684;&#x56FA;&#x5B9A;&#x7684;&#x539F;&#x59CB;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x88AB;opencv&#x5E93;&#x64CD;&#x4F5C;&#x3002;&#x5982;&#x4E0B;&#xFF1A;<ul>
+<li>8-bit unsigned integer (uchar)</li>
+<li>8-bit signed integer (schar)</li>
+<li>8-bit signed integer (schar)</li>
+<li>16-bit signed integer (short)</li>
+<li>32-bit signed integer (int)</li>
+<li>32-bit floating-point number (float)</li>
+<li>64-bit floating-point number (double)</li>
+<li>&#x4E00;&#x4E9B;&#x5143;&#x7D20;&#xFF08;&#x50CF;&#x7D20;&#x70B9;&#xFF09;&#x5305;&#x542B;&#x591A;&#x4E2A;&#x76F8;&#x540C;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x7684;&#x5143;&#x7D20;&#x88AB;&#x79F0;&#x4E3A;&#x591A;&#x901A;&#x9053;&#x6570;&#x7EC4;&#xFF0C;&#x4E0E;&#x5355;&#x901A;&#x9053;&#x6570;&#x7EC4;&#x76F8;&#x5BF9;&#x5E94;&#x3002;opencv&#x4E2D;&#x6700;&#x5927;&#x7684;&#x53EF;&#x80FD;&#x7684;&#x901A;&#x9053;&#x6570;&#x88AB;CV_CN_MAX&#x5E38;&#x91CF;&#x8BBE;&#x7F6E;&#x4E3A;512.<br>&#x5BF9;&#x4E8E;&#x8FD9;&#x4E9B;&#x57FA;&#x672C;&#x7C7B;&#x578B;&#xFF0C;&#x4F1A;&#x5E94;&#x7528;&#x4EE5;&#x4E0B;&#x679A;&#x4E3E;&#x5E38;&#x91CF;&#xFF1A;<br>enum { CV_8U=0, CV_8S=1, CV_16U=2, CV_16S=3, CV_32S=4, CV_32F=5, CV_64F=6 };<br>&#x800C;&#x591A;&#x901A;&#x9053;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x7528;&#x4EE5;&#x4E0B;&#x9009;&#x62E9;&#x65B9;&#x5F0F;&#x51B3;&#x5B9A;&#xFF1A;</li>
+<li>CV_8UC1 &#x2026; CV_64FC4 &#x5E38;&#x91CF;(&#x901A;&#x9053;&#x6570;&#x4E3A;1-4)</li>
+<li>CV_8UC(n) &#x2026; CV_64FC(n) or CV_MAKETYPE(CV_8U, n) &#x2026; CV_MAKETYPE(CV_64F, n) &#x5B8F;&#xFF0C;&#x5F53;&#x901A;&#x9053;&#x6570;&#x8D85;&#x8FC7;4&#x6216;&#x8005;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x65E0;&#x6CD5;&#x786E;&#x5B9A;<br>&#x8303;&#x4F8B;&#xFF1A;<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Mat <span class="function">mtx</span>(3, 3, CV_32F); <span class="comment">// make a 3x3 floating-point matrix</span></span><br><span class="line">Mat <span class="function">cmtx</span>(10, 1, CV_64FC2); <span class="comment">// make a 10x1 2-channel floating-point</span></span><br><span class="line">                           <span class="comment">// matrix (10-element complex vector)</span></span><br><span class="line">Mat <span class="function">img</span>(<span class="function">Size</span>(1920, 1080), CV_8UC3); <span class="comment">// make a 3-channel (color) image</span></span><br><span class="line">                                    <span class="comment">// of 1920 columns and 1080 rows.</span></span><br><span class="line">Mat <span class="function">grayscale</span>(image<span class="class">.size</span>(), <span class="function">CV_MAKETYPE</span>(image<span class="class">.depth</span>(), 1)); <span class="comment">// make a 1-channel image of</span></span><br><span class="line">                                                            <span class="comment">// the same size and same</span></span><br><span class="line">                                                            <span class="comment">// channel type as img</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>&#x800C;&#x62E5;&#x6709;&#x66F4;&#x590D;&#x6742;&#x5143;&#x7D20;&#x7684;&#x6570;&#x7EC4;&#x662F;&#x65E0;&#x6CD5;&#x88AB;opencv&#x5E93;&#x6784;&#x9020;&#x548C;&#x5904;&#x7406;&#x7684;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x6BCF;&#x4E2A;&#x51FD;&#x6570;&#x548C;&#x65B9;&#x6CD5;&#x90FD;&#x53EA;&#x80FD;&#x591F;&#x5904;&#x7406;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x7684;&#x6570;&#x7EC4;&#x7C7B;&#x578B;&#x4E2D;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x3002;&#x901A;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#x7B97;&#x6CD5;&#x8D8A;&#x590D;&#x6742;&#xFF0C;&#x80FD;&#x591F;&#x652F;&#x6301;&#x7684;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x8D8A;&#x5C11;&#x3002;<br>&#x4EE5;&#x4E0B;&#x662F;&#x4E00;&#x4E9B;&#x5178;&#x578B;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre><code>* &#x4EBA;&#x8138;&#x68C0;&#x6D4B;&#x7B97;&#x6CD5;&#x53EA;&#x80FD;&#x5904;&#x7406;8&#x4F4D;&#x7684;&#x7070;&#x5EA6;&#x56FE;&#x6216;&#x8005;&#x5F69;&#x8272;&#x56FE;
+* &#x7EBF;&#x6027;&#x4EE3;&#x6570;&#x51FD;&#x6570;&#x548C;&#x5927;&#x591A;&#x6570;&#x7684;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7B97;&#x6CD5;&#x90FD;&#x53EA;&#x80FD;&#x5904;&#x7406;&#x6D6E;&#x70B9;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x7EC4;&#x3002;
+* &#x57FA;&#x672C;&#x7684;&#x51FD;&#x6570;&#x5982;cv::add&#xFF0C;&#x652F;&#x6301;&#x6240;&#x6709;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;
+* &#x5F69;&#x8272;&#x7A7A;&#x95F4;&#x8F6C;&#x6362;&#x51FD;&#x6570;&#x652F;&#x6301;8&#x4F4D;&#x65E0;&#x7B26;&#x53F7;&#x6574;&#x6570;&#xFF0C;16&#x4F4D;&#x65E0;&#x7B26;&#x53F7;&#x6574;&#x6570;&#x548C;32&#x4F4D;&#x6D6E;&#x70B9;&#x7C7B;&#x578B;&#x3002;
+</code></pre><p>&#x6BCF;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x652F;&#x6301;&#x7C7B;&#x578B;&#x7684;&#x5B50;&#x96C6;&#x90FD;&#x5DF2;&#x7ECF;&#x4ECE;&#x5B9E;&#x8DF5;&#x9700;&#x8981;&#x4E2D;&#x9884;&#x5B9A;&#x4E49;&#x4E86;&#xFF0C;&#x800C;&#x4E14;&#x53EF;&#x80FD;&#x5728;&#x672A;&#x6765;&#x56E0;&#x4E3A;&#x65B0;&#x7684;&#x9700;&#x8981;&#x800C;&#x6269;&#x5C55;&#x3002;</p>
+<ul>
+<li><code>&#x8F93;&#x5165;&#x6570;&#x7EC4;&#x548C;&#x8F93;&#x51FA;&#x6570;&#x7EC4;</code><br> &#x8BB8;&#x591A;opencv&#x7684;&#x51FD;&#x6570;&#x5904;&#x7406;2&#x7EF4;&#x548C;&#x591A;&#x7EF4;&#x7684;&#x6570;&#x5B57;&#x6570;&#x7EC4;&#x3002;&#x901A;&#x5E38;&#xFF0C;&#x4E00;&#x4E9B;&#x51FD;&#x6570;&#x91C7;&#x7528;cpp::class:Mat &#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x4E00;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4F7F;&#x7528;std::vector(&#x4F8B;&#x5982;&#x4E00;&#x4E2A;&#x6307;&#x9488;&#x96C6;&#x5408;) &#x6216;&#x8005;Matx&lt;&gt;&#xFF08;&#x4F8B;&#x5982;&#x4E00;&#x4E2A;3*3&#x77E9;&#x9635;&#xFF09;&#x662F;&#x66F4;&#x65B9;&#x4FBF;&#x7684;&#x3002;&#x4E3A;&#x4E86;&#x907F;&#x514D;API&#x4E2D;&#x7684;&#x8FC7;&#x591A;&#x7684;&#x590D;&#x5236;&#xFF0C;&#x7279;&#x6B8A;&#x7684;&#x201C;&#x4EE3;&#x7406;proxy&#x201D;&#x7C7B;&#x4FBF;&#x51FA;&#x73B0;&#x4E86;&#x3002;&#x6700;&#x57FA;&#x672C;&#x7684;&#x201C;&#x4EE3;&#x7406;&#x201D;&#x7C7B;&#x662F;InputArray&#xFF0C;&#x5728;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x8F93;&#x5165;&#x4E2D;&#xFF0C;&#x4ED6;&#x88AB;&#x7528;&#x4E8E;&#x4F20;&#x9012;&#x53EA;&#x8BFB;&#x6570;&#x7EC4;&#xFF0C;&#x4ECE;InputArrray&#x6D3E;&#x751F;&#x51FA;&#x6765;&#x7684;OutputArray&#x7C7B;&#x88AB;&#x7528;&#x4E8E;&#x4E3A;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x786E;&#x5B9A;&#x4E00;&#x4E2A;&#x8F93;&#x51FA;&#x6570;&#x7EC4;&#x3002;&#x901A;&#x5E38;&#xFF0C;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x5173;&#x6CE8;&#x5176;&#x5185;&#x5728;&#x7C7B;&#x578B;&#xFF0C;&#x5B83;&#x5C06;&#x4F1A;&#x81EA;&#x52A8;&#x5DE5;&#x4F5C;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x5047;&#x8BBE;&#x4E0D;&#x662F;&#x4F7F;&#x7528;InputArray&#x548C;OutputArray&#xFF0C;&#x800C;&#x662F;&#x4F7F;&#x7528;Mat, std::vector&lt;&gt;, Matx&lt;&gt;, &#x6216;&#x8005;&#x662F;&#x6807;&#x91CF;&#x3002;&#x5F53;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6709;&#x53EF;&#x9009;&#x7684;&#x8F93;&#x5165;&#x6216;&#x8005;&#x8F93;&#x51FA;&#x6570;&#x7EC4;&#x65F6;&#xFF0C;&#x4F60;&#x6CA1;&#x6709;&#x8BE5;&#x6570;&#x7EC4;&#xFF0C;&#x53EF;&#x4EE5;&#x4F20;&#x9012;cv::noArray()&#x3002;</li>
+<li><p><code>&#x9519;&#x8BEF;&#x5904;&#x7406;</code><br> opencv&#x4F7F;&#x7528;exceptions&#x6765;&#x6807;&#x8BC6;&#x91CD;&#x8981;&#x7684;&#x9519;&#x8BEF;&#x3002;&#x5F53;&#x8F93;&#x5165;&#x6570;&#x636E;&#x6709;&#x4E00;&#x4E2A;&#x6B63;&#x786E;&#x7684;&#x683C;&#x5F0F;&#x800C;&#x4E14;&#x5C5E;&#x4E8E;&#x7279;&#x5B9A;&#x7684;&#x503C;&#x8303;&#x56F4;&#xFF0C;&#x4F46;&#x662F;&#x56E0;&#x4E3A;&#x67D0;&#x4E9B;&#x539F;&#x56E0;&#xFF08;&#x5982;&#x6700;&#x4F18;&#x5316;&#x7B97;&#x6CD5;&#x6CA1;&#x6709;&#x6536;&#x655B;&#xFF09;&#x7B97;&#x6CD5;&#x4E0D;&#x80FD;&#x6210;&#x529F;&#x6267;&#x884C;&#xFF0C;&#x5B83;&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x9519;&#x8BEF;&#x7801;&#xFF08;&#x5178;&#x578B;&#x60C5;&#x51B5;&#x662F;&#x4E00;&#x4E2A;boolean&#x503C;&#xFF09;&#x3002;<br> exceptions&#x53EF;&#x4EE5;&#x662F;cv::Exception &#x7C7B;&#x6216;&#x8005;&#x662F;&#x5B83;&#x7684;&#x6D3E;&#x751F;&#x7C7B;&#xFF0C;&#x800C;cv::Exception &#x662F;std::Exception&#x7684;&#x6D3E;&#x751F;&#x7C7B;&#x3002;&#x6240;&#x4EE5;&#x5B83;&#x53EF;&#x4EE5;&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x4F7F;&#x7528;&#x6807;&#x51C6;c++&#x5E93;&#x4E2D;&#x7684;&#x90E8;&#x5206;&#x4F18;&#x96C5;&#x7684;&#x5904;&#x7406;&#x3002;<br> exception &#x662F;&#x5178;&#x578B;&#x7684;&#x4F7F;&#x7528;CV_Error(errcode, description)&#x5B8F;&#xFF0C;&#x6216;&#x8005;&#x5B83;&#x7684;CV_Error_(errcode, printf-spec, (printf-args)),&#x6216;&#x8005;CV_Assert(condition)&#x5B8F;&#x3002;&#x5BF9;&#x4E8E;&#x6027;&#x80FD;&#x81F3;&#x5173;&#x91CD;&#x8981;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x4F7F;&#x7528;CV_DbgAssert(condition)&#x3002;&#x56E0;&#x4E3A;&#x81EA;&#x52A8;&#x5185;&#x5B58;&#x5206;&#x914D;&#xFF0C;&#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x7A81;&#x7136;&#x95F4;&#x7684;&#x9519;&#x8BEF;&#x6240;&#x6709;&#x7684;&#x5185;&#x90E8;&#x7684;&#x5185;&#x5B58;&#x533A;&#x90FD;&#x662F;&#x81EA;&#x52A8;&#x89E3;&#x9664;&#x5206;&#x914D;&#xFF1A;</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">{</span><br><span class="line">    ... <span class="comment">// call OpenCV</span></span><br><span class="line">}</span><br><span class="line"><span class="keyword">catch</span>( cv::Exception&amp; e )</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* err_msg = e.what();</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;exception caught: &quot;</span> &lt;&lt; err_msg &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>&#x591A;&#x7EBF;&#x7A0B;</code><br> &#x5F53;&#x524D;opencv&#x7684;&#x5B9E;&#x73B0;&#x662F; re-enterable  &#xFF0C;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x76F8;&#x540C;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x4E00;&#x4E2A;&#x7C7B;&#x5B9E;&#x4F8B;&#x7684;&#x76F8;&#x540C;&#x7684;&#x5E38;&#x91CF;&#x65B9;&#x6CD5;&#xFF0C;&#x6216;&#x8005;&#x4E0D;&#x540C;&#x7684;&#x7C7B;&#x7684;&#x76F8;&#x540C;&#x7684;&#x975E;&#x5E38;&#x91CF;&#x65B9;&#x6CD5;&#x90FD;&#x53EF;&#x4EE5;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x7EBF;&#x7A0B;&#x4E2D;&#x88AB;&#x8C03;&#x7528;&#x3002;&#x76F8;&#x540C;&#x7684;cv::Mat&#x53EF;&#x4EE5;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x7EBF;&#x7A0B;&#x4E2D;&#x88AB;&#x4F7F;&#x7528;&#xFF0C;&#x56E0;&#x4E3A;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x64CD;&#x4F5C;&#x4F7F;&#x7528;&#x4E86;the architecture-specific atomic instructions.</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/12/21/一，opencv2.x介绍/">一，opencv2.x介绍</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 kongsicong 的个人博客">kongsicong</a></p>
+        <p><span>发布时间:</span>2015年12月21日 - 10时17分</p>
+        <p><span>最后更新:</span>2015年12月26日 - 15时41分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/12/21/一，opencv2.x介绍/" title="一，opencv2.x介绍">http://yoursite.com/2015/12/21/一，opencv2.x介绍/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2015/12/21/一，opencv2.x介绍/　　作者: kongsicong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2015/12/24/二，opencv2.x模块core介绍（一）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          二，opencv2.x模块core介绍（一）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E00_uFF0Copencv_u6982_u89C8"><span class="toc-number">1.</span> <span class="toc-text">一，opencv概览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3C_21-more-_3E"><span class="toc-number">2.</span> <span class="toc-text">"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E8C_uFF0Copencv_API_u7279_u6027_u7B80_u4ECB"><span class="toc-number">3.</span> <span class="toc-text">二，opencv API特性简介</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/12/21/一，opencv2.x介绍/" data-title="一，opencv2.x介绍" data-url="http://yoursite.com/2015/12/21/一，opencv2.x介绍/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/12/24/二，opencv2.x模块core介绍（一）/" title="上一篇: 二，opencv2.x模块core介绍（一）">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2015/12/16/hello-world/" title="下一篇: Hello World">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/09/年龄识别/">年龄识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/C&Cplusplus学习笔记之多线程/">C/C++学习笔记之多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/30/五，opencv2-x模块highgui模块介绍/">五，opencv2.x模块highgui模块介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/26/四，opencv2.x模块core介绍（三）/">四，opencv2.x模块core介绍（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/25/三，opencv2.x模块core介绍（二）/">三，opencv2.x模块core介绍（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/24/二，opencv2.x模块core介绍（一）/">二，opencv2.x模块core介绍（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/一，opencv2.x介绍/">一，opencv2.x介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/16/hello-world/">Hello World</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 kongsicong
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

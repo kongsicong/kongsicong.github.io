@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>四，opencv2.x模块core介绍（三） | 孔小葱的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;#x4E00;&amp;#xFF0C;opencv&amp;#x6A21;&amp;#x5757;core&amp;#x5185;&amp;#x5BB9;&amp;#x7B2C;&amp;#x4E09;&amp;#x90E8;&amp;#x5206;&amp;#x2014;&amp;#x2014;Drawing Functions&amp;#xFF08;&amp;#x7ED8;&amp;#x56FE;&amp;#x51FD;&amp;#x6570;&amp;#xFF09;&amp;#x7ED8;&amp;#x56FE;&amp;#x51FD;&amp;#x65">
+<meta property="og:type" content="article">
+<meta property="og:title" content="四，opencv2.x模块core介绍（三）">
+<meta property="og:url" content="http://yoursite.com/2015/12/26/四，opencv2.x模块core介绍（三）/index.html">
+<meta property="og:site_name" content="孔小葱的博客">
+<meta property="og:description" content="&amp;#x4E00;&amp;#xFF0C;opencv&amp;#x6A21;&amp;#x5757;core&amp;#x5185;&amp;#x5BB9;&amp;#x7B2C;&amp;#x4E09;&amp;#x90E8;&amp;#x5206;&amp;#x2014;&amp;#x2014;Drawing Functions&amp;#xFF08;&amp;#x7ED8;&amp;#x56FE;&amp;#x51FD;&amp;#x6570;&amp;#xFF09;&amp;#x7ED8;&amp;#x56FE;&amp;#x51FD;&amp;#x65">
+<meta property="og:updated_time" content="2015-12-26T08:52:08.460Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="四，opencv2.x模块core介绍（三）">
+<meta name="twitter:description" content="&amp;#x4E00;&amp;#xFF0C;opencv&amp;#x6A21;&amp;#x5757;core&amp;#x5185;&amp;#x5BB9;&amp;#x7B2C;&amp;#x4E09;&amp;#x90E8;&amp;#x5206;&amp;#x2014;&amp;#x2014;Drawing Functions&amp;#xFF08;&amp;#x7ED8;&amp;#x56FE;&amp;#x51FD;&amp;#x6570;&amp;#xFF09;&amp;#x7ED8;&amp;#x56FE;&amp;#x51FD;&amp;#x65">
+  
+    <link rel="alternative" href="/atom.xml" title="孔小葱的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">kongsicong</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/luuman" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/lishangmou" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="http://i.youku.com/shangmou" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="http: //twitter.com/luuman" title="twitter">twitter</a>
+                            
+                                <a class="fl facebook" target="_blank" href="/#" title="facebook">facebook</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/deeplearning/" style="font-size: 10px;">deeplearning</a> <a href="/tags/opencv2-x-学习笔记/" style="font-size: 20px;">opencv2.x 学习笔记</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://MOxFIVE.github.io/">MOxFIVE</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vsay.cn/">DoubleV</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ccwebsite.com/">兮兮</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.dandyweng.com/">翁天信</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.plqblog.com/views/index.php">潘利强</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.waydrow.com/">waydrow</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">kongsicong</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">kongsicong</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/luuman" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/lishangmou" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="http://i.youku.com/shangmou" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="http: //twitter.com/luuman" title="twitter">twitter</a>
+                    
+                        <a class="facebook" target="_blank" href="/#" title="facebook">facebook</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-四，opencv2.x模块core介绍（三）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/26/四，opencv2.x模块core介绍（三）/" class="article-date">
+      <time datetime="2015-12-26T07:32:21.000Z" itemprop="datePublished">2015-12-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      四，opencv2.x模块core介绍（三）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv2-x-学习笔记/">opencv2.x 学习笔记</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E09_u90E8_u5206_u2014_u2014Drawing_Functions_uFF08_u7ED8_u56FE_u51FD_u6570_uFF09"><a href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E09_u90E8_u5206_u2014_u2014Drawing_Functions_uFF08_u7ED8_u56FE_u51FD_u6570_uFF09" class="headerlink" title="&#x4E00;&#xFF0C;opencv&#x6A21;&#x5757;core&#x5185;&#x5BB9;&#x7B2C;&#x4E09;&#x90E8;&#x5206;&#x2014;&#x2014;Drawing Functions&#xFF08;&#x7ED8;&#x56FE;&#x51FD;&#x6570;&#xFF09;"></a>&#x4E00;&#xFF0C;opencv&#x6A21;&#x5757;core&#x5185;&#x5BB9;&#x7B2C;&#x4E09;&#x90E8;&#x5206;&#x2014;&#x2014;Drawing Functions&#xFF08;&#x7ED8;&#x56FE;&#x51FD;&#x6570;&#xFF09;</h2><p>&#x7ED8;&#x56FE;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x518D;&#x4EFB;&#x610F;&#x6DF1;&#x5EA6;&#x7684;&#x77E9;&#x9635;&#xFF08;&#x56FE;&#x50CF;&#xFF09;&#x4E0A;&#x5DE5;&#x4F5C;&#x3002;&#x8FD9;&#x4E9B;&#x51FD;&#x6570;&#x5C31;&#x662F;&#x5728;&#x56FE;&#x50CF;&#x77E9;&#x9635;&#x4E0A;&#x7ED8;&#x51FA;&#x7279;&#x5B9A;&#x7684;&#x56FE;&#x50CF;&#x3002;&#x4E3B;&#x8981;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#x7B80;&#x5355;&#x7684;&#x7ED8;&#x56FE;&#x529F;&#x80FD;&#x3002;</p>
+<ol>
+<li>&#x7ED8;&#x5236;&#x6587;&#x5B57;putText</li>
+<li>&#x7ED8;&#x5236;&#x77E9;&#x5F62;rectangle</li>
+<li>&#x7ED8;&#x5236;&#x5706;&#x5F62;circle</li>
+<li>&#x7ED8;&#x5236;&#x692D;&#x5706;ellipse</li>
+<li>&#x7ED8;&#x5236;&#x7EBF;&#x6BB5;line</li>
+<li>&#x7ED8;&#x5236;&#x7BAD;&#x5934;arrowedLine</li>
+<li>&#x7ED8;&#x5236;&#x66F2;&#x7EBF;polylines</li>
+<li>&#x5176;&#x4F59;&#x4E00;&#x4E9B;&#x5E2E;&#x52A9;&#x51FD;&#x6570;clipLine, ellipse2Poly, fillConvexPoly, fillPoly, getTextSize, InitFont<a id="more"></a>
+</li>
+</ol>
+<hr>
+<h2 id="u4E8C_uFF0C_u5177_u4F53_u7ED8_u5236_u51FD_u6570_u8BE6_u89E3"><a href="#u4E8C_uFF0C_u5177_u4F53_u7ED8_u5236_u51FD_u6570_u8BE6_u89E3" class="headerlink" title="&#x4E8C;&#xFF0C;&#x5177;&#x4F53;&#x7ED8;&#x5236;&#x51FD;&#x6570;&#x8BE6;&#x89E3;"></a>&#x4E8C;&#xFF0C;&#x5177;&#x4F53;&#x7ED8;&#x5236;&#x51FD;&#x6570;&#x8BE6;&#x89E3;</h2><ol>
+<li>&#x7ED8;&#x5236;&#x6587;&#x5B57;putText<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">putText</span><span class="params">(Mat&amp; img, <span class="keyword">const</span> <span class="built_in">string</span>&amp; text, Point org, <span class="keyword">int</span> fontFace, <span class="keyword">double</span> fontScale, Scalar color, <span class="keyword">int</span> thickness=<span class="number">1</span>, <span class="keyword">int</span> lineType=<span class="number">8</span>, <span class="keyword">bool</span> bottomLeftOrigin=<span class="literal">false</span> )</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>&#x5728;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x4E0A;&#x5199;&#x4E0A;&#x81EA;&#x5DF1;&#x6307;&#x5B9A;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;<br>&#x5176;&#x4E2D;&#x90E8;&#x5206;&#x53C2;&#x6570;&#x8BE6;&#x89E3;&#xFF1A;<br>org&#x2014;&#x2014;&#x6587;&#x5B57;&#x6846;&#x5DE6;&#x4E0B;&#x89D2;&#x5728;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x5750;&#x6807;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x4F4D;&#x7F6E;&#x5750;&#x6807;<br>fontFace&#x2014;&#x2014;&#x5B57;&#x4F53;&#x7C7B;&#x578B;&#x53EF;&#x80FD;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#xFF1A;<code>FONT_HERSHEY_SIMPLEX, FONT_HERSHEY_PLAIN, FONT_HERSHEY_DUPLEX, FONT_HERSHEY_COMPLEX, FONT_HERSHEY_TRIPLEX, FONT_HERSHEY_COMPLEX_SMALL, FONT_HERSHEY_SCRIPT_SIMPLEX, or FONT_HERSHEY_SCRIPT_COMPLEX</code><br>fontScale&#x2014;&#x2014;&#x5B57;&#x4F53;&#x5927;&#x5C0F;&#x3002;&#x76F8;&#x5BF9;&#x4E8E;&#x57FA;&#x672C;&#x5927;&#x5C0F;&#x7684;&#x7F29;&#x653E;<br>color&#x2014;&#x2014;&#x5B57;&#x4F53;&#x989C;&#x8272;<br>thickness&#x2014;&#x2014;&#x5B57;&#x7B26;&#x4E32;&#x7EBF;&#x6761;&#x7C97;&#x7EC6;<br>lineType&#x2014;&#x2014;&#x7EBF;&#x578B;<br>bottomLeftOrigin&#x2014;&#x2014;&#x786E;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;&#x56FE;&#x50CF;&#x7684;&#x539F;&#x70B9;&#x662F;&#x5750;&#x4E0B;&#x70B9;&#x8FD8;&#x662F;&#x5DE6;&#x4E0A;&#x70B9;&#x3002;<br>&#x901A;&#x5E38;&#x4F1A;&#x901A;&#x8FC7;&#x8F85;&#x52A9;&#x51FD;&#x6570;getTextSize&#xFF08;&#xFF09;&#x6765;&#x5E2E;&#x52A9;&#x7ED8;&#x56FE;&#x3002;</p>
+<ol>
+<li>&#x7ED8;&#x5236;&#x77E9;&#x5F62;rectangle<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> rectangle(Mat&amp; img, Point pt1, Point pt2, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=1, <span class="keyword">int</span> lineType=8, <span class="keyword">int</span> shift=0)</span><br><span class="line">C++: <span class="keyword">void</span> rectangle(Mat&amp; img, Rect rec, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=1, <span class="keyword">int</span> lineType=8, <span class="keyword">int</span> shift=0 )</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>&#x5728;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x4E0A;&#x7ED8;&#x5236;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x786E;&#x5B9A;&#x7C97;&#x7EC6;&#x7684;&#x77E9;&#x5F62;&#x6846;&#xFF0C;&#x6216;&#x8005;&#x662F;&#x586B;&#x5145;&#x77E9;&#x5F62;&#x3002;</p>
+<ol>
+<li><p>&#x7ED8;&#x5236;&#x5706;&#x5F62;circle</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">circle</span><span class="params">(Mat&amp; img, Point center, <span class="keyword">int</span> radius, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=<span class="number">1</span>, <span class="keyword">int</span> lineType=<span class="number">8</span>, <span class="keyword">int</span> shift=<span class="number">0</span>)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x7ED8;&#x5236;&#x692D;&#x5706;ellipse</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> <span class="built_in">ellipse</span>(Mat&amp; img, Point center, Size axes, <span class="keyword">double</span> angle, <span class="keyword">double</span> startAngle, <span class="keyword">double</span> endAngle, <span class="keyword">const</span> Scalar&amp; <span class="built_in">color</span>, <span class="built_in">int</span> thickness=<span class="number">1</span>, <span class="built_in">int</span> lineType=<span class="number">8</span>, <span class="built_in">int</span> shift=<span class="number">0</span>)</span><br><span class="line">C++: <span class="keyword">void</span> <span class="built_in">ellipse</span>(Mat&amp; img, <span class="keyword">const</span> RotatedRect&amp; <span class="built_in">box</span>, <span class="keyword">const</span> Scalar&amp; <span class="built_in">color</span>, <span class="built_in">int</span> thickness=<span class="number">1</span>, <span class="built_in">int</span> lineType=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x7ED8;&#x5236;&#x7EBF;&#x6BB5;line</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">line</span><span class="params">(Mat&amp; img, Point pt1, Point pt2, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=<span class="number">1</span>, <span class="keyword">int</span> lineType=<span class="number">8</span>, <span class="keyword">int</span> shift=<span class="number">0</span>)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x7ED8;&#x5236;&#x7BAD;&#x5934;arrowedLine</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="function"><span class="keyword">void</span> <span class="title">arrowedLine</span><span class="params">(Mat&amp; img, Point pt1, Point pt2, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=<span class="number">1</span>, <span class="keyword">int</span> line_type=<span class="number">8</span>, <span class="keyword">int</span> shift=<span class="number">0</span>, <span class="keyword">double</span> tipLength=<span class="number">0.1</span>)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x7ED8;&#x5236;&#x66F2;&#x7EBF;polylines</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++: <span class="keyword">void</span> polylines(Mat&amp; img, <span class="keyword">const</span> Point** pts, <span class="keyword">const</span> <span class="keyword">int</span>* npts, <span class="keyword">int</span> ncontours, bool isClosed, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=1, <span class="keyword">int</span> lineType=8, <span class="keyword">int</span> shift=0 )</span><br><span class="line">C++: <span class="keyword">void</span> polylines(InputOutputArray img, InputArrayOfArrays pts, bool isClosed, <span class="keyword">const</span> Scalar&amp; color, <span class="keyword">int</span> thickness=1, <span class="keyword">int</span> lineType=8, <span class="keyword">int</span> shift=0 )</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>&#x90E8;&#x5206;&#x53C2;&#x6570;&#x8BE6;&#x89E3;<br>pts&#x2014;&#x2014;&#x591A;&#x8FB9;&#x5F62;&#x66F2;&#x7EBF;&#x7684;&#x6570;&#x7EC4;<br>npts&#x2014;&#x2014;&#x591A;&#x8FB9;&#x5F62;&#x5B9A;&#x70B9;&#x8BA1;&#x6570;&#x7684;&#x6570;&#x7EC4;<br>ncontours&#x2014;&#x2014;&#x66F2;&#x7EBF;&#x7684;&#x6570;&#x91CF;<br>isClosed&#x2014;&#x2014;&#x51B3;&#x5B9A;&#x7ED8;&#x5236;&#x66F2;&#x7EBF;&#x662F;&#x5426;&#x95ED;&#x5408;&#x3002;<br>&#x8BE5;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x753B;&#x51FA;&#x4E00;&#x6839;&#x6216;&#x591A;&#x8DDF;&#x66F2;&#x7EBF;&#x3002;</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/12/26/四，opencv2.x模块core介绍（三）/">四，opencv2.x模块core介绍（三）</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 kongsicong 的个人博客">kongsicong</a></p>
+        <p><span>发布时间:</span>2015年12月26日 - 15时32分</p>
+        <p><span>最后更新:</span>2015年12月26日 - 16时52分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/12/26/四，opencv2.x模块core介绍（三）/" title="四，opencv2.x模块core介绍（三）">http://yoursite.com/2015/12/26/四，opencv2.x模块core介绍（三）/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2015/12/26/四，opencv2.x模块core介绍（三）/　　作者: kongsicong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2015/12/30/五，opencv2-x模块highgui模块介绍/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          五，opencv2.x模块highgui模块介绍
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/25/三，opencv2.x模块core介绍（二）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">三，opencv2.x模块core介绍（二）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E00_uFF0Copencv_u6A21_u5757core_u5185_u5BB9_u7B2C_u4E09_u90E8_u5206_u2014_u2014Drawing_Functions_uFF08_u7ED8_u56FE_u51FD_u6570_uFF09"><span class="toc-number">1.</span> <span class="toc-text">一，opencv模块core内容第三部分——Drawing Functions（绘图函数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E8C_uFF0C_u5177_u4F53_u7ED8_u5236_u51FD_u6570_u8BE6_u89E3"><span class="toc-number">2.</span> <span class="toc-text">二，具体绘制函数详解</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/12/26/四，opencv2.x模块core介绍（三）/" data-title="四，opencv2.x模块core介绍（三）" data-url="http://yoursite.com/2015/12/26/四，opencv2.x模块core介绍（三）/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/12/30/五，opencv2-x模块highgui模块介绍/" title="上一篇: 五，opencv2.x模块highgui模块介绍">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2015/12/25/三，opencv2.x模块core介绍（二）/" title="下一篇: 三，opencv2.x模块core介绍（二）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/09/年龄识别/">年龄识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/C&Cplusplus学习笔记之多线程/">C/C++学习笔记之多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/30/五，opencv2-x模块highgui模块介绍/">五，opencv2.x模块highgui模块介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/26/四，opencv2.x模块core介绍（三）/">四，opencv2.x模块core介绍（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/25/三，opencv2.x模块core介绍（二）/">三，opencv2.x模块core介绍（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/24/二，opencv2.x模块core介绍（一）/">二，opencv2.x模块core介绍（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/一，opencv2.x介绍/">一，opencv2.x介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/16/hello-world/">Hello World</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 kongsicong
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
